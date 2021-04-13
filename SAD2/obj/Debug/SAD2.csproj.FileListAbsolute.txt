@@ -1,0 +1,48 @@
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.csprojAssemblyReference.cache
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.frmStockin.resources
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.Properties.Resources.resources
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.csproj.GenerateResource.cache
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.csproj.CoreCompileInputs.cache
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\SAD2.exe.config
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\SAD2.exe
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\SAD2.pdb
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.exe
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.pdb
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.frmInventory.resources
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\MySql.Data.dll
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\Google.Protobuf.dll
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\Renci.SshNet.dll
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\bin\Debug\MySql.Data.xml
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.csproj.CopyComplete
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.frmStockinDetailsAdd.resources
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.frmStockinDetailsUpdate.resources
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.frmStockout.resources
+C:\Users\Vincent Mark Erese\source\repos\SAD2\SAD2\obj\Debug\SAD2.frmStockinAdd.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.csprojAssemblyReference.cache
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmInventory.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmStockinAdd.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmStockinDetailsAdd.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.Properties.Resources.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.csproj.GenerateResource.cache
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.csproj.CoreCompileInputs.cache
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.exe
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.pdb
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\SAD2.exe.config
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\SAD2.exe
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\SAD2.pdb
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\Google.Protobuf.dll
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\Renci.SshNet.dll
+C:\Users\Kobz\Desktop\SAD2\SAD2\bin\Debug\MySql.Data.xml
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.csproj.CopyComplete
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmStockRecordDetails.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmStockRecordHistory.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmStockOut.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmStockOutDetails.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmOrder.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmMainMenu.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmTransactionDetails.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmTransactions.resources
