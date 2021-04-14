@@ -42,6 +42,8 @@ namespace SAD2
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.grpInventory = new System.Windows.Forms.GroupBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.lblPrice = new System.Windows.Forms.Label();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.listProduct = new System.Windows.Forms.ListView();
@@ -53,21 +55,22 @@ namespace SAD2
             this.colSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAdd = new System.Windows.Forms.Button();
             this.grpCart = new System.Windows.Forms.GroupBox();
+            this.txtSubtotal = new System.Windows.Forms.TextBox();
+            this.lblSubtotal = new System.Windows.Forms.Label();
             this.listCart = new System.Windows.Forms.ListView();
             this.cartID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cartType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cartColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cartWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cartQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cartSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtSubtotal = new System.Windows.Forms.TextBox();
-            this.lblSubtotal = new System.Windows.Forms.Label();
+            this.cartPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txtTotalWeight = new System.Windows.Forms.TextBox();
+            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.lblPrice = new System.Windows.Forms.Label();
-            this.cartTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpCustomerDetails.SuspendLayout();
             this.grpInventory.SuspendLayout();
             this.grpCart.SuspendLayout();
@@ -191,6 +194,22 @@ namespace SAD2
             this.grpInventory.TabStop = false;
             this.grpInventory.Text = "Inventory";
             // 
+            // txtPrice
+            // 
+            this.txtPrice.Location = new System.Drawing.Point(278, 309);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(141, 20);
+            this.txtPrice.TabIndex = 16;
+            // 
+            // lblPrice
+            // 
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(241, 313);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(31, 13);
+            this.lblPrice.TabIndex = 17;
+            this.lblPrice.Text = "Price";
+            // 
             // txtQuantity
             // 
             this.txtQuantity.Location = new System.Drawing.Point(74, 309);
@@ -271,9 +290,11 @@ namespace SAD2
             // 
             // grpCart
             // 
-            this.grpCart.Controls.Add(this.listCart);
             this.grpCart.Controls.Add(this.txtSubtotal);
             this.grpCart.Controls.Add(this.lblSubtotal);
+            this.grpCart.Controls.Add(this.listCart);
+            this.grpCart.Controls.Add(this.txtTotalWeight);
+            this.grpCart.Controls.Add(this.lblTotalWeight);
             this.grpCart.Controls.Add(this.btnRemove);
             this.grpCart.Location = new System.Drawing.Point(631, 195);
             this.grpCart.Name = "grpCart";
@@ -281,6 +302,23 @@ namespace SAD2
             this.grpCart.TabIndex = 2;
             this.grpCart.TabStop = false;
             this.grpCart.Text = "Cart";
+            // 
+            // txtSubtotal
+            // 
+            this.txtSubtotal.Enabled = false;
+            this.txtSubtotal.Location = new System.Drawing.Point(439, 318);
+            this.txtSubtotal.Name = "txtSubtotal";
+            this.txtSubtotal.Size = new System.Drawing.Size(154, 20);
+            this.txtSubtotal.TabIndex = 16;
+            // 
+            // lblSubtotal
+            // 
+            this.lblSubtotal.AutoSize = true;
+            this.lblSubtotal.Location = new System.Drawing.Point(387, 321);
+            this.lblSubtotal.Name = "lblSubtotal";
+            this.lblSubtotal.Size = new System.Drawing.Size(46, 13);
+            this.lblSubtotal.TabIndex = 15;
+            this.lblSubtotal.Text = "Subtotal";
             // 
             // listCart
             // 
@@ -291,6 +329,7 @@ namespace SAD2
             this.cartWeight,
             this.cartQuantity,
             this.cartTotalWeight,
+            this.cartPrice,
             this.cartSubtotal});
             this.listCart.FullRowSelect = true;
             this.listCart.HideSelection = false;
@@ -312,44 +351,56 @@ namespace SAD2
             // cartType
             // 
             this.cartType.Text = "Type";
-            this.cartType.Width = 76;
+            this.cartType.Width = 112;
             // 
             // cartColor
             // 
             this.cartColor.Text = "Color";
-            this.cartColor.Width = 76;
+            this.cartColor.Width = 100;
             // 
             // cartWeight
             // 
             this.cartWeight.Text = "Weight";
-            this.cartWeight.Width = 82;
+            this.cartWeight.Width = 52;
             // 
             // cartQuantity
             // 
             this.cartQuantity.Text = "Quantity";
-            this.cartQuantity.Width = 83;
+            this.cartQuantity.Width = 53;
+            // 
+            // cartTotalWeight
+            // 
+            this.cartTotalWeight.Text = "Total Weight";
+            this.cartTotalWeight.Width = 77;
             // 
             // cartSubtotal
             // 
+            this.cartSubtotal.DisplayIndex = 7;
             this.cartSubtotal.Text = "Subtotal";
-            this.cartSubtotal.Width = 95;
+            this.cartSubtotal.Width = 57;
             // 
-            // txtSubtotal
+            // cartPrice
             // 
-            this.txtSubtotal.Enabled = false;
-            this.txtSubtotal.Location = new System.Drawing.Point(439, 292);
-            this.txtSubtotal.Name = "txtSubtotal";
-            this.txtSubtotal.Size = new System.Drawing.Size(154, 20);
-            this.txtSubtotal.TabIndex = 5;
+            this.cartPrice.DisplayIndex = 6;
+            this.cartPrice.Text = "Price";
+            this.cartPrice.Width = 48;
             // 
-            // lblSubtotal
+            // txtTotalWeight
             // 
-            this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new System.Drawing.Point(387, 296);
-            this.lblSubtotal.Name = "lblSubtotal";
-            this.lblSubtotal.Size = new System.Drawing.Size(46, 13);
-            this.lblSubtotal.TabIndex = 4;
-            this.lblSubtotal.Text = "Subtotal";
+            this.txtTotalWeight.Enabled = false;
+            this.txtTotalWeight.Location = new System.Drawing.Point(439, 292);
+            this.txtTotalWeight.Name = "txtTotalWeight";
+            this.txtTotalWeight.Size = new System.Drawing.Size(154, 20);
+            this.txtTotalWeight.TabIndex = 5;
+            // 
+            // lblTotalWeight
+            // 
+            this.lblTotalWeight.AutoSize = true;
+            this.lblTotalWeight.Location = new System.Drawing.Point(365, 295);
+            this.lblTotalWeight.Name = "lblTotalWeight";
+            this.lblTotalWeight.Size = new System.Drawing.Size(68, 13);
+            this.lblTotalWeight.TabIndex = 4;
+            this.lblTotalWeight.Text = "Total Weight";
             // 
             // btnRemove
             // 
@@ -374,27 +425,6 @@ namespace SAD2
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(278, 309);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(141, 20);
-            this.txtPrice.TabIndex = 16;
-            // 
-            // lblPrice
-            // 
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(241, 313);
-            this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(31, 13);
-            this.lblPrice.TabIndex = 17;
-            this.lblPrice.Text = "Price";
-            // 
-            // cartTotalWeight
-            // 
-            this.cartTotalWeight.Text = "Total Weight";
-            this.cartTotalWeight.Width = 85;
             // 
             // frmOrder
             // 
@@ -438,8 +468,8 @@ namespace SAD2
         private System.Windows.Forms.GroupBox grpInventory;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox grpCart;
-        private System.Windows.Forms.TextBox txtSubtotal;
-        private System.Windows.Forms.Label lblSubtotal;
+        private System.Windows.Forms.TextBox txtTotalWeight;
+        private System.Windows.Forms.Label lblTotalWeight;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Timer timer1;
@@ -462,5 +492,8 @@ namespace SAD2
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.ColumnHeader cartTotalWeight;
+        private System.Windows.Forms.ColumnHeader cartPrice;
+        private System.Windows.Forms.TextBox txtSubtotal;
+        private System.Windows.Forms.Label lblSubtotal;
     }
 }

@@ -68,13 +68,45 @@ namespace SAD2
 
         private void txtStockID_TextChanged(object sender, EventArgs e)
         {
-            //if(!txtStockID.Text.All(char.IsDigit) && txtStockID.Text != "")
-            //{
-            //    btnCreate.Enabled = false;
-            //}else
-            //{
-            //    btnCreate.Enabled = true;
-            //}
+            if (!txtStockID.Text.All(char.IsDigit) && txtStockID.Text != "")
+            {
+                MessageBox.Show("Enter all numeric value");
+                btnCreate.Enabled = false;
+            }
+            else
+            {
+                btnCreate.Enabled = true;
+
+                try
+                {
+                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT stockin_id FROM `db_cefinal`.`stockin` WHERE stockin_id = '" + txtStockID.Text + "') THEN 'TRUE' ELSE 'FALSE' END as stockin_id;";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string temp = dataReader["stockin_id"].ToString();
+                            if (temp == "TRUE")
+                            {
+                                btnCreate.Enabled = false;
+                                MessageBox.Show("Duplicate Transaction Number");
+                            }
+                            else
+                            {
+                                btnCreate.Enabled = true;
+                            }
+                        }
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+
+                }
+            }
         }
 
         private void txtEmployee_TextChanged(object sender, EventArgs e)

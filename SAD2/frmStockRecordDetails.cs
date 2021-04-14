@@ -127,7 +127,7 @@ namespace SAD2
                                color = dataReader["itemColor"] + "",
                                weight = dataReader["itemWeight"] + "",
                                quantity = dataReader["itemQuantity"] + "",
-                               subtotal = dataReader["subtotal"] + "";
+                               subtotal = dataReader["totalWeight"] + "";
                         string[] row = { id, type, color, weight, quantity, subtotal };
                         ListViewItem item = new ListViewItem(row);
                         listItems.Items.Add(item);

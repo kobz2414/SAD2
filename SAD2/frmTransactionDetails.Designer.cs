@@ -42,13 +42,19 @@ namespace SAD2
             this.lblAddress = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
+            this.txtSubtotal = new System.Windows.Forms.TextBox();
+            this.lblSubtotal = new System.Windows.Forms.Label();
+            this.txtTotalWeight = new System.Windows.Forms.TextBox();
+            this.lblTotalWeight = new System.Windows.Forms.Label();
             this.listProducts = new System.Windows.Forms.ListView();
-            this.colInventoryID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cartSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpCustomerDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,54 +185,101 @@ namespace SAD2
             this.lblName.TabIndex = 4;
             this.lblName.Text = "Name";
             // 
+            // txtSubtotal
+            // 
+            this.txtSubtotal.Enabled = false;
+            this.txtSubtotal.Location = new System.Drawing.Point(440, 570);
+            this.txtSubtotal.Name = "txtSubtotal";
+            this.txtSubtotal.Size = new System.Drawing.Size(154, 20);
+            this.txtSubtotal.TabIndex = 20;
+            // 
+            // lblSubtotal
+            // 
+            this.lblSubtotal.AutoSize = true;
+            this.lblSubtotal.Location = new System.Drawing.Point(388, 573);
+            this.lblSubtotal.Name = "lblSubtotal";
+            this.lblSubtotal.Size = new System.Drawing.Size(46, 13);
+            this.lblSubtotal.TabIndex = 19;
+            this.lblSubtotal.Text = "Subtotal";
+            // 
+            // txtTotalWeight
+            // 
+            this.txtTotalWeight.Enabled = false;
+            this.txtTotalWeight.Location = new System.Drawing.Point(440, 544);
+            this.txtTotalWeight.Name = "txtTotalWeight";
+            this.txtTotalWeight.Size = new System.Drawing.Size(154, 20);
+            this.txtTotalWeight.TabIndex = 18;
+            // 
+            // lblTotalWeight
+            // 
+            this.lblTotalWeight.AutoSize = true;
+            this.lblTotalWeight.Location = new System.Drawing.Point(366, 547);
+            this.lblTotalWeight.Name = "lblTotalWeight";
+            this.lblTotalWeight.Size = new System.Drawing.Size(68, 13);
+            this.lblTotalWeight.TabIndex = 17;
+            this.lblTotalWeight.Text = "Total Weight";
+            // 
             // listProducts
             // 
             this.listProducts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colInventoryID,
-            this.colType,
-            this.colColor,
-            this.colWeight,
-            this.colQuantity,
-            this.colSubtotal});
-            this.listProducts.Enabled = false;
+            this.cartID,
+            this.cartType,
+            this.cartColor,
+            this.cartWeight,
+            this.cartQuantity,
+            this.cartTotalWeight,
+            this.cartPrice,
+            this.cartSubtotal});
+            this.listProducts.FullRowSelect = true;
             this.listProducts.HideSelection = false;
-            this.listProducts.Location = new System.Drawing.Point(17, 268);
+            this.listProducts.Location = new System.Drawing.Point(17, 262);
             this.listProducts.Margin = new System.Windows.Forms.Padding(2);
+            this.listProducts.MultiSelect = false;
             this.listProducts.Name = "listProducts";
-            this.listProducts.Size = new System.Drawing.Size(577, 332);
-            this.listProducts.TabIndex = 14;
+            this.listProducts.Size = new System.Drawing.Size(577, 267);
+            this.listProducts.TabIndex = 21;
             this.listProducts.UseCompatibleStateImageBehavior = false;
             this.listProducts.View = System.Windows.Forms.View.Details;
             // 
-            // colInventoryID
+            // cartID
             // 
-            this.colInventoryID.Text = "ID";
-            this.colInventoryID.Width = 79;
+            this.cartID.Text = "ID";
+            this.cartID.Width = 65;
             // 
-            // colType
+            // cartType
             // 
-            this.colType.Text = "Type";
-            this.colType.Width = 90;
+            this.cartType.Text = "Type";
+            this.cartType.Width = 75;
             // 
-            // colColor
+            // cartColor
             // 
-            this.colColor.Text = "Color";
-            this.colColor.Width = 94;
+            this.cartColor.Text = "Color";
+            this.cartColor.Width = 105;
             // 
-            // colWeight
+            // cartWeight
             // 
-            this.colWeight.Text = "Weight";
-            this.colWeight.Width = 106;
+            this.cartWeight.Text = "Weight";
+            this.cartWeight.Width = 63;
             // 
-            // colQuantity
+            // cartQuantity
             // 
-            this.colQuantity.Text = "Quantity";
-            this.colQuantity.Width = 101;
+            this.cartQuantity.Text = "Quantity";
+            this.cartQuantity.Width = 61;
             // 
-            // colSubtotal
+            // cartTotalWeight
             // 
-            this.colSubtotal.Text = "Subtotal";
-            this.colSubtotal.Width = 98;
+            this.cartTotalWeight.Text = "Total Weight";
+            this.cartTotalWeight.Width = 76;
+            // 
+            // cartPrice
+            // 
+            this.cartPrice.Text = "Price";
+            this.cartPrice.Width = 56;
+            // 
+            // cartSubtotal
+            // 
+            this.cartSubtotal.Text = "Subtotal";
+            this.cartSubtotal.Width = 62;
             // 
             // frmTransactionDetails
             // 
@@ -234,6 +287,10 @@ namespace SAD2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 611);
             this.Controls.Add(this.listProducts);
+            this.Controls.Add(this.txtSubtotal);
+            this.Controls.Add(this.lblSubtotal);
+            this.Controls.Add(this.txtTotalWeight);
+            this.Controls.Add(this.lblTotalWeight);
             this.Controls.Add(this.grpCustomerDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -245,6 +302,7 @@ namespace SAD2
             this.grpCustomerDetails.ResumeLayout(false);
             this.grpCustomerDetails.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -261,14 +319,20 @@ namespace SAD2
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.ListView listProducts;
-        private System.Windows.Forms.ColumnHeader colInventoryID;
-        private System.Windows.Forms.ColumnHeader colType;
-        private System.Windows.Forms.ColumnHeader colColor;
-        private System.Windows.Forms.ColumnHeader colWeight;
-        private System.Windows.Forms.ColumnHeader colQuantity;
-        private System.Windows.Forms.ColumnHeader colSubtotal;
         private System.Windows.Forms.ComboBox cmbPaymentStatus;
         private System.Windows.Forms.Label lblPaymentStatus;
+        private System.Windows.Forms.TextBox txtSubtotal;
+        private System.Windows.Forms.Label lblSubtotal;
+        private System.Windows.Forms.TextBox txtTotalWeight;
+        private System.Windows.Forms.Label lblTotalWeight;
+        private System.Windows.Forms.ListView listProducts;
+        private System.Windows.Forms.ColumnHeader cartID;
+        private System.Windows.Forms.ColumnHeader cartType;
+        private System.Windows.Forms.ColumnHeader cartColor;
+        private System.Windows.Forms.ColumnHeader cartWeight;
+        private System.Windows.Forms.ColumnHeader cartQuantity;
+        private System.Windows.Forms.ColumnHeader cartTotalWeight;
+        private System.Windows.Forms.ColumnHeader cartPrice;
+        private System.Windows.Forms.ColumnHeader cartSubtotal;
     }
 }

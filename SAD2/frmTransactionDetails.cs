@@ -80,8 +80,10 @@ namespace SAD2
                                color = dataReader["itemColor"] + "",
                                weight = dataReader["itemWeight"] + "",
                                quantity = dataReader["itemQuantity"] + "",
+                               totalWeight = dataReader["totalWeight"] + "",
+                               price = dataReader["price"] + "",
                                subtotal = dataReader["subtotal"] + "";
-                        string[] row = { id, type, color, weight, quantity, subtotal};
+                        string[] row = { id, type, color, weight, quantity, totalWeight, price, subtotal};
                         ListViewItem item = new ListViewItem(row);
                         listProducts.Items.Add(item);
                     }
@@ -119,6 +121,22 @@ namespace SAD2
             {
                 Console.WriteLine(err);
             }
+
+            double subTotal = 0;
+            double totalTransactionWeight = 0;
+
+            for (int i = 0; i < listProducts.Items.Count; i++)
+            {
+                totalTransactionWeight += double.Parse(listProducts.Items[i].SubItems[5].Text);
+            }
+
+            for (int i = 0; i < listProducts.Items.Count; i++)
+            {
+                subTotal += double.Parse(listProducts.Items[i].SubItems[7].Text);
+            }
+
+            txtTotalWeight.Text = totalTransactionWeight.ToString();
+            txtSubtotal.Text = subTotal.ToString();
 
             temp.Refresh();
 
@@ -160,6 +178,11 @@ namespace SAD2
             temp.Show();
             temp.Refresh();
             this.Hide();
+        }
+
+        private void listProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void Initialize()

@@ -112,23 +112,23 @@ namespace SAD2
             //}
             //show();
             string id = txtID.Text;
-            string type = txtType.Text;
-            string color = txtColor.Text;
-            string weight = txtWeight.Text;
+            string type = cmbType.Text;
+            string color = cmbColor.Text;
+            string weight = cmbWeight.Text;
             string quantity = txtQuantity.Text;
             string subtotal = txtSubtotal.Text;
             double total = 0;
 
-            if (txtID.Text != "" && txtType.Text != "" && txtColor.Text != "" && txtWeight.Text != "" && txtQuantity.Text != "")
+            if (id != "" && type != "" && color != "" && weight != "" && quantity != "")
             {
                 string[] row = { id, type, color, weight, quantity, subtotal };
                 ListViewItem item = new ListViewItem(row);
                 listCart.Items.Add(item);
 
                 txtID.Text = "";
-                txtType.Text = "";
-                txtColor.Text = "";
-                txtWeight.Text = "";
+                cmbType.Text = "";
+                cmbColor.Text = "";
+                cmbWeight.Text = "";
                 txtQuantity.Text = "";
                 txtSubtotal.Text = "";
 
@@ -170,9 +170,9 @@ namespace SAD2
                     item.Remove();
 
                     txtID.Text = "";
-                    txtType.Text = "";
-                    txtColor.Text = "";
-                    txtWeight.Text = "";
+                    cmbType.Text = "";
+                    cmbColor.Text = "";
+                    cmbWeight.Text = "";
                     txtQuantity.Text = "";
                     txtSubtotal.Text = "";
                     double total = 0;
@@ -193,7 +193,31 @@ namespace SAD2
 
         private void frmStockinDetailsAdd_Load(object sender, EventArgs e)
         {
+            try
+            {
+                cmbType.Items.Clear();
 
+                string query = "SELECT DISTINCT type FROM db_cefinal.products;";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        cmbType.Items.Add(dataReader["type"]);
+                    }
+
+                    dataReader.Close();
+
+                    this.CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+
+            }
         }
 
         private void txtStockID_TextChanged(object sender, EventArgs e)
@@ -209,9 +233,9 @@ namespace SAD2
         {
             if (txtQuantity.Text.All(char.IsDigit))
             {
-                if (txtQuantity.Text != "" && txtWeight.Text != "" && txtWeight.Text.All(char.IsDigit))
+                if (txtQuantity.Text != "" && cmbWeight.Text != "" && cmbWeight.Text.All(char.IsDigit))
                 {
-                    txtSubtotal.Text = (int.Parse(txtQuantity.Text) * int.Parse(txtWeight.Text)).ToString();
+                    txtSubtotal.Text = (int.Parse(txtQuantity.Text) * int.Parse(cmbWeight.Text)).ToString();
                 }
                 else
                 {
@@ -228,11 +252,11 @@ namespace SAD2
 
         private void txtWeight_TextChanged(object sender, EventArgs e)
         {
-            if (txtWeight.Text.All(char.IsDigit))
+            if (cmbWeight.Text.All(char.IsDigit))
             {
-                if (txtQuantity.Text != "" && txtWeight.Text != "" && txtQuantity.Text.All(char.IsDigit))
+                if (txtQuantity.Text != "" && cmbWeight.Text != "" && txtQuantity.Text.All(char.IsDigit))
                 {
-                    txtSubtotal.Text = (int.Parse(txtQuantity.Text) * int.Parse(txtWeight.Text)).ToString();
+                    txtSubtotal.Text = (int.Parse(txtQuantity.Text) * int.Parse(cmbWeight.Text)).ToString();
                 }
                 else
                 {
@@ -242,7 +266,7 @@ namespace SAD2
             else
             {
                 MessageBox.Show("Please enter a numeric value");
-                txtWeight.Text = "";
+                cmbWeight.Text = "";
             }
         }
 
@@ -251,6 +275,120 @@ namespace SAD2
             frmStockRecordHistory temp = new frmStockRecordHistory();
             temp.Show();
             this.Hide();
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbType.Text != "")
+            {
+                cmbColor.Enabled = true;
+            }
+            else {
+                cmbColor.Enabled = false;
+            }
+
+            try
+            {
+                cmbColor.Items.Clear();
+
+                string query = "SELECT DISTINCT color FROM db_cefinal.products where type = '" + cmbType.Text + "';";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    cmbColor.Text = "";
+                    cmbWeight.Text = "";
+                    txtID.Text = "";
+                    cmbWeight.Enabled = false;
+
+                    while (dataReader.Read())
+                    {
+                        cmbColor.Items.Add(dataReader["color"]);
+                    }
+
+                    dataReader.Close();
+
+                    this.CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+
+            }
+        }
+
+        private void cmbColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbColor.Text != "")
+            {
+                cmbWeight.Enabled = true;
+            }
+            else
+            {
+                cmbWeight.Enabled = false;
+            }
+
+            try
+            {
+                cmbWeight.Items.Clear();
+
+                string query = "SELECT DISTINCT weight FROM db_cefinal.products where type = '" + cmbType.Text +"' and color = '" + cmbColor.Text + "';";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    cmbWeight.Text = "";
+                    txtID.Text = "";
+
+                    while (dataReader.Read())
+                    {
+                        cmbWeight.Items.Add(dataReader["weight"]);
+                    }
+
+                    dataReader.Close();
+
+                    this.CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+
+            }
+        }
+
+        private void cmbWeight_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string query = "SELECT itemid FROM db_cefinal.products where type = '" + cmbType.Text + "' and color = '" + cmbColor.Text + "' and weight = '" + cmbWeight.Text + "';";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        txtID.Text = dataReader["itemid"].ToString();
+                    }
+
+                    dataReader.Close();
+
+                    this.CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+
+            }
+        }
+
+        private void btnAddDeleteItem_Click(object sender, EventArgs e)
+        {
+            frmAddDeleteInventoryItems temp = new frmAddDeleteInventoryItems();
+            temp.ShowDialog();
         }
 
         private void listCart_SelectedIndexChanged(object sender, EventArgs e)
@@ -273,9 +411,6 @@ namespace SAD2
 
         private void btnStockin_Click(object sender, EventArgs e)
         {
-            
-
-
             string query = "INSERT INTO `db_cefinal`.`stockin` (`stockin_id`, `date`, `staff`) VALUES(" + txtStockID.Text + ", now(), '" + txtEmployee.Text + "');" +
                            "create table `db_stockindetails`.`" + txtStockID.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, subtotal int, primary key (itemID));" +
                            "INSERT INTO `db_cefinal`.`stockrecordhistory` (`recordID`, `date`, `person`, `action`) VALUES(" + txtStockID.Text + ", now(), '" + txtEmployee.Text + "', 'Stock In');";

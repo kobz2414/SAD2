@@ -46,3 +46,4 @@ C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmOrder.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmMainMenu.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmTransactionDetails.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmTransactions.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddDeleteInventoryItems.resources

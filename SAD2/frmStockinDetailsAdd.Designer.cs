@@ -30,9 +30,6 @@
         {
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.txtType = new System.Windows.Forms.TextBox();
-            this.txtColor = new System.Windows.Forms.TextBox();
-            this.txtWeight = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.txtSubtotal = new System.Windows.Forms.TextBox();
             this.lblWeight = new System.Windows.Forms.Label();
@@ -60,6 +57,10 @@
             this.lblItemID = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.grpItems = new System.Windows.Forms.GroupBox();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.cmbWeight = new System.Windows.Forms.ComboBox();
+            this.btnAddDeleteItem = new System.Windows.Forms.Button();
             this.grpStockIn.SuspendLayout();
             this.grpItemDetails.SuspendLayout();
             this.grpItems.SuspendLayout();
@@ -67,7 +68,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(114, 308);
+            this.btnDelete.Location = new System.Drawing.Point(55, 261);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(115, 30);
@@ -78,7 +79,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(114, 274);
+            this.btnAdd.Location = new System.Drawing.Point(172, 261);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(115, 30);
@@ -86,31 +87,6 @@
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // txtType
-            // 
-            this.txtType.Location = new System.Drawing.Point(109, 81);
-            this.txtType.Margin = new System.Windows.Forms.Padding(2);
-            this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(171, 20);
-            this.txtType.TabIndex = 2;
-            // 
-            // txtColor
-            // 
-            this.txtColor.Location = new System.Drawing.Point(109, 115);
-            this.txtColor.Margin = new System.Windows.Forms.Padding(2);
-            this.txtColor.Name = "txtColor";
-            this.txtColor.Size = new System.Drawing.Size(171, 20);
-            this.txtColor.TabIndex = 3;
-            // 
-            // txtWeight
-            // 
-            this.txtWeight.Location = new System.Drawing.Point(109, 149);
-            this.txtWeight.Margin = new System.Windows.Forms.Padding(2);
-            this.txtWeight.Name = "txtWeight";
-            this.txtWeight.Size = new System.Drawing.Size(171, 20);
-            this.txtWeight.TabIndex = 4;
-            this.txtWeight.TextChanged += new System.EventHandler(this.txtWeight_TextChanged);
             // 
             // txtQuantity
             // 
@@ -321,23 +297,23 @@
             // 
             // grpItemDetails
             // 
+            this.grpItemDetails.Controls.Add(this.cmbWeight);
+            this.grpItemDetails.Controls.Add(this.cmbColor);
+            this.grpItemDetails.Controls.Add(this.cmbType);
             this.grpItemDetails.Controls.Add(this.lblItemID);
+            this.grpItemDetails.Controls.Add(this.btnDelete);
+            this.grpItemDetails.Controls.Add(this.btnAdd);
             this.grpItemDetails.Controls.Add(this.txtID);
             this.grpItemDetails.Controls.Add(this.lblWeight);
             this.grpItemDetails.Controls.Add(this.lblType);
             this.grpItemDetails.Controls.Add(this.lblColor);
             this.grpItemDetails.Controls.Add(this.lblQuantity);
             this.grpItemDetails.Controls.Add(this.lblSubtotal);
-            this.grpItemDetails.Controls.Add(this.btnAdd);
-            this.grpItemDetails.Controls.Add(this.btnDelete);
-            this.grpItemDetails.Controls.Add(this.txtType);
-            this.grpItemDetails.Controls.Add(this.txtColor);
             this.grpItemDetails.Controls.Add(this.txtSubtotal);
-            this.grpItemDetails.Controls.Add(this.txtWeight);
             this.grpItemDetails.Controls.Add(this.txtQuantity);
-            this.grpItemDetails.Location = new System.Drawing.Point(12, 149);
+            this.grpItemDetails.Location = new System.Drawing.Point(12, 154);
             this.grpItemDetails.Name = "grpItemDetails";
-            this.grpItemDetails.Size = new System.Drawing.Size(342, 373);
+            this.grpItemDetails.Size = new System.Drawing.Size(342, 310);
             this.grpItemDetails.TabIndex = 23;
             this.grpItemDetails.TabStop = false;
             this.grpItemDetails.Text = "Item Details";
@@ -354,6 +330,7 @@
             // 
             // txtID
             // 
+            this.txtID.Enabled = false;
             this.txtID.Location = new System.Drawing.Point(109, 47);
             this.txtID.Margin = new System.Windows.Forms.Padding(2);
             this.txtID.Name = "txtID";
@@ -373,11 +350,52 @@
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Items";
             // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(108, 82);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(172, 21);
+            this.cmbType.TabIndex = 15;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.Enabled = false;
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(108, 116);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(172, 21);
+            this.cmbColor.TabIndex = 16;
+            this.cmbColor.SelectedIndexChanged += new System.EventHandler(this.cmbColor_SelectedIndexChanged);
+            // 
+            // cmbWeight
+            // 
+            this.cmbWeight.Enabled = false;
+            this.cmbWeight.FormattingEnabled = true;
+            this.cmbWeight.Location = new System.Drawing.Point(108, 150);
+            this.cmbWeight.Name = "cmbWeight";
+            this.cmbWeight.Size = new System.Drawing.Size(172, 21);
+            this.cmbWeight.TabIndex = 17;
+            this.cmbWeight.SelectedIndexChanged += new System.EventHandler(this.cmbWeight_SelectedIndexChanged);
+            // 
+            // btnAddDeleteItem
+            // 
+            this.btnAddDeleteItem.Location = new System.Drawing.Point(67, 483);
+            this.btnAddDeleteItem.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddDeleteItem.Name = "btnAddDeleteItem";
+            this.btnAddDeleteItem.Size = new System.Drawing.Size(232, 30);
+            this.btnAddDeleteItem.TabIndex = 18;
+            this.btnAddDeleteItem.Text = "Add/Delete Inventory  Items";
+            this.btnAddDeleteItem.UseVisualStyleBackColor = true;
+            this.btnAddDeleteItem.Click += new System.EventHandler(this.btnAddDeleteItem_Click);
+            // 
             // frmStockinDetailsAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1241, 602);
+            this.Controls.Add(this.btnAddDeleteItem);
             this.Controls.Add(this.grpItems);
             this.Controls.Add(this.grpItemDetails);
             this.Controls.Add(this.grpStockIn);
@@ -404,9 +422,6 @@
 
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox txtType;
-        private System.Windows.Forms.TextBox txtColor;
-        private System.Windows.Forms.TextBox txtWeight;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.TextBox txtSubtotal;
         private System.Windows.Forms.Label lblWeight;
@@ -434,5 +449,9 @@
         private System.Windows.Forms.GroupBox grpItems;
         private System.Windows.Forms.Label lblItemID;
         private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Button btnAddDeleteItem;
+        private System.Windows.Forms.ComboBox cmbWeight;
+        private System.Windows.Forms.ComboBox cmbColor;
+        private System.Windows.Forms.ComboBox cmbType;
     }
 }

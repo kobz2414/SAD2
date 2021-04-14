@@ -15,8 +15,8 @@ namespace SAD2
     {
         private MySqlConnection connection, connection2;
         private string server, database, database1, uid, password;
-        private string itemSubtotal, itemTotalWeight;
-        private double total = 0;
+        private string itemSubtotal, itemTotalWeight, itemPrice;
+        private double subTotal = 0, totalWeight = 0;
 
 
         public frmOrder()
@@ -89,17 +89,19 @@ namespace SAD2
                     }
                     else
                     {
-
+                        itemPrice = txtPrice.Text;
                         itemTotalWeight = item.SubItems[5].Text;
 
                         int output = qty1 - qty2;
                         item.SubItems[4].Text = output.ToString();
 
+                        int price = int.Parse(itemPrice);
                         int weight = int.Parse(item.SubItems[3].Text);
                         int qty3 = int.Parse(item.SubItems[4].Text);
                         item.SubItems[5].Text = (weight * qty3).ToString();
 
                         itemTotalWeight = (qty2 * weight).ToString();
+                        itemSubtotal = (price * int.Parse(itemTotalWeight)).ToString();
 
                         string itemID = item.Text;
 
@@ -112,12 +114,13 @@ namespace SAD2
                                 int updatedTemp = temp + qty2;
                                 eachItem.SubItems[4].Text = (updatedTemp).ToString();
                                 eachItem.SubItems[5].Text = (updatedTemp * weight).ToString();
+                                eachItem.SubItems[7].Text = (price * (updatedTemp * weight)).ToString();
                                 check = true;
                             }
 
                         if (check == false)
                         {
-                            string[] row = { item.Text, item.SubItems[1].Text, item.SubItems[2].Text, item.SubItems[3].Text, txtQuantity.Text, itemTotalWeight };
+                            string[] row = { item.Text, item.SubItems[1].Text, item.SubItems[2].Text, item.SubItems[3].Text, txtQuantity.Text, itemTotalWeight, itemPrice, itemSubtotal };
                             var listViewItem = new ListViewItem(row);
                             listCart.Items.Add(listViewItem);
                         }
@@ -127,15 +130,23 @@ namespace SAD2
                             item.Remove();
                         }
 
-                        total = 0;
+                        subTotal = 0;
+                        totalWeight = 0;
 
                         for (int i = 0; i < listCart.Items.Count; i++)
                         {
-                            total += double.Parse(listCart.Items[i].SubItems[5].Text);
+                            totalWeight += double.Parse(listCart.Items[i].SubItems[5].Text);
                         }
-                        
-                        txtSubtotal.Text = total.ToString();
+
+                        for (int i = 0; i < listCart.Items.Count; i++)
+                        {
+                            subTotal += double.Parse(listCart.Items[i].SubItems[7].Text);
+                        }
+
+                        txtTotalWeight.Text = totalWeight.ToString();
+                        txtSubtotal.Text = subTotal.ToString();
                         txtQuantity.Text = "";
+                        txtPrice.Text = "";
                     }
                 }
             }
@@ -148,6 +159,23 @@ namespace SAD2
             if (listProduct.SelectedItems.Count < 1) return;
             ListViewItem item = listProduct.SelectedItems[0];
             txtQuantity.Text = item.SubItems[4].Text;
+            String itemID = item.Text;
+
+
+            foreach (ListViewItem eachItem in listCart.Items)
+            {
+                if (eachItem.SubItems[0].Text == itemID)
+                {
+                    txtPrice.Enabled = false;
+                    txtPrice.Text = eachItem.SubItems[6].Text;
+                    break;
+                }
+                else
+                {
+                    txtPrice.Enabled = true;
+                    txtPrice.Text = "";
+                }
+            }
 
         }
 
@@ -165,6 +193,10 @@ namespace SAD2
 
                     int qty = int.Parse(item.SubItems[4].Text);
                     string itemID = item.Text;
+
+                    txtPrice.Enabled = true;
+                    txtPrice.Text = "";
+                    txtQuantity.Text = "";
 
                     bool check = false;
 
@@ -186,15 +218,21 @@ namespace SAD2
 
                     item.Remove();
 
-                    total = 0;
+                    subTotal = 0;
+                    totalWeight = 0;
 
                     for (int i = 0; i < listCart.Items.Count; i++)
                     {
-                        total += double.Parse(listCart.Items[i].SubItems[5].Text);
-                        //Console.WriteLine(listCart.Items[i].SubItems[5].Text);
+                        totalWeight += double.Parse(listCart.Items[i].SubItems[5].Text);
                     }
 
-                    txtSubtotal.Text = total.ToString();
+                    for (int i = 0; i < listCart.Items.Count; i++)
+                    {
+                        subTotal += double.Parse(listCart.Items[i].SubItems[7].Text);
+                    }
+
+                    txtTotalWeight.Text = totalWeight.ToString();
+                    txtSubtotal.Text = subTotal.ToString();
 
                 }
             }
@@ -380,21 +418,21 @@ namespace SAD2
 
 
                     //Sales
-                    string query = "insert into sales(transactionID, DateTime, Name, Address, ContactNumber) values('" + txtTransactionNum.Text + "','" +
-                         DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "','" + txtName.Text + "','" + txtAddress.Text + "','" + txtContactNum.Text + "');" +
+                    string query = "insert into sales(transactionID, DateTime, Name, Address, ContactNumber, Status) values('" + txtTransactionNum.Text + "','" +
+                         DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "','" + txtName.Text + "','" + txtAddress.Text + "','" + txtContactNum.Text + "', 'Unpaid');" +
                          "insert into stockrecordhistory(recordID, date, person, action) values('" + txtTransactionNum.Text + "','" +
                          DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "','" + txtName.Text + "','Stock Out');";
 
                     //New table in transactions database
                     string queryTransaction = "";
-                    queryTransaction = "create table `" + txtTransactionNum.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, subtotal int, primary" +
+                    queryTransaction = "create table `" + txtTransactionNum.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, totalWeight int, price int, subtotal int, primary" +
                         " key (itemID));";
 
                     //Add items from cart to database
                     foreach (ListViewItem eachItem in listCart.Items)
                     {
-                        queryTransaction = queryTransaction + "insert into `" + txtTransactionNum.Text + "`(itemID, itemType, itemColor, itemWeight, itemQuantity, subtotal) values('" + int.Parse(eachItem.SubItems[0].Text) + "','" +
-                        eachItem.SubItems[1].Text + "','" + eachItem.SubItems[2].Text + "','" + int.Parse(eachItem.SubItems[3].Text) + "','" + int.Parse(eachItem.SubItems[4].Text) + "','" + int.Parse(eachItem.SubItems[5].Text) + "');" +
+                        queryTransaction = queryTransaction + "insert into `" + txtTransactionNum.Text + "`(itemID, itemType, itemColor, itemWeight, itemQuantity, totalWeight, price, subtotal) values('" + int.Parse(eachItem.SubItems[0].Text) + "','" +
+                        eachItem.SubItems[1].Text + "','" + eachItem.SubItems[2].Text + "','" + int.Parse(eachItem.SubItems[3].Text) + "','" + int.Parse(eachItem.SubItems[4].Text) + "','" + int.Parse(eachItem.SubItems[5].Text) + "','" + int.Parse(eachItem.SubItems[6].Text) + "','" + int.Parse(eachItem.SubItems[7].Text) + "');" +
                         "UPDATE `db_cefinal`.`inventory` SET quantity = quantity - " + int.Parse(eachItem.SubItems[4].Text) + " WHERE (`inventory_id` = '" + eachItem.SubItems[0].Text + "');";
                     }
 
@@ -416,10 +454,10 @@ namespace SAD2
                 {
                     MessageBox.Show(err.ToString());
                 }
-            }
 
             temp.Show();
             this.Hide();
+            }
         }
     }
 }

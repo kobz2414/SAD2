@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAddDeleteInventoryItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddDeleteInventoryItems.Designer.cs">
+      <DependentUpon>frmAddDeleteInventoryItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAddDeleteInventoryItems.resx">
+      <DependentUpon>frmAddDeleteInventoryItems.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInventory.resx">
       <DependentUpon>frmInventory.cs</DependentUpon>
     </EmbeddedResource>
