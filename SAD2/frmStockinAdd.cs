@@ -16,6 +16,7 @@ namespace SAD2
         private MySqlConnection connection;
         private string server, database, uid, password;
         public string id, employee;
+        private bool checkStockInID = true, checkDuplicateStockID = true;
 
         public frmStockinAdd()
         {
@@ -70,13 +71,15 @@ namespace SAD2
         {
             if (!txtStockID.Text.All(char.IsDigit) && txtStockID.Text != "")
             {
-                MessageBox.Show("Enter all numeric value");
+                if (checkStockInID == true)
+                {
+                    MessageBox.Show("Enter all numeric value");
+                }
+                checkStockInID = false;
                 btnCreate.Enabled = false;
             }
             else
             {
-                btnCreate.Enabled = true;
-
                 try
                 {
                     string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT stockin_id FROM `db_cefinal`.`stockin` WHERE stockin_id = '" + txtStockID.Text + "') THEN 'TRUE' ELSE 'FALSE' END as stockin_id;";
@@ -92,10 +95,18 @@ namespace SAD2
                             if (temp == "TRUE")
                             {
                                 btnCreate.Enabled = false;
-                                MessageBox.Show("Duplicate Transaction Number");
+                                
+                                if (checkDuplicateStockID == true)
+                                {
+                                    MessageBox.Show("Duplicate Transaction Number");
+                                }
+
+                                checkDuplicateStockID = false;
                             }
                             else
                             {
+                                checkDuplicateStockID = true;
+                                checkStockInID = true;
                                 btnCreate.Enabled = true;
                             }
                         }

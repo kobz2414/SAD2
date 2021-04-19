@@ -44,7 +44,7 @@ namespace SAD2
             this.colStockColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colStockWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colStockQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colStockSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colStockTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.frmDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +142,7 @@ namespace SAD2
             this.colStockColor,
             this.colStockWeight,
             this.colStockQuantity,
-            this.colStockSubtotal});
+            this.colStockTotalWeight});
             this.listItems.HideSelection = false;
             this.listItems.Location = new System.Drawing.Point(29, 227);
             this.listItems.Name = "listItems";
@@ -176,10 +176,10 @@ namespace SAD2
             this.colStockQuantity.Text = "Quantity";
             this.colStockQuantity.Width = 118;
             // 
-            // colStockSubtotal
+            // colStockTotalWeight
             // 
-            this.colStockSubtotal.Text = "Subtotal";
-            this.colStockSubtotal.Width = 133;
+            this.colStockTotalWeight.Text = "Total Weight";
+            this.colStockTotalWeight.Width = 133;
             // 
             // frmStockRecordDetails
             // 
@@ -217,6 +217,6 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader colStockColor;
         private System.Windows.Forms.ColumnHeader colStockWeight;
         private System.Windows.Forms.ColumnHeader colStockQuantity;
-        private System.Windows.Forms.ColumnHeader colStockSubtotal;
+        private System.Windows.Forms.ColumnHeader colStockTotalWeight;
     }
 }

@@ -17,6 +17,7 @@ namespace SAD2
         private string server, database, database1, uid, password;
         private string itemSubtotal, itemTotalWeight, itemPrice;
         private double subTotal = 0, totalWeight = 0;
+        private bool checkNum = true, checkContact = true;
 
 
         public frmOrder()
@@ -252,42 +253,51 @@ namespace SAD2
         {
             if (!txtTransactionNum.Text.All(char.IsDigit))
             {
+                
                 btnAccept.Enabled = false;
-                MessageBox.Show("Must enter a number");
+
+                if (checkNum == true)
+                {
+                    checkNum = false;
+                    MessageBox.Show("Must enter a number");
+                }
             }
             else
             {
-                btnAccept.Enabled = true;
-            }
 
-            try
-            {
-                string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT transactionID FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtTransactionNum.Text + "') THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
-
-                if (OpenConnection() == true)
+                try
                 {
-                    MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
+                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT transactionID FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtTransactionNum.Text + "') THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
 
-                    while (dataReader.Read())
+                    if (OpenConnection() == true)
                     {
-                        string temp = dataReader["transactionID"].ToString();
-                        if (temp == "TRUE")
-                        {
-                            btnAccept.Enabled = false;
-                            MessageBox.Show("Duplicate Transaction Number");
-                        }
-                        else
-                        {
-                            btnAccept.Enabled = true;
-                        }
-                    }
-                    CloseConnection();
-                }
-            }
-            catch (Exception err)
-            {
+                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
 
+                        while (dataReader.Read())
+                        {
+                            string temp = dataReader["transactionID"].ToString();
+                            if (temp == "TRUE")
+                            {
+                                btnAccept.Enabled = false;
+                                MessageBox.Show("Duplicate Transaction Number");
+                            }
+                            else
+                            {
+                                checkNum = true;
+                                if (checkNum == true && checkContact == true)
+                                {
+                                    btnAccept.Enabled = true;
+                                }
+                            }
+                        }
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+
+                }
             }
         }
 
@@ -295,12 +305,20 @@ namespace SAD2
         {
             if (!txtContactNum.Text.All(char.IsDigit))
             {
+                if(checkContact == true)
+                {
+                    MessageBox.Show("Must enter a number");
+                }
                 btnAccept.Enabled = false;
-                MessageBox.Show("Must enter a number");
+                checkContact = false;
             }
             else
             {
-                btnAccept.Enabled = true;
+                checkContact = true;
+                if (checkNum == true && checkContact == true)
+                {
+                    btnAccept.Enabled = true;
+                }
             }
         }
 
@@ -372,23 +390,22 @@ namespace SAD2
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            frmMainMenu temp = new frmMainMenu();
 
             if (txtTransactionNum.Text == "")
             {
-                MessageBox.Show("Please input Transaction Number");
+                MessageBox.Show("Incomplete customer details");
             }
             else if (txtName.Text == "")
             {
-                MessageBox.Show("Please input Customer Name");
+                MessageBox.Show("Incomplete customer details");
             }
             else if (txtAddress.Text == "")
             {
-                MessageBox.Show("Please input Customer address");
+                MessageBox.Show("Incomplete customer details");
             }
             else if (txtContactNum.Text == "")
             {
-                MessageBox.Show("Please input Customer contact number");
+                MessageBox.Show("Incomplete customer details");
             }
             else if (listCart.Items.Count == 0)
             {
@@ -455,6 +472,7 @@ namespace SAD2
                     MessageBox.Show(err.ToString());
                 }
 
+            frmMainMenu temp = new frmMainMenu();
             temp.Show();
             this.Hide();
             }
