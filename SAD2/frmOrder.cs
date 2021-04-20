@@ -17,7 +17,7 @@ namespace SAD2
         private string server, database, database1, uid, password;
         private string itemSubtotal, itemTotalWeight, itemPrice;
         private double subTotal = 0, totalWeight = 0;
-        private bool checkNum = true, checkContact = true;
+        private bool checkNum = false, checkContact = false, checkName = false, checkAdd = false;
 
 
         public frmOrder()
@@ -69,13 +69,13 @@ namespace SAD2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (txtQuantity.Text != "" && txtQuantity.Text != "0")
+            if (listProduct.SelectedItems.Count <= 0)
             {
-                if (listProduct.SelectedItems.Count == 0)
-                {
-                    MessageBox.Show("Please select an item");
-                }
-                else
+                MessageBox.Show("Please select an item");
+            }
+            else
+            {
+                if (txtQuantity.Text != "" && txtQuantity.Text != "0")
                 {
                     ListViewItem item = listProduct.SelectedItems[0];
 
@@ -85,7 +85,9 @@ namespace SAD2
                     if (qty1 - qty2 < 0)
                     {
                         MessageBox.Show("Must not be more or less than what is available");
-                    } else if (txtPrice.Text == ""){
+                    }
+                    else if (txtPrice.Text == "")
+                    {
                         MessageBox.Show("Please input price");
                     }
                     else
@@ -148,6 +150,10 @@ namespace SAD2
                         txtSubtotal.Text = subTotal.ToString();
                         txtQuantity.Text = "";
                         txtPrice.Text = "";
+                        btnRemove.Enabled = false;
+                        btnAdd.Enabled = false;
+                        txtPrice.Enabled = false;
+                        txtQuantity.Enabled = false;
                     }
                 }
             }
@@ -157,27 +163,57 @@ namespace SAD2
 
         private void listProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listProduct.SelectedItems.Count < 1) return;
-            ListViewItem item = listProduct.SelectedItems[0];
-            txtQuantity.Text = item.SubItems[4].Text;
-            String itemID = item.Text;
-
-
-            foreach (ListViewItem eachItem in listCart.Items)
+            if (listProduct.SelectedItems.Count < 1)
             {
-                if (eachItem.SubItems[0].Text == itemID)
+                btnAdd.Enabled = false;
+                txtPrice.Enabled = false;
+                txtQuantity.Enabled = false;
+
+                txtPrice.Text = "";
+                txtQuantity.Text = "";
+            }
+            else
+            {
+                btnAdd.Enabled = true;
+
+                txtPrice.Enabled = true;
+                txtQuantity.Enabled = true;
+
+                ListViewItem item = listProduct.SelectedItems[0];
+                txtQuantity.Text = item.SubItems[4].Text;
+                String itemID = item.Text;
+
+                foreach (ListViewItem eachItem in listCart.Items)
                 {
-                    txtPrice.Enabled = false;
-                    txtPrice.Text = eachItem.SubItems[6].Text;
-                    break;
-                }
-                else
-                {
-                    txtPrice.Enabled = true;
-                    txtPrice.Text = "";
+                    if (eachItem.SubItems[0].Text == itemID)
+                    {
+                        txtPrice.Enabled = false;
+                        txtPrice.Text = eachItem.SubItems[6].Text;
+                        break;
+                    }
+                    else
+                    {
+                        txtPrice.Enabled = true;
+                        txtPrice.Text = "";
+                    }
                 }
             }
+        }
 
+        private void txtAddress_TextChanged(object sender, EventArgs e)
+        {
+            if(txtAddress.Text == "")
+            {
+                checkAdd = false;
+            }
+            else
+            {
+                checkAdd = true;
+                if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
+                {
+                    btnAccept.Enabled = true;
+                }
+            }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -235,6 +271,11 @@ namespace SAD2
                     txtTotalWeight.Text = totalWeight.ToString();
                     txtSubtotal.Text = subTotal.ToString();
 
+                    btnRemove.Enabled = false;
+                    btnAdd.Enabled = false;
+                    txtPrice.Enabled = false;
+                    txtQuantity.Enabled = false;
+
                 }
             }
             catch (Exception err)
@@ -244,9 +285,33 @@ namespace SAD2
             
         }
 
-        private void listCart_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtName_TextChanged(object sender, EventArgs e)
         {
 
+            if(txtName.Text == "")
+            {
+                checkName = false;
+            }
+            else
+            {
+                checkName = true;
+                if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
+                {
+                    btnAccept.Enabled = true;
+                }
+            }
+        }
+
+        private void listCart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listCart.SelectedItems.Count < 1)
+            {
+                btnRemove.Enabled = false;
+            }
+            else
+            {
+                btnRemove.Enabled = true;
+            }
         }
 
         private void txtTransactionNum_TextChanged(object sender, EventArgs e)
@@ -255,12 +320,8 @@ namespace SAD2
             {
                 
                 btnAccept.Enabled = false;
-
-                if (checkNum == true)
-                {
-                    checkNum = false;
-                    MessageBox.Show("Must enter a number");
-                }
+                checkNum = false;
+                lblTransactionNumberPrompt.Text = "Must enter all in digits";
             }
             else
             {
@@ -280,14 +341,19 @@ namespace SAD2
                             if (temp == "TRUE")
                             {
                                 btnAccept.Enabled = false;
-                                MessageBox.Show("Duplicate Transaction Number");
+                                checkNum = false;
+                                lblTransactionNumberPrompt.Text = "Duplicate Transaction Number";
                             }
                             else
                             {
                                 checkNum = true;
-                                if (checkNum == true && checkContact == true)
+                                if (checkNum == true)
                                 {
-                                    btnAccept.Enabled = true;
+                                    lblTransactionNumberPrompt.Text = "   ";
+                                    if(checkContact == true && checkName == true && checkAdd == true)
+                                    {
+                                        btnAccept.Enabled = true;
+                                    }
                                 }
                             }
                         }
@@ -303,19 +369,22 @@ namespace SAD2
 
         private void txtContactNum_TextChanged(object sender, EventArgs e)
         {
-            if (!txtContactNum.Text.All(char.IsDigit))
+            if (txtContactNum.Text == "")
             {
-                if(checkContact == true)
-                {
-                    MessageBox.Show("Must enter a number");
-                }
+                btnAccept.Enabled = false;
+                checkContact = false;
+            }
+            else if (!txtContactNum.Text.All(char.IsDigit))
+            {
+                lblContactPrompt.Text = "Must enter all in digits";
                 btnAccept.Enabled = false;
                 checkContact = false;
             }
             else
             {
                 checkContact = true;
-                if (checkNum == true && checkContact == true)
+                lblContactPrompt.Text = "   ";
+                if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
                 {
                     btnAccept.Enabled = true;
                 }
@@ -324,9 +393,22 @@ namespace SAD2
 
         private void frmOrder_FormClosing(object sender, FormClosingEventArgs e)
         {
-            frmMainMenu temp = new frmMainMenu();
-            temp.Show();
-            this.Hide();
+            string message = "Do you want to close this window?";
+            string title = "Close Window";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+
+                frmMainMenu temp = new frmMainMenu();
+                frmOrder temp2 = new frmOrder();
+                temp.Show();
+                temp2.Hide();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         private bool CloseConnection()
@@ -391,23 +473,7 @@ namespace SAD2
         private void btnAccept_Click(object sender, EventArgs e)
         {
 
-            if (txtTransactionNum.Text == "")
-            {
-                MessageBox.Show("Incomplete customer details");
-            }
-            else if (txtName.Text == "")
-            {
-                MessageBox.Show("Incomplete customer details");
-            }
-            else if (txtAddress.Text == "")
-            {
-                MessageBox.Show("Incomplete customer details");
-            }
-            else if (txtContactNum.Text == "")
-            {
-                MessageBox.Show("Incomplete customer details");
-            }
-            else if (listCart.Items.Count == 0)
+            if (listCart.Items.Count == 0)
             {
                 MessageBox.Show("Please input items to cart");
             }
@@ -464,8 +530,7 @@ namespace SAD2
 
                     CloseConnection();
 
-                    MessageBox.Show("Success");
-                    this.Close();
+                    MessageBox.Show("Order added to cart");
                 }
                 catch (Exception err)
                 {

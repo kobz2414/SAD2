@@ -31,6 +31,7 @@ namespace SAD2
         {
             this.components = new System.ComponentModel.Container();
             this.grpCustomerDetails = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtDateandTime = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
             this.txtTransactionNum = new System.Windows.Forms.TextBox();
@@ -42,10 +43,6 @@ namespace SAD2
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.grpInventory = new System.Windows.Forms.GroupBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.lblPrice = new System.Windows.Forms.Label();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.lblQuantity = new System.Windows.Forms.Label();
             this.listProduct = new System.Windows.Forms.ListView();
             this.colInventoryID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,6 +50,10 @@ namespace SAD2
             this.colWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.lblPrice = new System.Windows.Forms.Label();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.lblQuantity = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.grpCart = new System.Windows.Forms.GroupBox();
             this.txtSubtotal = new System.Windows.Forms.TextBox();
@@ -71,7 +72,8 @@ namespace SAD2
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTransactionNumberPrompt = new System.Windows.Forms.Label();
+            this.lblContactPrompt = new System.Windows.Forms.Label();
             this.grpCustomerDetails.SuspendLayout();
             this.grpInventory.SuspendLayout();
             this.grpCart.SuspendLayout();
@@ -79,6 +81,8 @@ namespace SAD2
             // 
             // grpCustomerDetails
             // 
+            this.grpCustomerDetails.Controls.Add(this.lblContactPrompt);
+            this.grpCustomerDetails.Controls.Add(this.lblTransactionNumberPrompt);
             this.grpCustomerDetails.Controls.Add(this.label1);
             this.grpCustomerDetails.Controls.Add(this.txtDateandTime);
             this.grpCustomerDetails.Controls.Add(this.lblTime);
@@ -96,6 +100,16 @@ namespace SAD2
             this.grpCustomerDetails.TabIndex = 0;
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Customer Details";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(155, 152);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "* - Required";
             // 
             // txtDateandTime
             // 
@@ -155,6 +169,7 @@ namespace SAD2
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(373, 20);
             this.txtAddress.TabIndex = 3;
+            this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_TextChanged);
             // 
             // lblAddress
             // 
@@ -171,6 +186,7 @@ namespace SAD2
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(373, 20);
             this.txtName.TabIndex = 2;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // lblName
             // 
@@ -190,38 +206,6 @@ namespace SAD2
             this.grpInventory.TabIndex = 1;
             this.grpInventory.TabStop = false;
             this.grpInventory.Text = "Inventory";
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(82, 332);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(141, 20);
-            this.txtPrice.TabIndex = 16;
-            // 
-            // lblPrice
-            // 
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(21, 336);
-            this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(53, 13);
-            this.lblPrice.TabIndex = 17;
-            this.lblPrice.Text = "Unit Price";
-            // 
-            // txtQuantity
-            // 
-            this.txtQuantity.Location = new System.Drawing.Point(82, 300);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(141, 20);
-            this.txtQuantity.TabIndex = 14;
-            // 
-            // lblQuantity
-            // 
-            this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(28, 304);
-            this.lblQuantity.Name = "lblQuantity";
-            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
-            this.lblQuantity.TabIndex = 15;
-            this.lblQuantity.Text = "Quantity";
             // 
             // listProduct
             // 
@@ -275,8 +259,43 @@ namespace SAD2
             this.colTotalWeight.Text = "Total Weight";
             this.colTotalWeight.Width = 78;
             // 
+            // txtPrice
+            // 
+            this.txtPrice.Enabled = false;
+            this.txtPrice.Location = new System.Drawing.Point(82, 332);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(141, 20);
+            this.txtPrice.TabIndex = 16;
+            // 
+            // lblPrice
+            // 
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(21, 336);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(53, 13);
+            this.lblPrice.TabIndex = 17;
+            this.lblPrice.Text = "Unit Price";
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.Enabled = false;
+            this.txtQuantity.Location = new System.Drawing.Point(82, 300);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(141, 20);
+            this.txtQuantity.TabIndex = 14;
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Location = new System.Drawing.Point(28, 304);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
+            this.lblQuantity.TabIndex = 15;
+            this.lblQuantity.Text = "Quantity";
+            // 
             // btnAdd
             // 
+            this.btnAdd.Enabled = false;
             this.btnAdd.Location = new System.Drawing.Point(247, 295);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(107, 28);
@@ -404,6 +423,7 @@ namespace SAD2
             // 
             // btnRemove
             // 
+            this.btnRemove.Enabled = false;
             this.btnRemove.Location = new System.Drawing.Point(247, 329);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(107, 28);
@@ -414,6 +434,7 @@ namespace SAD2
             // 
             // btnAccept
             // 
+            this.btnAccept.Enabled = false;
             this.btnAccept.Location = new System.Drawing.Point(518, 592);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 28);
@@ -426,15 +447,25 @@ namespace SAD2
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label1
+            // lblTransactionNumberPrompt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(155, 152);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "* - Required";
+            this.lblTransactionNumberPrompt.AutoSize = true;
+            this.lblTransactionNumberPrompt.Location = new System.Drawing.Point(537, 29);
+            this.lblTransactionNumberPrompt.Name = "lblTransactionNumberPrompt";
+            this.lblTransactionNumberPrompt.Size = new System.Drawing.Size(16, 13);
+            this.lblTransactionNumberPrompt.TabIndex = 15;
+            this.lblTransactionNumberPrompt.Text = "   ";
+            this.lblTransactionNumberPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblContactPrompt
+            // 
+            this.lblContactPrompt.AutoSize = true;
+            this.lblContactPrompt.Location = new System.Drawing.Point(356, 126);
+            this.lblContactPrompt.Name = "lblContactPrompt";
+            this.lblContactPrompt.Size = new System.Drawing.Size(16, 13);
+            this.lblContactPrompt.TabIndex = 16;
+            this.lblContactPrompt.Text = "   ";
+            this.lblContactPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmOrder
             // 
@@ -505,5 +536,7 @@ namespace SAD2
         private System.Windows.Forms.TextBox txtSubtotal;
         private System.Windows.Forms.Label lblSubtotal;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTransactionNumberPrompt;
+        private System.Windows.Forms.Label lblContactPrompt;
     }
 }
