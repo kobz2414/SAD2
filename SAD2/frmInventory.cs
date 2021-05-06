@@ -240,16 +240,10 @@ namespace SAD2
                 while (dataReader.Read())
                 {
                     string id = dataReader["id"] + "", type = dataReader["type"] + "", color = dataReader["color"] + "", weight = dataReader["weight"] + "", quantity = dataReader["quantity"] + "", subtotal = (Int32.Parse(weight) * Int32.Parse(quantity)).ToString();
-                    if (int.Parse(quantity) <= 0)
-                    {
 
-                    }
-                    else
-                    {
-                        string[] row = { id, type, color, weight, quantity, subtotal };
-                        ListViewItem item = new ListViewItem(row);
-                        listProduct.Items.Add(item);
-                    }
+                    string[] row = { id, type, color, weight, quantity, subtotal };
+                    ListViewItem item = new ListViewItem(row);
+                    listProduct.Items.Add(item);
                     
                 }
 

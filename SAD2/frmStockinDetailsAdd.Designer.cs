@@ -54,12 +54,12 @@
             this.lblStaff = new System.Windows.Forms.Label();
             this.grpStockIn = new System.Windows.Forms.GroupBox();
             this.grpItemDetails = new System.Windows.Forms.GroupBox();
+            this.cmbWeight = new System.Windows.Forms.ComboBox();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.lblItemID = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.grpItems = new System.Windows.Forms.GroupBox();
-            this.cmbType = new System.Windows.Forms.ComboBox();
-            this.cmbColor = new System.Windows.Forms.ComboBox();
-            this.cmbWeight = new System.Windows.Forms.ComboBox();
             this.btnAddDeleteItem = new System.Windows.Forms.Button();
             this.grpStockIn.SuspendLayout();
             this.grpItemDetails.SuspendLayout();
@@ -318,6 +318,35 @@
             this.grpItemDetails.TabStop = false;
             this.grpItemDetails.Text = "Item Details";
             // 
+            // cmbWeight
+            // 
+            this.cmbWeight.Enabled = false;
+            this.cmbWeight.FormattingEnabled = true;
+            this.cmbWeight.Location = new System.Drawing.Point(108, 150);
+            this.cmbWeight.Name = "cmbWeight";
+            this.cmbWeight.Size = new System.Drawing.Size(172, 21);
+            this.cmbWeight.TabIndex = 17;
+            this.cmbWeight.SelectedIndexChanged += new System.EventHandler(this.cmbWeight_SelectedIndexChanged);
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.Enabled = false;
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(108, 116);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(172, 21);
+            this.cmbColor.TabIndex = 16;
+            this.cmbColor.SelectedIndexChanged += new System.EventHandler(this.cmbColor_SelectedIndexChanged);
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(108, 82);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(172, 21);
+            this.cmbType.TabIndex = 15;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
             // lblItemID
             // 
             this.lblItemID.AutoSize = true;
@@ -349,35 +378,6 @@
             this.grpItems.TabIndex = 24;
             this.grpItems.TabStop = false;
             this.grpItems.Text = "Items";
-            // 
-            // cmbType
-            // 
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(108, 82);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(172, 21);
-            this.cmbType.TabIndex = 15;
-            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
-            // 
-            // cmbColor
-            // 
-            this.cmbColor.Enabled = false;
-            this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(108, 116);
-            this.cmbColor.Name = "cmbColor";
-            this.cmbColor.Size = new System.Drawing.Size(172, 21);
-            this.cmbColor.TabIndex = 16;
-            this.cmbColor.SelectedIndexChanged += new System.EventHandler(this.cmbColor_SelectedIndexChanged);
-            // 
-            // cmbWeight
-            // 
-            this.cmbWeight.Enabled = false;
-            this.cmbWeight.FormattingEnabled = true;
-            this.cmbWeight.Location = new System.Drawing.Point(108, 150);
-            this.cmbWeight.Name = "cmbWeight";
-            this.cmbWeight.Size = new System.Drawing.Size(172, 21);
-            this.cmbWeight.TabIndex = 17;
-            this.cmbWeight.SelectedIndexChanged += new System.EventHandler(this.cmbWeight_SelectedIndexChanged);
             // 
             // btnAddDeleteItem
             // 

@@ -43,6 +43,12 @@
             this.lblColor = new System.Windows.Forms.Label();
             this.grpInventory = new System.Windows.Forms.GroupBox();
             this.grpItemHistory = new System.Windows.Forms.GroupBox();
+            this.listProductStockOut = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listProductStockIn = new System.Windows.Forms.ListView();
             this.colStockRecordID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateAndTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,12 +56,8 @@
             this.colRecordQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colAction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnStock = new System.Windows.Forms.Button();
-            this.listProductStockOut = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblStockIn = new System.Windows.Forms.Label();
+            this.lblStockOut = new System.Windows.Forms.Label();
             this.grpInventory.SuspendLayout();
             this.grpItemHistory.SuspendLayout();
             this.SuspendLayout();
@@ -201,6 +203,8 @@
             // 
             // grpItemHistory
             // 
+            this.grpItemHistory.Controls.Add(this.lblStockOut);
+            this.grpItemHistory.Controls.Add(this.lblStockIn);
             this.grpItemHistory.Controls.Add(this.listProductStockOut);
             this.grpItemHistory.Controls.Add(this.listProductStockIn);
             this.grpItemHistory.Location = new System.Drawing.Point(17, 286);
@@ -209,6 +213,48 @@
             this.grpItemHistory.TabIndex = 22;
             this.grpItemHistory.TabStop = false;
             this.grpItemHistory.Text = "Item History";
+            // 
+            // listProductStockOut
+            // 
+            this.listProductStockOut.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.listProductStockOut.HideSelection = false;
+            this.listProductStockOut.Location = new System.Drawing.Point(477, 46);
+            this.listProductStockOut.Margin = new System.Windows.Forms.Padding(2);
+            this.listProductStockOut.Name = "listProductStockOut";
+            this.listProductStockOut.Size = new System.Drawing.Size(453, 187);
+            this.listProductStockOut.TabIndex = 13;
+            this.listProductStockOut.UseCompatibleStateImageBehavior = false;
+            this.listProductStockOut.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Item ID";
+            this.columnHeader1.Width = 73;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Date and Time";
+            this.columnHeader2.Width = 125;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Weight";
+            this.columnHeader3.Width = 76;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Quantity";
+            this.columnHeader4.Width = 79;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Action";
+            this.columnHeader5.Width = 92;
             // 
             // listProductStockIn
             // 
@@ -219,10 +265,10 @@
             this.colRecordQuantity,
             this.colAction});
             this.listProductStockIn.HideSelection = false;
-            this.listProductStockIn.Location = new System.Drawing.Point(15, 31);
+            this.listProductStockIn.Location = new System.Drawing.Point(15, 46);
             this.listProductStockIn.Margin = new System.Windows.Forms.Padding(2);
             this.listProductStockIn.Name = "listProductStockIn";
-            this.listProductStockIn.Size = new System.Drawing.Size(453, 202);
+            this.listProductStockIn.Size = new System.Drawing.Size(453, 187);
             this.listProductStockIn.TabIndex = 12;
             this.listProductStockIn.UseCompatibleStateImageBehavior = false;
             this.listProductStockIn.View = System.Windows.Forms.View.Details;
@@ -263,47 +309,25 @@
             this.btnStock.UseVisualStyleBackColor = true;
             this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
             // 
-            // listProductStockOut
+            // lblStockIn
             // 
-            this.listProductStockOut.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.listProductStockOut.HideSelection = false;
-            this.listProductStockOut.Location = new System.Drawing.Point(477, 31);
-            this.listProductStockOut.Margin = new System.Windows.Forms.Padding(2);
-            this.listProductStockOut.Name = "listProductStockOut";
-            this.listProductStockOut.Size = new System.Drawing.Size(453, 202);
-            this.listProductStockOut.TabIndex = 13;
-            this.listProductStockOut.UseCompatibleStateImageBehavior = false;
-            this.listProductStockOut.View = System.Windows.Forms.View.Details;
+            this.lblStockIn.AutoSize = true;
+            this.lblStockIn.Location = new System.Drawing.Point(218, 27);
+            this.lblStockIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStockIn.Name = "lblStockIn";
+            this.lblStockIn.Size = new System.Drawing.Size(47, 13);
+            this.lblStockIn.TabIndex = 21;
+            this.lblStockIn.Text = "Stock In";
             // 
-            // columnHeader1
+            // lblStockOut
             // 
-            this.columnHeader1.Text = "Item ID";
-            this.columnHeader1.Width = 73;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Date and Time";
-            this.columnHeader2.Width = 125;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Weight";
-            this.columnHeader3.Width = 76;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Quantity";
-            this.columnHeader4.Width = 79;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Action";
-            this.columnHeader5.Width = 92;
+            this.lblStockOut.AutoSize = true;
+            this.lblStockOut.Location = new System.Drawing.Point(676, 27);
+            this.lblStockOut.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStockOut.Name = "lblStockOut";
+            this.lblStockOut.Size = new System.Drawing.Size(55, 13);
+            this.lblStockOut.TabIndex = 22;
+            this.lblStockOut.Text = "Stock Out";
             // 
             // frmInventory
             // 
@@ -324,6 +348,7 @@
             this.grpInventory.ResumeLayout(false);
             this.grpInventory.PerformLayout();
             this.grpItemHistory.ResumeLayout(false);
+            this.grpItemHistory.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -358,5 +383,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Label lblStockOut;
+        private System.Windows.Forms.Label lblStockIn;
     }
 }

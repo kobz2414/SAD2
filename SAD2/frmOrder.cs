@@ -128,10 +128,10 @@ namespace SAD2
                             listCart.Items.Add(listViewItem);
                         }
 
-                        if (int.Parse(item.SubItems[5].Text) == 0)
-                        {
-                            item.Remove();
-                        }
+                        //if (int.Parse(item.SubItems[5].Text) == 0)
+                        //{
+                        //    item.Remove();
+                        //}
 
                         subTotal = 0;
                         totalWeight = 0;
@@ -174,27 +174,31 @@ namespace SAD2
             }
             else
             {
-                btnAdd.Enabled = true;
-
-                txtPrice.Enabled = true;
-                txtQuantity.Enabled = true;
-
                 ListViewItem item = listProduct.SelectedItems[0];
-                txtQuantity.Text = item.SubItems[4].Text;
-                String itemID = item.Text;
 
-                foreach (ListViewItem eachItem in listCart.Items)
+                if(int.Parse(item.SubItems[4].Text) != 0)
                 {
-                    if (eachItem.SubItems[0].Text == itemID)
+                    btnAdd.Enabled = true;
+
+                    txtPrice.Enabled = true;
+                    txtQuantity.Enabled = true;
+
+                    txtQuantity.Text = item.SubItems[4].Text;
+                    String itemID = item.Text;
+
+                    foreach (ListViewItem eachItem in listCart.Items)
                     {
-                        txtPrice.Enabled = false;
-                        txtPrice.Text = eachItem.SubItems[6].Text;
-                        break;
-                    }
-                    else
-                    {
-                        txtPrice.Enabled = true;
-                        txtPrice.Text = "";
+                        if (eachItem.SubItems[0].Text == itemID)
+                        {
+                            txtPrice.Enabled = false;
+                            txtPrice.Text = eachItem.SubItems[6].Text;
+                            break;
+                        }
+                        else
+                        {
+                            txtPrice.Enabled = true;
+                            txtPrice.Text = "";
+                        }
                     }
                 }
             }
@@ -441,16 +445,9 @@ namespace SAD2
                 {
                     string id = dataReader["id"] + "", type = dataReader["type"] + "", color = dataReader["color"] + "", weight = dataReader["weight"] + "", quantity = dataReader["quantity"] + "", subtotal = (Int32.Parse(weight) * Int32.Parse(quantity)).ToString();
 
-                    if (int.Parse(quantity) <= 0)
-                    {
-
-                    }
-                    else
-                    {
-                        string[] row = { id, type, color, weight, quantity, subtotal };
-                        ListViewItem item = new ListViewItem(row);
-                        listProduct.Items.Add(item);
-                    }
+                    string[] row = { id, type, color, weight, quantity, subtotal };
+                    ListViewItem item = new ListViewItem(row);
+                    listProduct.Items.Add(item);
                     
                 }
 
