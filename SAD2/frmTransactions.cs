@@ -15,7 +15,7 @@ namespace SAD2
     {
         private MySqlConnection connection;
         private string server, database, uid, password;
-        private string transactionID;
+        private int transactionID;
 
         public frmTransactions()
         {
@@ -36,8 +36,6 @@ namespace SAD2
                 temp.Show();
                 this.Hide();
             }
-
-            
         }
 
         private void frmTransactions_Load(object sender, EventArgs e)
@@ -62,7 +60,7 @@ namespace SAD2
         {
             if (listTransactionHistory.SelectedItems.Count < 1) return;
             ListViewItem item = listTransactionHistory.SelectedItems[0];
-            transactionID = item.Text;
+            transactionID = int.Parse(item.Text);
 
         }
 
@@ -72,6 +70,164 @@ namespace SAD2
             temp.Show();
             this.Hide();
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "")
+            {
+                show();
+            }
+            else
+            {
+                String temp = cmbSearch.Text;
+                if (temp == "")
+                {
+                }
+                else if (temp == "Transaction ID")
+                {
+                    listTransactionHistory.Items.Clear();
+
+                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+                            string[] row = { id, date, name, status };
+                            ListViewItem item = new ListViewItem(row);
+                            listTransactionHistory.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+                else if (temp == "Name")
+                {
+                    listTransactionHistory.Items.Clear();
+
+                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+                            string[] row = { id, date, name, status };
+                            ListViewItem item = new ListViewItem(row);
+                            listTransactionHistory.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+            }
+        }
+
+        private void cmbSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "")
+            {
+                show();
+            }
+            else
+            {
+                String temp = cmbSearch.Text;
+                if (temp == "")
+                {
+                }
+                else if (temp == "Transaction ID")
+                {
+                    listTransactionHistory.Items.Clear();
+
+                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+                            string[] row = { id, date, name, status };
+                            ListViewItem item = new ListViewItem(row);
+                            listTransactionHistory.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+                else if (temp == "Name")
+                {
+                    listTransactionHistory.Items.Clear();
+
+                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+                            string[] row = { id, date, name, status };
+                            ListViewItem item = new ListViewItem(row);
+                            listTransactionHistory.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+            }
+        }
+
+        //private void txtName_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (txtName.Text == "")
+        //    {
+        //        show();
+        //    }
+        //    else
+        //    {
+        //        listTransactionHistory.Items.Clear();
+
+        //        string query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtName.Text + "' ORDER BY DateTime DESC; ";
+
+        //        if (OpenConnection() == true)
+        //        {
+        //            MySqlCommand cmd = new MySqlCommand(query, connection);
+        //            MySqlDataReader dataReader = cmd.ExecuteReader();
+
+        //            while (dataReader.Read())
+        //            {
+        //                string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+        //                string[] row = { id, date, name, status };
+        //                ListViewItem item = new ListViewItem(row);
+        //                listTransactionHistory.Items.Add(item);
+        //            }
+
+        //            dataReader.Close();
+
+        //            CloseConnection();
+        //        }
+        //    }
+        //}
 
         private bool OpenConnection()
         {

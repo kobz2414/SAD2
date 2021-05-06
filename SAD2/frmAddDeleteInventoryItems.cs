@@ -35,72 +35,6 @@ namespace SAD2
             connection = new MySqlConnection(connectionString);
         }
 
-        private void cmbColor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbColor.Text != "")
-            {
-                cmbWeight.Enabled = true;
-            }
-            else
-            {
-                cmbWeight.Enabled = false;
-            }
-
-            try
-            {
-                cmbWeight.Items.Clear();
-
-                string query = "SELECT DISTINCT weight FROM db_cefinal.products where type = '" + cmbType.Text + "' and color = '" + cmbColor.Text + "';";
-
-                if (this.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    cmbWeight.Text = "";
-                    txtIDAdd.Text = "";
-
-                    while (dataReader.Read())
-                    {
-                        cmbWeight.Items.Add(dataReader["weight"]);
-                    }
-
-                    dataReader.Close();
-
-                    this.CloseConnection();
-                }
-            }
-            catch (Exception err)
-            {
-
-            }
-        }
-
-        private void cmbWeight_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string query = "SELECT itemid FROM db_cefinal.products where type = '" + cmbType.Text + "' and color = '" + cmbColor.Text + "' and weight = '" + cmbWeight.Text + "';";
-
-                if (this.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                    while (dataReader.Read())
-                    {
-                        txtID.Text = dataReader["itemid"].ToString();
-                    }
-
-                    dataReader.Close();
-
-                    this.CloseConnection();
-                }
-            }
-            catch (Exception err)
-            {
-
-            }
-        }
 
         private void frmAddDeleteInventoryItems_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -110,9 +44,9 @@ namespace SAD2
         {
             try
             {
-                cmbType.Items.Clear();
+                listInventory.Items.Clear();
 
-                string query = "SELECT DISTINCT type FROM db_cefinal.products;";
+                string query = "SELECT * FROM db_cefinal.inventory;";
 
                 if (this.OpenConnection() == true)
                 {
@@ -121,7 +55,11 @@ namespace SAD2
 
                     while (dataReader.Read())
                     {
-                        cmbType.Items.Add(dataReader["type"]);
+                        string id = dataReader["inventory_id"] + "", type = dataReader["type"] + "", color = dataReader["color"] + "", weight = dataReader["weight"] + "", quantity = dataReader["quantity"] + "";
+
+                        string[] row = { id, type, color, weight, quantity};
+                        ListViewItem item = new ListViewItem(row);
+                        listInventory.Items.Add(item);
                     }
 
                     dataReader.Close();
@@ -138,8 +76,8 @@ namespace SAD2
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int quantity = 0;
-            bool ifExists = false;
-            string query = "SELECT quantity FROM db_cefinal.inventory where inventory_id = '" + txtID.Text + "';"; // Check for number of quantity
+            ListViewItem item = listInventory.SelectedItems[0];
+            string query = "SELECT quantity FROM db_cefinal.inventory where inventory_id = '" + item.Text + "';"; // Check for number of quantity
 
             try
             {
@@ -199,8 +137,7 @@ namespace SAD2
             }
             else
             {
-                query = "DELETE FROM `db_cefinal`.`products` WHERE (`itemID` = '" + txtID.Text + "');" +
-                    "DELETE FROM `db_cefinal`.`inventory` WHERE (`inventory_id` = '" + txtID.Text + "');";
+                query = "DELETE FROM `db_cefinal`.`inventory` WHERE (`inventory_id` = '" + item.Text + "');";
 
                 if (this.OpenConnection() == true)
                 {
@@ -208,20 +145,13 @@ namespace SAD2
                     cmd.ExecuteNonQuery();
                     this.CloseConnection();
                 }
-
-                cmbType.Text = "";
-                cmbColor.Text = "";
-                cmbColor.Enabled = false;
-                cmbWeight.Text = "";
-                cmbWeight.Enabled = false;
-                txtID.Text = "";
                 MessageBox.Show("Success");
             }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_cefinal`.`products` (`itemID`, `type`, `color`, `weight`) VALUES('" + txtIDAdd.Text + "', '" + txtType.Text + "', '" + txtColor.Text + "', '" + txtWeight.Text + "');";
+            string query = "INSERT INTO `db_cefinal`.`inventory` (`inventory_id`, `type`, `color`, `weight`, `quantity`)  VALUES('" + txtIDAdd.Text + "', '" + txtType.Text + "', '" + txtColor.Text + "', '" + txtWeight.Text + "', 0);";
 
             if (this.OpenConnection() == true)
             {
@@ -237,6 +167,11 @@ namespace SAD2
             MessageBox.Show("Success");
 
             this.Close();
+        }
+
+        private void pgDelete_Click(object sender, EventArgs e)
+        {
+
         }
 
         private bool OpenConnection()
@@ -274,49 +209,7 @@ namespace SAD2
                 MessageBox.Show(ex.Message);
                 return false;
             }
-        }
 
-
-        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbType.Text != "")
-            {
-                cmbColor.Enabled = true;
-            }
-            else
-            {
-                cmbColor.Enabled = false;
-            }
-
-            try
-            {
-                cmbColor.Items.Clear();
-
-                string query = "SELECT DISTINCT color FROM db_cefinal.products where type = '" + cmbType.Text + "';";
-
-                if (this.OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-                    cmbColor.Text = "";
-                    cmbWeight.Text = "";
-                    txtIDAdd.Text = "";
-                    cmbWeight.Enabled = false;
-
-                    while (dataReader.Read())
-                    {
-                        cmbColor.Items.Add(dataReader["color"]);
-                    }
-
-                    dataReader.Close();
-
-                    this.CloseConnection();
-                }
-            }
-            catch (Exception err)
-            {
-
-            }
         }
     }
 }

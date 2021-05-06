@@ -32,11 +32,12 @@ namespace SAD2
             this.btnOrder = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
             this.btnTransactions = new System.Windows.Forms.Button();
+            this.btnCustomer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOrder
             // 
-            this.btnOrder.Location = new System.Drawing.Point(62, 156);
+            this.btnOrder.Location = new System.Drawing.Point(167, 191);
             this.btnOrder.Name = "btnOrder";
             this.btnOrder.Size = new System.Drawing.Size(190, 45);
             this.btnOrder.TabIndex = 0;
@@ -46,7 +47,7 @@ namespace SAD2
             // 
             // btnInventory
             // 
-            this.btnInventory.Location = new System.Drawing.Point(272, 156);
+            this.btnInventory.Location = new System.Drawing.Point(167, 242);
             this.btnInventory.Name = "btnInventory";
             this.btnInventory.Size = new System.Drawing.Size(190, 45);
             this.btnInventory.TabIndex = 1;
@@ -56,19 +57,30 @@ namespace SAD2
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Location = new System.Drawing.Point(167, 217);
+            this.btnTransactions.Location = new System.Drawing.Point(167, 293);
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Size = new System.Drawing.Size(190, 45);
             this.btnTransactions.TabIndex = 2;
-            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.Text = "Order Transactions";
             this.btnTransactions.UseVisualStyleBackColor = true;
             this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.Location = new System.Drawing.Point(167, 344);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(190, 45);
+            this.btnCustomer.TabIndex = 3;
+            this.btnCustomer.Text = "Customer Profiles";
+            this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 310);
+            this.ClientSize = new System.Drawing.Size(524, 422);
+            this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.btnTransactions);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnOrder);
@@ -88,5 +100,6 @@ namespace SAD2
         private System.Windows.Forms.Button btnOrder;
         private System.Windows.Forms.Button btnInventory;
         private System.Windows.Forms.Button btnTransactions;
+        private System.Windows.Forms.Button btnCustomer;
     }
 }

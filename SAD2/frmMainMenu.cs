@@ -47,5 +47,12 @@ namespace SAD2
         {
 
         }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            frmCustomers temp = new frmCustomers();
+            temp.Show();
+            this.Hide();
+        }
     }
 }

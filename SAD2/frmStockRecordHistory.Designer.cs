@@ -75,7 +75,6 @@ namespace SAD2
             // 
             // colDateAndTime
             // 
-            this.colDateAndTime.DisplayIndex = 0;
             this.colDateAndTime.Text = "Date and Time";
             this.colDateAndTime.Width = 232;
             // 
@@ -87,7 +86,7 @@ namespace SAD2
             // colAction
             // 
             this.colAction.Text = "Action";
-            this.colAction.Width = 144;
+            this.colAction.Width = 137;
             // 
             // btnDetails
             // 

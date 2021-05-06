@@ -15,9 +15,10 @@ namespace SAD2
     {
         private MySqlConnection connection;
         private string server, database, uid, password;
-        public string transactionID;
+        private int transactionID, totalAmount;
 
-        public frmTransactionDetails(string temp)
+
+        public frmTransactionDetails(int temp)
         {
             transactionID = temp;
             InitializeComponent();
@@ -26,8 +27,6 @@ namespace SAD2
 
         private void frmTransactionDetails_Load(object sender, EventArgs e)
         {
-            frmTransactions temp = new frmTransactions();
-
             string query = "SELECT * FROM `db_cefinal`.`sales` where transactionID = " + transactionID + ";";
 
             try
@@ -62,6 +61,7 @@ namespace SAD2
             }catch(Exception err)
             {
                 Console.WriteLine(err);
+                CloseConnection();
             }
 
             query = "SELECT * FROM db_transactions.`" + transactionID + "`";
@@ -96,6 +96,7 @@ namespace SAD2
             catch (Exception err)
             {
                 Console.WriteLine(err);
+                CloseConnection();
             }
 
             query = "SELECT Status FROM `db_cefinal`.`sales` where transactionID = " + transactionID + ";";
@@ -109,7 +110,7 @@ namespace SAD2
 
                     while (dataReader.Read())
                     {
-                        cmbPaymentStatus.SelectedIndex = cmbPaymentStatus.FindStringExact(dataReader["Status"].ToString());
+                        //cmbPaymentStatus.SelectedIndex = cmbPaymentStatus.FindStringExact(dataReader["Status"].ToString());
                     }
 
                     dataReader.Close();
@@ -120,6 +121,87 @@ namespace SAD2
             catch (Exception err)
             {
                 Console.WriteLine(err);
+                CloseConnection();
+            }
+
+            query = "SELECT sum(amount) AS subtotal FROM db_payments.`" + transactionID + "`";
+
+            try
+            {
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        string total = dataReader["subtotal"] + "";
+                        totalAmount = int.Parse(total);
+                    }
+
+                    dataReader.Close();
+
+                    CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+                CloseConnection();
+            }
+
+            query = "SELECT sum(subtotal) AS subtotal FROM db_transactions.`" + transactionID + "`";
+
+            try
+            {
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        string total = dataReader["subtotal"] + "";
+                        totalAmount = int.Parse(total) - totalAmount;
+                    }
+
+                    dataReader.Close();
+
+                    CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+                CloseConnection();
+            }
+
+
+            if(totalAmount <= 0)
+            {
+                txtPaymentStatus.Text = "Paid";
+                query = "UPDATE `db_cefinal`.`sales` SET `Status` = 'Paid' WHERE (`transactionID` = " + transactionID + ");";
+            }
+            else
+            {
+                txtPaymentStatus.Text = "Unpaid";
+                query = "UPDATE `db_cefinal`.`sales` SET `Status` = 'Unpaid' WHERE (`transactionID` = " + transactionID + ");";
+            }
+
+            try
+            {
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteReader();
+
+                    CloseConnection();
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+                CloseConnection();
             }
 
             double subTotal = 0;
@@ -138,39 +220,37 @@ namespace SAD2
             txtTotalWeight.Text = totalTransactionWeight.ToString();
             txtSubtotal.Text = subTotal.ToString();
 
-            temp.Refresh();
-
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string query = "";
+        //private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string query = "";
 
-            if (cmbPaymentStatus.SelectedItem.ToString() == "Unpaid")
-            {
-                query = "UPDATE `db_cefinal`.`sales` SET `Status` = 'Unpaid' WHERE (`transactionID` = " + transactionID + ");";
-            }
-            else if (cmbPaymentStatus.SelectedItem.ToString() == "Paid")
-            {
-                query = "UPDATE `db_cefinal`.`sales` SET `Status` = 'Paid' WHERE (`transactionID` = " + transactionID + ");";
-            }
+        //    if (cmbPaymentStatus.SelectedItem.ToString() == "Unpaid")
+        //    {
+        //        query = "UPDATE `db_cefinal`.`sales` SET `Status` = 'Unpaid' WHERE (`transactionID` = " + transactionID + ");";
+        //    }
+        //    else if (cmbPaymentStatus.SelectedItem.ToString() == "Paid")
+        //    {
+        //        query = "UPDATE `db_cefinal`.`sales` SET `Status` = 'Paid' WHERE (`transactionID` = " + transactionID + ");";
+        //    }
             
 
-            try
-            {
-                if (OpenConnection() == true)
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.ExecuteReader();
+        //    try
+        //    {
+        //        if (OpenConnection() == true)
+        //        {
+        //            MySqlCommand cmd = new MySqlCommand(query, connection);
+        //            cmd.ExecuteReader();
 
-                    CloseConnection();
-                }
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine(err);
-            }
-        }
+        //            CloseConnection();
+        //        }
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        Console.WriteLine(err);
+        //    }
+        //}
 
         private void frmTransactionDetails_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -181,6 +261,23 @@ namespace SAD2
         }
 
         private void listProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPayments_Click(object sender, EventArgs e)
+        {
+            frmPayment temp = new frmPayment(int.Parse(txtTransactionNum.Text));
+            temp.Show();
+            this.Hide();
+        }
+
+        private void txtSubtotal_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

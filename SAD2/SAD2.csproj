@@ -47,11 +47,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAddCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddCustomer.Designer.cs">
+      <DependentUpon>frmAddCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddDeleteInventoryItems.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAddDeleteInventoryItems.Designer.cs">
       <DependentUpon>frmAddDeleteInventoryItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddPayment.Designer.cs">
+      <DependentUpon>frmAddPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomer.Designer.cs">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="frmInventory.cs">
       <SubType>Form</SubType>
@@ -70,6 +88,18 @@
     </Compile>
     <Compile Include="frmOrder.Designer.cs">
       <DependentUpon>frmOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaymentDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaymentDetails.Designer.cs">
+      <DependentUpon>frmPaymentDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="frmStockinAdd.cs">
       <SubType>Form</SubType>
@@ -121,8 +151,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAddCustomer.resx">
+      <DependentUpon>frmAddCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddDeleteInventoryItems.resx">
       <DependentUpon>frmAddDeleteInventoryItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddPayment.resx">
+      <DependentUpon>frmAddPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomer.resx">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInventory.resx">
       <DependentUpon>frmInventory.cs</DependentUpon>
@@ -132,6 +171,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOrder.resx">
       <DependentUpon>frmOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPayment.resx">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaymentDetails.resx">
+      <DependentUpon>frmPaymentDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStockinAdd.resx">
       <DependentUpon>frmStockinAdd.cs</DependentUpon>

@@ -25,6 +25,7 @@ namespace SAD2
             InitializeComponent();
             Initialize();
             show();
+            showCustomerProfiles();
         }
 
         private void Initialize()
@@ -220,6 +221,16 @@ namespace SAD2
             }
         }
 
+        private void txtDateandTime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTime_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
             try
@@ -287,6 +298,44 @@ namespace SAD2
 
             }
             
+        }
+
+        private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            int space1 = cmbProfile.SelectedItem.ToString().IndexOf(' ');
+            string firstPart = cmbProfile.SelectedItem.ToString().Substring(0, space1);
+
+            string query = "SELECT * FROM db_cefinal.customers where customerID = '" + firstPart + "';";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string name = dataReader["name"] + "",
+                           address = dataReader["address"] + "",
+                           number = dataReader["contactnumber"] + "";
+
+                    txtName.Text = name;
+                    txtAddress.Text = address;
+                    txtContactNum.Text = number;
+
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            frmAddCustomer temp = new frmAddCustomer(1);
+            temp.ShowDialog();
+            showCustomerProfiles();
         }
 
         private void txtName_TextChanged(object sender, EventArgs e)
@@ -380,14 +429,12 @@ namespace SAD2
             }
             else if (!txtContactNum.Text.All(char.IsDigit))
             {
-                lblContactPrompt.Text = "Must enter all in digits";
                 btnAccept.Enabled = false;
                 checkContact = false;
             }
             else
             {
                 checkContact = true;
-                lblContactPrompt.Text = "   ";
                 if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
                 {
                     btnAccept.Enabled = true;
@@ -457,6 +504,31 @@ namespace SAD2
             }
         }
 
+        public void showCustomerProfiles()
+        {
+            cmbProfile.Items.Clear();
+
+            string query = "SELECT customerID, name, address from db_cefinal.customers";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["customerID"] + "", name = dataReader["name"] + "", address = dataReader["address"] + "";
+
+                    cmbProfile.Items.Add(id + " - " + name + " - " + address);
+
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
+        }
+
         private void frmOrder_Load(object sender, EventArgs e)
         {
             timer1.Enabled = true;
@@ -498,15 +570,17 @@ namespace SAD2
 
 
                     //Sales
-                    string query = "insert into sales(transactionID, DateTime, Name, Address, ContactNumber, Status) values('" + txtTransactionNum.Text + "','" +
-                         DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "','" + txtName.Text + "','" + txtAddress.Text + "','" + txtContactNum.Text + "', 'Unpaid');" +
-                         "insert into stockrecordhistory(recordID, date, person, action) values('" + txtTransactionNum.Text + "','" +
-                         DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "','" + txtName.Text + "','Stock Out');";
+                    string query = "insert into sales(transactionID, DateTime, Name, Address, ContactNumber, Status) values('" + txtTransactionNum.Text + "', now() ,'" + txtName.Text + "','" + txtAddress.Text + "','" + txtContactNum.Text + "', 'Unpaid');" +
+                         "insert into stockrecordhistory(recordID, date, person, action) values('" + txtTransactionNum.Text + "', now(),'" + txtName.Text + "','Stock Out');";
 
                     //New table in transactions database
                     string queryTransaction = "";
                     queryTransaction = "create table `" + txtTransactionNum.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, totalWeight int, price int, subtotal int, primary" +
                         " key (itemID));";
+
+                    //New table in transactions database
+                    queryTransaction += "CREATE TABLE `db_payments`.`" + txtTransactionNum.Text + "` (paymentID int not null AUTO_INCREMENT, Date varchar(255), ModeOfPayment varchar(255), AccountNumber int, AccountName varchar(255), Amount int, primary" +
+                        " key (paymentID)) ENGINE = InnoDB AUTO_INCREMENT = 0;";
 
                     //Add items from cart to database
                     foreach (ListViewItem eachItem in listCart.Items)
@@ -532,6 +606,7 @@ namespace SAD2
                 catch (Exception err)
                 {
                     MessageBox.Show(err.ToString());
+                    CloseConnection();
                 }
 
             frmMainMenu temp = new frmMainMenu();

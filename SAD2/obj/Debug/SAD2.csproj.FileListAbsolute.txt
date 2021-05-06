@@ -47,3 +47,8 @@ C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmMainMenu.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmTransactionDetails.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmTransactions.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddDeleteInventoryItems.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmPayment.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddPayment.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmPaymentDetails.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmCustomers.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddCustomer.resources

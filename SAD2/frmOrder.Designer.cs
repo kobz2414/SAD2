@@ -31,6 +31,7 @@ namespace SAD2
         {
             this.components = new System.ComponentModel.Container();
             this.grpCustomerDetails = new System.Windows.Forms.GroupBox();
+            this.lblTransactionNumberPrompt = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDateandTime = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
@@ -72,8 +73,9 @@ namespace SAD2
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblTransactionNumberPrompt = new System.Windows.Forms.Label();
-            this.lblContactPrompt = new System.Windows.Forms.Label();
+            this.cmbProfile = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnCustomer = new System.Windows.Forms.Button();
             this.grpCustomerDetails.SuspendLayout();
             this.grpInventory.SuspendLayout();
             this.grpCart.SuspendLayout();
@@ -81,7 +83,9 @@ namespace SAD2
             // 
             // grpCustomerDetails
             // 
-            this.grpCustomerDetails.Controls.Add(this.lblContactPrompt);
+            this.grpCustomerDetails.Controls.Add(this.btnCustomer);
+            this.grpCustomerDetails.Controls.Add(this.label2);
+            this.grpCustomerDetails.Controls.Add(this.cmbProfile);
             this.grpCustomerDetails.Controls.Add(this.lblTransactionNumberPrompt);
             this.grpCustomerDetails.Controls.Add(this.label1);
             this.grpCustomerDetails.Controls.Add(this.txtDateandTime);
@@ -96,16 +100,26 @@ namespace SAD2
             this.grpCustomerDetails.Controls.Add(this.lblName);
             this.grpCustomerDetails.Location = new System.Drawing.Point(12, 12);
             this.grpCustomerDetails.Name = "grpCustomerDetails";
-            this.grpCustomerDetails.Size = new System.Drawing.Size(1232, 177);
+            this.grpCustomerDetails.Size = new System.Drawing.Size(1232, 203);
             this.grpCustomerDetails.TabIndex = 0;
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Customer Details";
+            // 
+            // lblTransactionNumberPrompt
+            // 
+            this.lblTransactionNumberPrompt.AutoSize = true;
+            this.lblTransactionNumberPrompt.Location = new System.Drawing.Point(423, 25);
+            this.lblTransactionNumberPrompt.Name = "lblTransactionNumberPrompt";
+            this.lblTransactionNumberPrompt.Size = new System.Drawing.Size(16, 13);
+            this.lblTransactionNumberPrompt.TabIndex = 15;
+            this.lblTransactionNumberPrompt.Text = "   ";
+            this.lblTransactionNumberPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(155, 152);
+            this.label1.Location = new System.Drawing.Point(155, 168);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 14;
@@ -119,6 +133,7 @@ namespace SAD2
             this.txtDateandTime.Size = new System.Drawing.Size(249, 20);
             this.txtDateandTime.TabIndex = 13;
             this.txtDateandTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDateandTime.TextChanged += new System.EventHandler(this.txtDateandTime_TextChanged);
             // 
             // lblTime
             // 
@@ -128,19 +143,20 @@ namespace SAD2
             this.lblTime.Size = new System.Drawing.Size(77, 13);
             this.lblTime.TabIndex = 12;
             this.lblTime.Text = "Date and Time";
+            this.lblTime.Click += new System.EventHandler(this.lblTime_Click);
             // 
             // txtTransactionNum
             // 
-            this.txtTransactionNum.Location = new System.Drawing.Point(158, 26);
+            this.txtTransactionNum.Location = new System.Drawing.Point(158, 22);
             this.txtTransactionNum.Name = "txtTransactionNum";
-            this.txtTransactionNum.Size = new System.Drawing.Size(373, 20);
+            this.txtTransactionNum.Size = new System.Drawing.Size(255, 20);
             this.txtTransactionNum.TabIndex = 1;
             this.txtTransactionNum.TextChanged += new System.EventHandler(this.txtTransactionNum_TextChanged);
             // 
             // lblTransactionNumber
             // 
             this.lblTransactionNumber.AutoSize = true;
-            this.lblTransactionNumber.Location = new System.Drawing.Point(39, 30);
+            this.lblTransactionNumber.Location = new System.Drawing.Point(39, 26);
             this.lblTransactionNumber.Name = "lblTransactionNumber";
             this.lblTransactionNumber.Size = new System.Drawing.Size(110, 13);
             this.lblTransactionNumber.TabIndex = 10;
@@ -148,7 +164,8 @@ namespace SAD2
             // 
             // txtContactNum
             // 
-            this.txtContactNum.Location = new System.Drawing.Point(158, 122);
+            this.txtContactNum.Enabled = false;
+            this.txtContactNum.Location = new System.Drawing.Point(158, 139);
             this.txtContactNum.Name = "txtContactNum";
             this.txtContactNum.Size = new System.Drawing.Size(192, 20);
             this.txtContactNum.TabIndex = 4;
@@ -157,15 +174,16 @@ namespace SAD2
             // lblContactNumber
             // 
             this.lblContactNumber.AutoSize = true;
-            this.lblContactNumber.Location = new System.Drawing.Point(58, 126);
+            this.lblContactNumber.Location = new System.Drawing.Point(65, 143);
             this.lblContactNumber.Name = "lblContactNumber";
-            this.lblContactNumber.Size = new System.Drawing.Size(91, 13);
+            this.lblContactNumber.Size = new System.Drawing.Size(84, 13);
             this.lblContactNumber.TabIndex = 8;
-            this.lblContactNumber.Text = "Contact Number *";
+            this.lblContactNumber.Text = "Contact Number";
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(158, 90);
+            this.txtAddress.Enabled = false;
+            this.txtAddress.Location = new System.Drawing.Point(158, 110);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(373, 20);
             this.txtAddress.TabIndex = 3;
@@ -174,15 +192,16 @@ namespace SAD2
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(97, 94);
+            this.lblAddress.Location = new System.Drawing.Point(104, 114);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(52, 13);
+            this.lblAddress.Size = new System.Drawing.Size(45, 13);
             this.lblAddress.TabIndex = 6;
-            this.lblAddress.Text = "Address *";
+            this.lblAddress.Text = "Address";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(158, 58);
+            this.txtName.Enabled = false;
+            this.txtName.Location = new System.Drawing.Point(158, 81);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(373, 20);
             this.txtName.TabIndex = 2;
@@ -191,18 +210,18 @@ namespace SAD2
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(107, 62);
+            this.lblName.Location = new System.Drawing.Point(114, 85);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(42, 13);
+            this.lblName.Size = new System.Drawing.Size(35, 13);
             this.lblName.TabIndex = 4;
-            this.lblName.Text = "Name *";
+            this.lblName.Text = "Name";
             // 
             // grpInventory
             // 
             this.grpInventory.Controls.Add(this.listProduct);
-            this.grpInventory.Location = new System.Drawing.Point(12, 195);
+            this.grpInventory.Location = new System.Drawing.Point(12, 221);
             this.grpInventory.Name = "grpInventory";
-            this.grpInventory.Size = new System.Drawing.Size(492, 378);
+            this.grpInventory.Size = new System.Drawing.Size(492, 352);
             this.grpInventory.TabIndex = 1;
             this.grpInventory.TabStop = false;
             this.grpInventory.Text = "Inventory";
@@ -220,10 +239,10 @@ namespace SAD2
             this.listProduct.FullRowSelect = true;
             this.listProduct.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listProduct.HideSelection = false;
-            this.listProduct.Location = new System.Drawing.Point(20, 30);
+            this.listProduct.Location = new System.Drawing.Point(20, 26);
             this.listProduct.Margin = new System.Windows.Forms.Padding(2);
             this.listProduct.Name = "listProduct";
-            this.listProduct.Size = new System.Drawing.Size(452, 253);
+            this.listProduct.Size = new System.Drawing.Size(452, 234);
             this.listProduct.TabIndex = 13;
             this.listProduct.UseCompatibleStateImageBehavior = false;
             this.listProduct.View = System.Windows.Forms.View.Details;
@@ -262,7 +281,7 @@ namespace SAD2
             // txtPrice
             // 
             this.txtPrice.Enabled = false;
-            this.txtPrice.Location = new System.Drawing.Point(82, 332);
+            this.txtPrice.Location = new System.Drawing.Point(82, 309);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(141, 20);
             this.txtPrice.TabIndex = 16;
@@ -270,7 +289,7 @@ namespace SAD2
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(21, 336);
+            this.lblPrice.Location = new System.Drawing.Point(21, 313);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(53, 13);
             this.lblPrice.TabIndex = 17;
@@ -279,7 +298,7 @@ namespace SAD2
             // txtQuantity
             // 
             this.txtQuantity.Enabled = false;
-            this.txtQuantity.Location = new System.Drawing.Point(82, 300);
+            this.txtQuantity.Location = new System.Drawing.Point(82, 277);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(141, 20);
             this.txtQuantity.TabIndex = 14;
@@ -287,7 +306,7 @@ namespace SAD2
             // lblQuantity
             // 
             this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(28, 304);
+            this.lblQuantity.Location = new System.Drawing.Point(28, 281);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(46, 13);
             this.lblQuantity.TabIndex = 15;
@@ -296,7 +315,7 @@ namespace SAD2
             // btnAdd
             // 
             this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(247, 295);
+            this.btnAdd.Location = new System.Drawing.Point(247, 272);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(107, 28);
             this.btnAdd.TabIndex = 3;
@@ -317,9 +336,9 @@ namespace SAD2
             this.grpCart.Controls.Add(this.lblTotalWeight);
             this.grpCart.Controls.Add(this.btnAdd);
             this.grpCart.Controls.Add(this.btnRemove);
-            this.grpCart.Location = new System.Drawing.Point(510, 195);
+            this.grpCart.Location = new System.Drawing.Point(510, 221);
             this.grpCart.Name = "grpCart";
-            this.grpCart.Size = new System.Drawing.Size(734, 378);
+            this.grpCart.Size = new System.Drawing.Size(734, 352);
             this.grpCart.TabIndex = 2;
             this.grpCart.TabStop = false;
             this.grpCart.Text = "Cart";
@@ -327,7 +346,7 @@ namespace SAD2
             // txtSubtotal
             // 
             this.txtSubtotal.Enabled = false;
-            this.txtSubtotal.Location = new System.Drawing.Point(562, 332);
+            this.txtSubtotal.Location = new System.Drawing.Point(562, 309);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Size = new System.Drawing.Size(154, 20);
             this.txtSubtotal.TabIndex = 16;
@@ -335,7 +354,7 @@ namespace SAD2
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new System.Drawing.Point(510, 336);
+            this.lblSubtotal.Location = new System.Drawing.Point(510, 313);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(46, 13);
             this.lblSubtotal.TabIndex = 15;
@@ -354,11 +373,11 @@ namespace SAD2
             this.cartSubtotal});
             this.listCart.FullRowSelect = true;
             this.listCart.HideSelection = false;
-            this.listCart.Location = new System.Drawing.Point(19, 30);
+            this.listCart.Location = new System.Drawing.Point(19, 26);
             this.listCart.Margin = new System.Windows.Forms.Padding(2);
             this.listCart.MultiSelect = false;
             this.listCart.Name = "listCart";
-            this.listCart.Size = new System.Drawing.Size(697, 253);
+            this.listCart.Size = new System.Drawing.Size(697, 234);
             this.listCart.TabIndex = 14;
             this.listCart.UseCompatibleStateImageBehavior = false;
             this.listCart.View = System.Windows.Forms.View.Details;
@@ -407,7 +426,7 @@ namespace SAD2
             // txtTotalWeight
             // 
             this.txtTotalWeight.Enabled = false;
-            this.txtTotalWeight.Location = new System.Drawing.Point(562, 300);
+            this.txtTotalWeight.Location = new System.Drawing.Point(562, 277);
             this.txtTotalWeight.Name = "txtTotalWeight";
             this.txtTotalWeight.Size = new System.Drawing.Size(154, 20);
             this.txtTotalWeight.TabIndex = 5;
@@ -415,7 +434,7 @@ namespace SAD2
             // lblTotalWeight
             // 
             this.lblTotalWeight.AutoSize = true;
-            this.lblTotalWeight.Location = new System.Drawing.Point(488, 304);
+            this.lblTotalWeight.Location = new System.Drawing.Point(488, 281);
             this.lblTotalWeight.Name = "lblTotalWeight";
             this.lblTotalWeight.Size = new System.Drawing.Size(68, 13);
             this.lblTotalWeight.TabIndex = 4;
@@ -424,7 +443,7 @@ namespace SAD2
             // btnRemove
             // 
             this.btnRemove.Enabled = false;
-            this.btnRemove.Location = new System.Drawing.Point(247, 329);
+            this.btnRemove.Location = new System.Drawing.Point(247, 306);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(107, 28);
             this.btnRemove.TabIndex = 4;
@@ -447,25 +466,34 @@ namespace SAD2
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lblTransactionNumberPrompt
+            // cmbProfile
             // 
-            this.lblTransactionNumberPrompt.AutoSize = true;
-            this.lblTransactionNumberPrompt.Location = new System.Drawing.Point(537, 29);
-            this.lblTransactionNumberPrompt.Name = "lblTransactionNumberPrompt";
-            this.lblTransactionNumberPrompt.Size = new System.Drawing.Size(16, 13);
-            this.lblTransactionNumberPrompt.TabIndex = 15;
-            this.lblTransactionNumberPrompt.Text = "   ";
-            this.lblTransactionNumberPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cmbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProfile.FormattingEnabled = true;
+            this.cmbProfile.Location = new System.Drawing.Point(158, 51);
+            this.cmbProfile.Name = "cmbProfile";
+            this.cmbProfile.Size = new System.Drawing.Size(255, 21);
+            this.cmbProfile.TabIndex = 17;
+            this.cmbProfile.SelectedIndexChanged += new System.EventHandler(this.cmbProfile_SelectedIndexChanged);
             // 
-            // lblContactPrompt
+            // label2
             // 
-            this.lblContactPrompt.AutoSize = true;
-            this.lblContactPrompt.Location = new System.Drawing.Point(356, 126);
-            this.lblContactPrompt.Name = "lblContactPrompt";
-            this.lblContactPrompt.Size = new System.Drawing.Size(16, 13);
-            this.lblContactPrompt.TabIndex = 16;
-            this.lblContactPrompt.Text = "   ";
-            this.lblContactPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(98, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Customer";
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.Location = new System.Drawing.Point(419, 51);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(112, 23);
+            this.btnCustomer.TabIndex = 19;
+            this.btnCustomer.Text = "Add Customer";
+            this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // frmOrder
             // 
@@ -537,6 +565,8 @@ namespace SAD2
         private System.Windows.Forms.Label lblSubtotal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTransactionNumberPrompt;
-        private System.Windows.Forms.Label lblContactPrompt;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbProfile;
+        private System.Windows.Forms.Button btnCustomer;
     }
 }

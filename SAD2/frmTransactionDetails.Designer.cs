@@ -30,7 +30,8 @@ namespace SAD2
         private void InitializeComponent()
         {
             this.grpCustomerDetails = new System.Windows.Forms.GroupBox();
-            this.cmbPaymentStatus = new System.Windows.Forms.ComboBox();
+            this.txtPaymentStatus = new System.Windows.Forms.TextBox();
+            this.btnPayments = new System.Windows.Forms.Button();
             this.lblPaymentStatus = new System.Windows.Forms.Label();
             this.txtDateandTime = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
@@ -60,7 +61,8 @@ namespace SAD2
             // 
             // grpCustomerDetails
             // 
-            this.grpCustomerDetails.Controls.Add(this.cmbPaymentStatus);
+            this.grpCustomerDetails.Controls.Add(this.txtPaymentStatus);
+            this.grpCustomerDetails.Controls.Add(this.btnPayments);
             this.grpCustomerDetails.Controls.Add(this.lblPaymentStatus);
             this.grpCustomerDetails.Controls.Add(this.txtDateandTime);
             this.grpCustomerDetails.Controls.Add(this.lblTime);
@@ -79,17 +81,24 @@ namespace SAD2
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Customer Details";
             // 
-            // cmbPaymentStatus
+            // txtPaymentStatus
             // 
-            this.cmbPaymentStatus.FormattingEnabled = true;
-            this.cmbPaymentStatus.Items.AddRange(new object[] {
-            "Unpaid",
-            "Paid"});
-            this.cmbPaymentStatus.Location = new System.Drawing.Point(158, 186);
-            this.cmbPaymentStatus.Name = "cmbPaymentStatus";
-            this.cmbPaymentStatus.Size = new System.Drawing.Size(121, 21);
-            this.cmbPaymentStatus.TabIndex = 15;
-            this.cmbPaymentStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.txtPaymentStatus.Enabled = false;
+            this.txtPaymentStatus.Location = new System.Drawing.Point(158, 187);
+            this.txtPaymentStatus.Name = "txtPaymentStatus";
+            this.txtPaymentStatus.Size = new System.Drawing.Size(121, 20);
+            this.txtPaymentStatus.TabIndex = 22;
+            this.txtPaymentStatus.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // btnPayments
+            // 
+            this.btnPayments.Location = new System.Drawing.Point(285, 186);
+            this.btnPayments.Name = "btnPayments";
+            this.btnPayments.Size = new System.Drawing.Size(107, 23);
+            this.btnPayments.TabIndex = 16;
+            this.btnPayments.Text = "Payments";
+            this.btnPayments.UseVisualStyleBackColor = true;
+            this.btnPayments.Click += new System.EventHandler(this.btnPayments_Click);
             // 
             // lblPaymentStatus
             // 
@@ -192,6 +201,7 @@ namespace SAD2
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Size = new System.Drawing.Size(154, 20);
             this.txtSubtotal.TabIndex = 20;
+            this.txtSubtotal.TextChanged += new System.EventHandler(this.txtSubtotal_TextChanged);
             // 
             // lblSubtotal
             // 
@@ -319,7 +329,6 @@ namespace SAD2
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.ComboBox cmbPaymentStatus;
         private System.Windows.Forms.Label lblPaymentStatus;
         private System.Windows.Forms.TextBox txtSubtotal;
         private System.Windows.Forms.Label lblSubtotal;
@@ -334,5 +343,7 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader cartTotalWeight;
         private System.Windows.Forms.ColumnHeader cartPrice;
         private System.Windows.Forms.ColumnHeader cartSubtotal;
+        private System.Windows.Forms.TextBox txtPaymentStatus;
+        private System.Windows.Forms.Button btnPayments;
     }
 }
