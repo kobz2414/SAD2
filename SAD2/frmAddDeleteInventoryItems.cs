@@ -40,7 +40,7 @@ namespace SAD2
         {
         }
 
-        private void frmAddDeleteInventoryItems_Load(object sender, EventArgs e)
+        private void showDelete()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace SAD2
                     {
                         string id = dataReader["inventory_id"] + "", type = dataReader["type"] + "", color = dataReader["color"] + "", weight = dataReader["weight"] + "", quantity = dataReader["quantity"] + "";
 
-                        string[] row = { id, type, color, weight, quantity};
+                        string[] row = { id, type, color, weight, quantity };
                         ListViewItem item = new ListViewItem(row);
                         listInventory.Items.Add(item);
                     }
@@ -69,8 +69,13 @@ namespace SAD2
             }
             catch (Exception err)
             {
-
+                this.CloseConnection();
             }
+        }
+
+        private void frmAddDeleteInventoryItems_Load(object sender, EventArgs e)
+        {
+            showDelete();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -98,7 +103,7 @@ namespace SAD2
             }
             catch(Exception err)
             {
-
+                CloseConnection();
             }
 
             //query = "SELECT EXISTS(SELECT quantity FROM `db_cefinal`.`inventory` WHERE inventory_id = '" + txtID.Text + "') as quantity;"; // Check if item exists
@@ -146,6 +151,7 @@ namespace SAD2
                     this.CloseConnection();
                 }
                 MessageBox.Show("Success");
+                showDelete();
             }
         }
 
@@ -165,8 +171,7 @@ namespace SAD2
             txtColor.Text = "";
             txtWeight.Text = "";
             MessageBox.Show("Success");
-
-            this.Close();
+            showDelete();
         }
 
         private void pgDelete_Click(object sender, EventArgs e)

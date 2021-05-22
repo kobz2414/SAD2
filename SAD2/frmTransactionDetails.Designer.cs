@@ -74,9 +74,9 @@ namespace SAD2
             this.grpCustomerDetails.Controls.Add(this.lblAddress);
             this.grpCustomerDetails.Controls.Add(this.txtName);
             this.grpCustomerDetails.Controls.Add(this.lblName);
-            this.grpCustomerDetails.Location = new System.Drawing.Point(17, 12);
+            this.grpCustomerDetails.Location = new System.Drawing.Point(18, 12);
             this.grpCustomerDetails.Name = "grpCustomerDetails";
-            this.grpCustomerDetails.Size = new System.Drawing.Size(577, 227);
+            this.grpCustomerDetails.Size = new System.Drawing.Size(637, 227);
             this.grpCustomerDetails.TabIndex = 1;
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Customer Details";
@@ -197,7 +197,7 @@ namespace SAD2
             // txtSubtotal
             // 
             this.txtSubtotal.Enabled = false;
-            this.txtSubtotal.Location = new System.Drawing.Point(440, 570);
+            this.txtSubtotal.Location = new System.Drawing.Point(501, 568);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Size = new System.Drawing.Size(154, 20);
             this.txtSubtotal.TabIndex = 20;
@@ -206,7 +206,7 @@ namespace SAD2
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new System.Drawing.Point(388, 573);
+            this.lblSubtotal.Location = new System.Drawing.Point(449, 571);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(46, 13);
             this.lblSubtotal.TabIndex = 19;
@@ -215,7 +215,7 @@ namespace SAD2
             // txtTotalWeight
             // 
             this.txtTotalWeight.Enabled = false;
-            this.txtTotalWeight.Location = new System.Drawing.Point(440, 544);
+            this.txtTotalWeight.Location = new System.Drawing.Point(501, 542);
             this.txtTotalWeight.Name = "txtTotalWeight";
             this.txtTotalWeight.Size = new System.Drawing.Size(154, 20);
             this.txtTotalWeight.TabIndex = 18;
@@ -223,7 +223,7 @@ namespace SAD2
             // lblTotalWeight
             // 
             this.lblTotalWeight.AutoSize = true;
-            this.lblTotalWeight.Location = new System.Drawing.Point(366, 547);
+            this.lblTotalWeight.Location = new System.Drawing.Point(427, 545);
             this.lblTotalWeight.Name = "lblTotalWeight";
             this.lblTotalWeight.Size = new System.Drawing.Size(68, 13);
             this.lblTotalWeight.TabIndex = 17;
@@ -242,11 +242,11 @@ namespace SAD2
             this.cartSubtotal});
             this.listProducts.FullRowSelect = true;
             this.listProducts.HideSelection = false;
-            this.listProducts.Location = new System.Drawing.Point(17, 262);
+            this.listProducts.Location = new System.Drawing.Point(18, 262);
             this.listProducts.Margin = new System.Windows.Forms.Padding(2);
             this.listProducts.MultiSelect = false;
             this.listProducts.Name = "listProducts";
-            this.listProducts.Size = new System.Drawing.Size(577, 267);
+            this.listProducts.Size = new System.Drawing.Size(637, 267);
             this.listProducts.TabIndex = 21;
             this.listProducts.UseCompatibleStateImageBehavior = false;
             this.listProducts.View = System.Windows.Forms.View.Details;
@@ -259,7 +259,7 @@ namespace SAD2
             // cartType
             // 
             this.cartType.Text = "Type";
-            this.cartType.Width = 75;
+            this.cartType.Width = 106;
             // 
             // cartColor
             // 
@@ -268,8 +268,8 @@ namespace SAD2
             // 
             // cartWeight
             // 
-            this.cartWeight.Text = "Weight";
-            this.cartWeight.Width = 63;
+            this.cartWeight.Text = "Weight (kg)";
+            this.cartWeight.Width = 74;
             // 
             // cartQuantity
             // 
@@ -278,8 +278,8 @@ namespace SAD2
             // 
             // cartTotalWeight
             // 
-            this.cartTotalWeight.Text = "Total Weight";
-            this.cartTotalWeight.Width = 76;
+            this.cartTotalWeight.Text = "Total Weight (kg)";
+            this.cartTotalWeight.Width = 99;
             // 
             // cartPrice
             // 
@@ -295,7 +295,7 @@ namespace SAD2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 611);
+            this.ClientSize = new System.Drawing.Size(672, 611);
             this.Controls.Add(this.listProducts);
             this.Controls.Add(this.txtSubtotal);
             this.Controls.Add(this.lblSubtotal);

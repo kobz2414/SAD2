@@ -15,12 +15,13 @@ namespace SAD2
     {
         private MySqlConnection connection;
         private string server, database, uid, password;
-        private int transactionID, totalAmount;
+        private int transactionID, totalAmount, fromPage;
 
 
-        public frmTransactionDetails(int temp)
+        public frmTransactionDetails(int temp, int page)
         {
             transactionID = temp;
+            fromPage = page;
             InitializeComponent();
             Initialize();
         }
@@ -254,10 +255,20 @@ namespace SAD2
 
         private void frmTransactionDetails_FormClosing(object sender, FormClosingEventArgs e)
         {
-            frmTransactions temp = new frmTransactions();
-            temp.Show();
-            temp.Refresh();
-            this.Hide();
+            if(fromPage == 0)
+            {
+                frmTransactions temp = new frmTransactions();
+                temp.Show();
+                temp.Refresh();
+                this.Hide();
+            }
+            else
+            {
+                frmCustomers temp = new frmCustomers();
+                temp.Show();
+                temp.Refresh();
+                this.Hide();
+            }
         }
 
         private void listProducts_SelectedIndexChanged(object sender, EventArgs e)

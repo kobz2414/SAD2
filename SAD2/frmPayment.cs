@@ -49,7 +49,7 @@ namespace SAD2
 
         private void frmPayment_FormClosing(object sender, FormClosingEventArgs e)
         {
-            frmTransactionDetails temp = new frmTransactionDetails(transactionID);
+            frmTransactionDetails temp = new frmTransactionDetails(transactionID, 0);
             temp.Show();
             this.Hide();
         }

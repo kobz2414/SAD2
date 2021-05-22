@@ -35,7 +35,10 @@ namespace SAD2
             this.lblStaff = new System.Windows.Forms.Label();
             this.lblStockInID = new System.Windows.Forms.Label();
             this.grpInventoryItems = new System.Windows.Forms.GroupBox();
-            this.grpStockOutItems = new System.Windows.Forms.GroupBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.lblQuantity = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.listInventory = new System.Windows.Forms.ListView();
             this.colItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colItemType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,6 +46,11 @@ namespace SAD2
             this.colItemWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colItemQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colItemSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.grpStockOutItems = new System.Windows.Forms.GroupBox();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.btnStockOut = new System.Windows.Forms.Button();
             this.listStockOutItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,14 +58,6 @@ namespace SAD2
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblQuantity = new System.Windows.Forms.Label();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnStockOut = new System.Windows.Forms.Button();
-            this.txtTotal = new System.Windows.Forms.TextBox();
-            this.lblTotal = new System.Windows.Forms.Label();
-            this.btnRemove = new System.Windows.Forms.Button();
             this.grpStockIn.SuspendLayout();
             this.grpInventoryItems.SuspendLayout();
             this.grpStockOutItems.SuspendLayout();
@@ -128,19 +128,38 @@ namespace SAD2
             this.grpInventoryItems.TabStop = false;
             this.grpInventoryItems.Text = "Inventory";
             // 
-            // grpStockOutItems
+            // btnAdd
             // 
-            this.grpStockOutItems.Controls.Add(this.btnRemove);
-            this.grpStockOutItems.Controls.Add(this.txtTotal);
-            this.grpStockOutItems.Controls.Add(this.lblTotal);
-            this.grpStockOutItems.Controls.Add(this.btnStockOut);
-            this.grpStockOutItems.Controls.Add(this.listStockOutItems);
-            this.grpStockOutItems.Location = new System.Drawing.Point(636, 12);
-            this.grpStockOutItems.Name = "grpStockOutItems";
-            this.grpStockOutItems.Size = new System.Drawing.Size(614, 494);
-            this.grpStockOutItems.TabIndex = 25;
-            this.grpStockOutItems.TabStop = false;
-            this.grpStockOutItems.Text = "Items";
+            this.btnAdd.Location = new System.Drawing.Point(491, 317);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(102, 27);
+            this.btnAdd.TabIndex = 4;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.Location = new System.Drawing.Point(440, 290);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(153, 20);
+            this.txtQuantity.TabIndex = 3;
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Location = new System.Drawing.Point(388, 293);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
+            this.lblQuantity.TabIndex = 2;
+            this.lblQuantity.Text = "Quantity";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(109, 317);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 1;
             // 
             // listInventory
             // 
@@ -176,7 +195,7 @@ namespace SAD2
             // 
             // colItemWeight
             // 
-            this.colItemWeight.Text = "Weight";
+            this.colItemWeight.Text = "Weight (kg)";
             this.colItemWeight.Width = 98;
             // 
             // colItemQuantity
@@ -188,6 +207,58 @@ namespace SAD2
             // 
             this.colItemSubtotal.Text = "Subtotal";
             this.colItemSubtotal.Width = 97;
+            // 
+            // grpStockOutItems
+            // 
+            this.grpStockOutItems.Controls.Add(this.btnRemove);
+            this.grpStockOutItems.Controls.Add(this.txtTotal);
+            this.grpStockOutItems.Controls.Add(this.lblTotal);
+            this.grpStockOutItems.Controls.Add(this.btnStockOut);
+            this.grpStockOutItems.Controls.Add(this.listStockOutItems);
+            this.grpStockOutItems.Location = new System.Drawing.Point(636, 12);
+            this.grpStockOutItems.Name = "grpStockOutItems";
+            this.grpStockOutItems.Size = new System.Drawing.Size(614, 494);
+            this.grpStockOutItems.TabIndex = 25;
+            this.grpStockOutItems.TabStop = false;
+            this.grpStockOutItems.Text = "Items";
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(25, 414);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(102, 27);
+            this.btnRemove.TabIndex = 5;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Enabled = false;
+            this.txtTotal.Location = new System.Drawing.Point(477, 410);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(116, 20);
+            this.txtTotal.TabIndex = 18;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(443, 414);
+            this.lblTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(31, 13);
+            this.lblTotal.TabIndex = 19;
+            this.lblTotal.Text = "Total";
+            // 
+            // btnStockOut
+            // 
+            this.btnStockOut.Location = new System.Drawing.Point(491, 441);
+            this.btnStockOut.Name = "btnStockOut";
+            this.btnStockOut.Size = new System.Drawing.Size(102, 27);
+            this.btnStockOut.TabIndex = 5;
+            this.btnStockOut.Text = "Stock Out";
+            this.btnStockOut.UseVisualStyleBackColor = true;
+            this.btnStockOut.Click += new System.EventHandler(this.button2_Click);
             // 
             // listStockOutItems
             // 
@@ -223,7 +294,7 @@ namespace SAD2
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Weight";
+            this.columnHeader4.Text = "Weight (kg)";
             this.columnHeader4.Width = 98;
             // 
             // columnHeader5
@@ -235,77 +306,6 @@ namespace SAD2
             // 
             this.columnHeader6.Text = "Subtotal";
             this.columnHeader6.Width = 100;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 317);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
-            this.label1.TabIndex = 1;
-            // 
-            // lblQuantity
-            // 
-            this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(388, 293);
-            this.lblQuantity.Name = "lblQuantity";
-            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
-            this.lblQuantity.TabIndex = 2;
-            this.lblQuantity.Text = "Quantity";
-            // 
-            // txtQuantity
-            // 
-            this.txtQuantity.Location = new System.Drawing.Point(440, 290);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(153, 20);
-            this.txtQuantity.TabIndex = 3;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(491, 317);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(102, 27);
-            this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnStockOut
-            // 
-            this.btnStockOut.Location = new System.Drawing.Point(491, 441);
-            this.btnStockOut.Name = "btnStockOut";
-            this.btnStockOut.Size = new System.Drawing.Size(102, 27);
-            this.btnStockOut.TabIndex = 5;
-            this.btnStockOut.Text = "Stock Out";
-            this.btnStockOut.UseVisualStyleBackColor = true;
-            this.btnStockOut.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(477, 410);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(116, 20);
-            this.txtTotal.TabIndex = 18;
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(443, 414);
-            this.lblTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(31, 13);
-            this.lblTotal.TabIndex = 19;
-            this.lblTotal.Text = "Total";
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Location = new System.Drawing.Point(25, 414);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(102, 27);
-            this.btnRemove.TabIndex = 5;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
             // 
             // frmStockOutDetails
             // 
@@ -320,6 +320,7 @@ namespace SAD2
             this.Name = "frmStockOutDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmStockOutDetails";
+            this.Load += new System.EventHandler(this.frmStockOutDetails_Load);
             this.grpStockIn.ResumeLayout(false);
             this.grpStockIn.PerformLayout();
             this.grpInventoryItems.ResumeLayout(false);

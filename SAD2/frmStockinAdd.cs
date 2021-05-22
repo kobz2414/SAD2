@@ -115,7 +115,7 @@ namespace SAD2
                 }
                 catch (Exception err)
                 {
-
+                    CloseConnection();
                 }
             }
         }

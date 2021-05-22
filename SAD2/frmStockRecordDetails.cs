@@ -61,6 +61,7 @@ namespace SAD2
                 catch (Exception err)
                 {
                     Console.WriteLine(err);
+                    CloseConnection();
                 }
 
             }
@@ -96,6 +97,7 @@ namespace SAD2
                 catch (Exception err)
                 {
                     Console.WriteLine(err);
+                    CloseConnection();
                 }
 
             }
@@ -105,44 +107,75 @@ namespace SAD2
             if (action == "Stock In")
             {
                 query = "SELECT * FROM db_stockindetails.`" + id + "`";
+                try
+                {
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        listItems.Columns[5].Text = "Subtotal";
+
+                        while (dataReader.Read())
+                        {
+                            string id = dataReader["itemID"] + "",
+                                   type = dataReader["itemType"] + "",
+                                   color = dataReader["itemColor"] + "",
+                                   weight = dataReader["itemWeight"] + "",
+                                   quantity = dataReader["itemQuantity"] + "",
+                                   subtotal = dataReader["subtotal"] + "";
+                            string[] row = { id, type, color, weight, quantity, subtotal };
+                            ListViewItem item = new ListViewItem(row);
+                            listItems.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err);
+                    CloseConnection();
+                }
             }
             else if (action == "Stock Out")
             {
                 query = "SELECT * FROM db_transactions.`" + id + "`";
-            }
-
-
-
-            try
-            {
-                if (OpenConnection() == true)
+                try
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                    while (dataReader.Read())
+                    if (OpenConnection() == true)
                     {
-                        string id = dataReader["itemID"] + "",
-                               type = dataReader["itemType"] + "",
-                               color = dataReader["itemColor"] + "",
-                               weight = dataReader["itemWeight"] + "",
-                               quantity = dataReader["itemQuantity"] + "",
-                               subtotal = dataReader["totalWeight"] + "";
-                        string[] row = { id, type, color, weight, quantity, subtotal };
-                        ListViewItem item = new ListViewItem(row);
-                        listItems.Items.Add(item);
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        listItems.Columns[5].Text = "Total Weight";
+
+                        while (dataReader.Read())
+                        {
+                            string id = dataReader["itemID"] + "",
+                                   type = dataReader["itemType"] + "",
+                                   color = dataReader["itemColor"] + "",
+                                   weight = dataReader["itemWeight"] + "",
+                                   quantity = dataReader["itemQuantity"] + "",
+                                   totalWeight = dataReader["totalWeight"] + "";
+                            string[] row = { id, type, color, weight, quantity, totalWeight};
+                            ListViewItem item = new ListViewItem(row);
+                            listItems.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
                     }
-
-                    dataReader.Close();
-
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err);
                     CloseConnection();
                 }
             }
-            catch (Exception err)
-            {
-                Console.WriteLine(err);
-            }
-
 
         }
 

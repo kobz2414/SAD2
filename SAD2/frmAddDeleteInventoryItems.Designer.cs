@@ -40,13 +40,13 @@ namespace SAD2
             this.txtColor = new System.Windows.Forms.TextBox();
             this.txtWeight = new System.Windows.Forms.TextBox();
             this.grpDeleteItems = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.listInventory = new System.Windows.Forms.ListView();
             this.colItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnDelete = new System.Windows.Forms.Button();
             this.grpAddItems.SuspendLayout();
             this.grpDeleteItems.SuspendLayout();
             this.SuspendLayout();
@@ -163,17 +163,6 @@ namespace SAD2
             this.grpDeleteItems.TabStop = false;
             this.grpDeleteItems.Text = "Delete Items";
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(193, 211);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(115, 30);
-            this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // listInventory
             // 
             this.listInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -182,6 +171,7 @@ namespace SAD2
             this.colColor,
             this.colWeight,
             this.colQuantity});
+            this.listInventory.FullRowSelect = true;
             this.listInventory.HideSelection = false;
             this.listInventory.Location = new System.Drawing.Point(10, 19);
             this.listInventory.Name = "listInventory";
@@ -207,13 +197,24 @@ namespace SAD2
             // 
             // colWeight
             // 
-            this.colWeight.Text = "Weight";
+            this.colWeight.Text = "Weight (kg)";
             this.colWeight.Width = 74;
             // 
             // colQuantity
             // 
             this.colQuantity.Text = "Quantity";
             this.colQuantity.Width = 65;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(193, 211);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(115, 30);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmAddDeleteInventoryItems
             // 

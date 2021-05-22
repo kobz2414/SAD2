@@ -21,5 +21,10 @@ namespace SAD2
         {
 
         }
+
+        private void frmStockOutDetails_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

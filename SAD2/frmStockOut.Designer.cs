@@ -110,6 +110,7 @@ namespace SAD2
             this.Name = "frmStockOut";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Out";
+            this.Load += new System.EventHandler(this.frmStockOut_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

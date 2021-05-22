@@ -47,6 +47,7 @@ namespace SAD2
             this.listCustomers = new System.Windows.Forms.ListView();
             this.colCustomerID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnDetails = new System.Windows.Forms.Button();
             this.grpCustomerInformation.SuspendLayout();
             this.grpCustomerTransactions.SuspendLayout();
             this.grpCustomerList.SuspendLayout();
@@ -140,6 +141,7 @@ namespace SAD2
             // 
             // grpCustomerTransactions
             // 
+            this.grpCustomerTransactions.Controls.Add(this.btnDetails);
             this.grpCustomerTransactions.Controls.Add(this.listTransactions);
             this.grpCustomerTransactions.Location = new System.Drawing.Point(264, 137);
             this.grpCustomerTransactions.Name = "grpCustomerTransactions";
@@ -158,10 +160,11 @@ namespace SAD2
             this.listTransactions.HideSelection = false;
             this.listTransactions.Location = new System.Drawing.Point(6, 19);
             this.listTransactions.Name = "listTransactions";
-            this.listTransactions.Size = new System.Drawing.Size(506, 234);
+            this.listTransactions.Size = new System.Drawing.Size(506, 201);
             this.listTransactions.TabIndex = 1;
             this.listTransactions.UseCompatibleStateImageBehavior = false;
             this.listTransactions.View = System.Windows.Forms.View.Details;
+            this.listTransactions.SelectedIndexChanged += new System.EventHandler(this.listTransactions_SelectedIndexChanged);
             // 
             // colTransactionID
             // 
@@ -215,6 +218,16 @@ namespace SAD2
             this.colName.Text = "Name";
             this.colName.Width = 177;
             // 
+            // btnDetails
+            // 
+            this.btnDetails.Location = new System.Drawing.Point(400, 226);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(112, 27);
+            this.btnDetails.TabIndex = 4;
+            this.btnDetails.Text = "Details";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
             // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,5 +271,6 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader colDateTime;
         private System.Windows.Forms.ColumnHeader colStatus;
         private System.Windows.Forms.ColumnHeader colCustomerID;
+        private System.Windows.Forms.Button btnDetails;
     }
 }

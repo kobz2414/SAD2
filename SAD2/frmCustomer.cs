@@ -16,6 +16,7 @@ namespace SAD2
 
         private MySqlConnection connection;
         private string server, database, database1, uid, password;
+        private int transactionID;
         public frmCustomers()
         {
             InitializeComponent();
@@ -108,6 +109,12 @@ namespace SAD2
 
                     MessageBox.Show("Profile Deleted");
                     show();
+
+                    txtAddress.Text = "";
+                    txtContactNumber.Text = "";
+                    txtName.Text = "";
+
+                    listTransactions.Items.Clear();
                 }
             }
         }
@@ -132,6 +139,27 @@ namespace SAD2
             frmAddCustomer temp = new frmAddCustomer(0);
             temp.Show();
             this.Hide();
+        }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+            if (listTransactions.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a transaction");
+            }
+            else
+            {
+                frmTransactionDetails temp = new frmTransactionDetails(transactionID, 1);
+                temp.Show();
+                this.Hide();
+            }
+        }
+
+        private void listTransactions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listTransactions.SelectedItems.Count < 1) return;
+            ListViewItem item = listTransactions.SelectedItems[0];
+            transactionID = int.Parse(item.Text);
         }
 
         private bool OpenConnection()

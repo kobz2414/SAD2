@@ -32,7 +32,7 @@ namespace SAD2
             }
             else
             {
-                frmTransactionDetails temp = new frmTransactionDetails(transactionID);
+                frmTransactionDetails temp = new frmTransactionDetails(transactionID, 0);
                 temp.Show();
                 this.Hide();
             }
@@ -136,6 +136,7 @@ namespace SAD2
 
         private void cmbSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtSearch.Text = "";
             if (txtSearch.Text == "")
             {
                 show();

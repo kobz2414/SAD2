@@ -31,6 +31,9 @@ namespace SAD2
         {
             this.components = new System.ComponentModel.Container();
             this.grpCustomerDetails = new System.Windows.Forms.GroupBox();
+            this.btnCustomer = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbProfile = new System.Windows.Forms.ComboBox();
             this.lblTransactionNumberPrompt = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDateandTime = new System.Windows.Forms.TextBox();
@@ -73,9 +76,6 @@ namespace SAD2
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cmbProfile = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnCustomer = new System.Windows.Forms.Button();
             this.grpCustomerDetails.SuspendLayout();
             this.grpInventory.SuspendLayout();
             this.grpCart.SuspendLayout();
@@ -104,6 +104,35 @@ namespace SAD2
             this.grpCustomerDetails.TabIndex = 0;
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Customer Details";
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.Location = new System.Drawing.Point(419, 51);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(112, 23);
+            this.btnCustomer.TabIndex = 19;
+            this.btnCustomer.Text = "Add Customer";
+            this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(98, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Customer";
+            // 
+            // cmbProfile
+            // 
+            this.cmbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProfile.FormattingEnabled = true;
+            this.cmbProfile.Location = new System.Drawing.Point(158, 51);
+            this.cmbProfile.Name = "cmbProfile";
+            this.cmbProfile.Size = new System.Drawing.Size(255, 21);
+            this.cmbProfile.TabIndex = 17;
+            this.cmbProfile.SelectedIndexChanged += new System.EventHandler(this.cmbProfile_SelectedIndexChanged);
             // 
             // lblTransactionNumberPrompt
             // 
@@ -251,7 +280,7 @@ namespace SAD2
             // colInventoryID
             // 
             this.colInventoryID.Text = "ID";
-            this.colInventoryID.Width = 55;
+            this.colInventoryID.Width = 51;
             // 
             // colType
             // 
@@ -261,22 +290,22 @@ namespace SAD2
             // colColor
             // 
             this.colColor.Text = "Color";
-            this.colColor.Width = 97;
+            this.colColor.Width = 85;
             // 
             // colWeight
             // 
-            this.colWeight.Text = "Weight";
-            this.colWeight.Width = 55;
+            this.colWeight.Text = "Weight (kg)";
+            this.colWeight.Width = 68;
             // 
             // colQuantity
             // 
             this.colQuantity.Text = "Quantity";
-            this.colQuantity.Width = 64;
+            this.colQuantity.Width = 53;
             // 
             // colTotalWeight
             // 
-            this.colTotalWeight.Text = "Total Weight";
-            this.colTotalWeight.Width = 78;
+            this.colTotalWeight.Text = "Total Weight (kg)";
+            this.colTotalWeight.Width = 96;
             // 
             // txtPrice
             // 
@@ -396,22 +425,22 @@ namespace SAD2
             // cartColor
             // 
             this.cartColor.Text = "Color";
-            this.cartColor.Width = 121;
+            this.cartColor.Width = 126;
             // 
             // cartWeight
             // 
-            this.cartWeight.Text = "Weight";
+            this.cartWeight.Text = "Weight (kg)";
             this.cartWeight.Width = 75;
             // 
             // cartQuantity
             // 
             this.cartQuantity.Text = "Quantity";
-            this.cartQuantity.Width = 70;
+            this.cartQuantity.Width = 52;
             // 
             // cartTotalWeight
             // 
-            this.cartTotalWeight.Text = "Total Weight";
-            this.cartTotalWeight.Width = 82;
+            this.cartTotalWeight.Text = "Total Weight (kg)";
+            this.cartTotalWeight.Width = 98;
             // 
             // cartUnitPrice
             // 
@@ -465,35 +494,6 @@ namespace SAD2
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // cmbProfile
-            // 
-            this.cmbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProfile.FormattingEnabled = true;
-            this.cmbProfile.Location = new System.Drawing.Point(158, 51);
-            this.cmbProfile.Name = "cmbProfile";
-            this.cmbProfile.Size = new System.Drawing.Size(255, 21);
-            this.cmbProfile.TabIndex = 17;
-            this.cmbProfile.SelectedIndexChanged += new System.EventHandler(this.cmbProfile_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(98, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Customer";
-            // 
-            // btnCustomer
-            // 
-            this.btnCustomer.Location = new System.Drawing.Point(419, 51);
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(112, 23);
-            this.btnCustomer.TabIndex = 19;
-            this.btnCustomer.Text = "Add Customer";
-            this.btnCustomer.UseVisualStyleBackColor = true;
-            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // frmOrder
             // 

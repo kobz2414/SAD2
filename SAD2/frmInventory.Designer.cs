@@ -43,6 +43,8 @@
             this.lblColor = new System.Windows.Forms.Label();
             this.grpInventory = new System.Windows.Forms.GroupBox();
             this.grpItemHistory = new System.Windows.Forms.GroupBox();
+            this.lblStockOut = new System.Windows.Forms.Label();
+            this.lblStockIn = new System.Windows.Forms.Label();
             this.listProductStockOut = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,8 +58,6 @@
             this.colRecordQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colAction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnStock = new System.Windows.Forms.Button();
-            this.lblStockIn = new System.Windows.Forms.Label();
-            this.lblStockOut = new System.Windows.Forms.Label();
             this.grpInventory.SuspendLayout();
             this.grpItemHistory.SuspendLayout();
             this.SuspendLayout();
@@ -100,7 +100,7 @@
             // 
             // colWeight
             // 
-            this.colWeight.Text = "Weight";
+            this.colWeight.Text = "Weight (kg)";
             this.colWeight.Width = 121;
             // 
             // colQuantity
@@ -214,6 +214,26 @@
             this.grpItemHistory.TabStop = false;
             this.grpItemHistory.Text = "Item History";
             // 
+            // lblStockOut
+            // 
+            this.lblStockOut.AutoSize = true;
+            this.lblStockOut.Location = new System.Drawing.Point(676, 27);
+            this.lblStockOut.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStockOut.Name = "lblStockOut";
+            this.lblStockOut.Size = new System.Drawing.Size(55, 13);
+            this.lblStockOut.TabIndex = 22;
+            this.lblStockOut.Text = "Stock Out";
+            // 
+            // lblStockIn
+            // 
+            this.lblStockIn.AutoSize = true;
+            this.lblStockIn.Location = new System.Drawing.Point(218, 27);
+            this.lblStockIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStockIn.Name = "lblStockIn";
+            this.lblStockIn.Size = new System.Drawing.Size(47, 13);
+            this.lblStockIn.TabIndex = 21;
+            this.lblStockIn.Text = "Stock In";
+            // 
             // listProductStockOut
             // 
             this.listProductStockOut.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -243,7 +263,7 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Weight";
+            this.columnHeader3.Text = "Weight (kg)";
             this.columnHeader3.Width = 76;
             // 
             // columnHeader4
@@ -285,7 +305,7 @@
             // 
             // colRecordWeight
             // 
-            this.colRecordWeight.Text = "Weight";
+            this.colRecordWeight.Text = "Weight (kg)";
             this.colRecordWeight.Width = 76;
             // 
             // colRecordQuantity
@@ -308,26 +328,6 @@
             this.btnStock.Text = "Stock In/Stock Records";
             this.btnStock.UseVisualStyleBackColor = true;
             this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
-            // 
-            // lblStockIn
-            // 
-            this.lblStockIn.AutoSize = true;
-            this.lblStockIn.Location = new System.Drawing.Point(218, 27);
-            this.lblStockIn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblStockIn.Name = "lblStockIn";
-            this.lblStockIn.Size = new System.Drawing.Size(47, 13);
-            this.lblStockIn.TabIndex = 21;
-            this.lblStockIn.Text = "Stock In";
-            // 
-            // lblStockOut
-            // 
-            this.lblStockOut.AutoSize = true;
-            this.lblStockOut.Location = new System.Drawing.Point(676, 27);
-            this.lblStockOut.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblStockOut.Name = "lblStockOut";
-            this.lblStockOut.Size = new System.Drawing.Size(55, 13);
-            this.lblStockOut.TabIndex = 22;
-            this.lblStockOut.Text = "Stock Out";
             // 
             // frmInventory
             // 

@@ -357,6 +357,14 @@ namespace SAD2
 
         private void listCart_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnAdd.Enabled = false;
+            txtPrice.Enabled = false;
+            txtQuantity.Enabled = false;
+            txtPrice.Text = "";
+            txtQuantity.Text = "";
+
+            listProduct.SelectedItems.Clear();
+
             if (listCart.SelectedItems.Count < 1)
             {
                 btnRemove.Enabled = false;
@@ -415,7 +423,7 @@ namespace SAD2
                 }
                 catch (Exception err)
                 {
-
+                    CloseConnection();
                 }
             }
         }

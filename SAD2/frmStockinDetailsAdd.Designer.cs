@@ -237,26 +237,26 @@
             // cartType
             // 
             this.cartType.Text = "Type";
-            this.cartType.Width = 132;
+            this.cartType.Width = 153;
             // 
             // cartColor
             // 
             this.cartColor.Text = "Color";
-            this.cartColor.Width = 121;
+            this.cartColor.Width = 140;
             // 
             // cartWeight
             // 
-            this.cartWeight.Text = "Weight";
-            this.cartWeight.Width = 89;
+            this.cartWeight.Text = "Weight (kg)";
+            this.cartWeight.Width = 71;
             // 
             // cartQuantity
             // 
             this.cartQuantity.Text = "Quantity";
-            this.cartQuantity.Width = 90;
+            this.cartQuantity.Width = 72;
             // 
             // cartTotalWeight
             // 
-            this.cartTotalWeight.Text = "Total Weight";
+            this.cartTotalWeight.Text = "Total Weight (kg)";
             this.cartTotalWeight.Width = 105;
             // 
             // txtTotalWeight
@@ -348,18 +348,18 @@
             // 
             // colWeight
             // 
-            this.colWeight.Text = "Weight";
+            this.colWeight.Text = "Weight (kg)";
             this.colWeight.Width = 76;
             // 
             // colQuantity
             // 
             this.colQuantity.Text = "Quantity";
-            this.colQuantity.Width = 73;
+            this.colQuantity.Width = 54;
             // 
             // colTotalWeight
             // 
-            this.colTotalWeight.Text = "Total Weight";
-            this.colTotalWeight.Width = 78;
+            this.colTotalWeight.Text = "Total Weight (kg)";
+            this.colTotalWeight.Width = 96;
             // 
             // timer1
             // 

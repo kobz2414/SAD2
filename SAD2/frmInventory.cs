@@ -207,7 +207,7 @@ namespace SAD2
                     }
                     catch (Exception err)
                     {
-
+                        this.CloseConnection();
                     }
                 }
 

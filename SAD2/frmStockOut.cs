@@ -22,5 +22,10 @@ namespace SAD2
             frmStockOutDetails temp = new frmStockOutDetails();
             temp.ShowDialog();
         }
+
+        private void frmStockOut_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
