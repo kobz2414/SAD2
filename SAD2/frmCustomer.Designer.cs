@@ -39,6 +39,7 @@ namespace SAD2
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
             this.grpCustomerTransactions = new System.Windows.Forms.GroupBox();
+            this.btnDetails = new System.Windows.Forms.Button();
             this.listTransactions = new System.Windows.Forms.ListView();
             this.colTransactionID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -47,7 +48,7 @@ namespace SAD2
             this.listCustomers = new System.Windows.Forms.ListView();
             this.colCustomerID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnDetails = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.grpCustomerInformation.SuspendLayout();
             this.grpCustomerTransactions.SuspendLayout();
             this.grpCustomerList.SuspendLayout();
@@ -121,9 +122,9 @@ namespace SAD2
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(6, 351);
+            this.btnAddCustomer.Location = new System.Drawing.Point(21, 359);
             this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.Size = new System.Drawing.Size(112, 27);
+            this.btnAddCustomer.Size = new System.Drawing.Size(96, 27);
             this.btnAddCustomer.TabIndex = 2;
             this.btnAddCustomer.Text = "Add Customer";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
@@ -131,9 +132,9 @@ namespace SAD2
             // 
             // btnDeleteCustomer
             // 
-            this.btnDeleteCustomer.Location = new System.Drawing.Point(122, 351);
+            this.btnDeleteCustomer.Location = new System.Drawing.Point(123, 359);
             this.btnDeleteCustomer.Name = "btnDeleteCustomer";
-            this.btnDeleteCustomer.Size = new System.Drawing.Size(112, 27);
+            this.btnDeleteCustomer.Size = new System.Drawing.Size(96, 27);
             this.btnDeleteCustomer.TabIndex = 3;
             this.btnDeleteCustomer.Text = "Delete Customer";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
@@ -145,10 +146,20 @@ namespace SAD2
             this.grpCustomerTransactions.Controls.Add(this.listTransactions);
             this.grpCustomerTransactions.Location = new System.Drawing.Point(264, 137);
             this.grpCustomerTransactions.Name = "grpCustomerTransactions";
-            this.grpCustomerTransactions.Size = new System.Drawing.Size(518, 259);
+            this.grpCustomerTransactions.Size = new System.Drawing.Size(518, 315);
             this.grpCustomerTransactions.TabIndex = 1;
             this.grpCustomerTransactions.TabStop = false;
             this.grpCustomerTransactions.Text = "Previous Transactions";
+            // 
+            // btnDetails
+            // 
+            this.btnDetails.Location = new System.Drawing.Point(400, 234);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(112, 27);
+            this.btnDetails.TabIndex = 4;
+            this.btnDetails.Text = "Details";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
             // listTransactions
             // 
@@ -183,12 +194,13 @@ namespace SAD2
             // 
             // grpCustomerList
             // 
+            this.grpCustomerList.Controls.Add(this.btnUpdate);
             this.grpCustomerList.Controls.Add(this.btnDeleteCustomer);
             this.grpCustomerList.Controls.Add(this.listCustomers);
             this.grpCustomerList.Controls.Add(this.btnAddCustomer);
             this.grpCustomerList.Location = new System.Drawing.Point(18, 12);
             this.grpCustomerList.Name = "grpCustomerList";
-            this.grpCustomerList.Size = new System.Drawing.Size(240, 384);
+            this.grpCustomerList.Size = new System.Drawing.Size(240, 440);
             this.grpCustomerList.TabIndex = 1;
             this.grpCustomerList.TabStop = false;
             this.grpCustomerList.Text = "Customer List";
@@ -218,21 +230,21 @@ namespace SAD2
             this.colName.Text = "Name";
             this.colName.Width = 177;
             // 
-            // btnDetails
+            // btnUpdate
             // 
-            this.btnDetails.Location = new System.Drawing.Point(400, 226);
-            this.btnDetails.Name = "btnDetails";
-            this.btnDetails.Size = new System.Drawing.Size(112, 27);
-            this.btnDetails.TabIndex = 4;
-            this.btnDetails.Text = "Details";
-            this.btnDetails.UseVisualStyleBackColor = true;
-            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            this.btnUpdate.Location = new System.Drawing.Point(78, 392);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(96, 27);
+            this.btnUpdate.TabIndex = 4;
+            this.btnUpdate.Text = "Update Info";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 408);
+            this.ClientSize = new System.Drawing.Size(800, 464);
             this.Controls.Add(this.grpCustomerTransactions);
             this.Controls.Add(this.grpCustomerList);
             this.Controls.Add(this.grpCustomerInformation);
@@ -272,5 +284,6 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader colStatus;
         private System.Windows.Forms.ColumnHeader colCustomerID;
         private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

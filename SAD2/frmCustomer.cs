@@ -162,6 +162,69 @@ namespace SAD2
             transactionID = int.Parse(item.Text);
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            
+
+            if (listCustomers.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a customer");
+            }
+            else
+            {
+                ListViewItem item = listCustomers.SelectedItems[0];
+                frmCustomerUpdate temp = new frmCustomerUpdate(item.Text);
+                temp.ShowDialog();
+                show();
+
+                string query = "select name, address, contactnumber from db_cefinal.customers where customerID = '" + item.Text + "';";
+
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        string name = dataReader["name"] + "",
+                               address = dataReader["address"] + "",
+                               num = dataReader["contactnumber"] + "";
+
+                        txtName.Text = name;
+                        txtAddress.Text = address;
+                        txtContactNumber.Text = num;
+
+                    }
+
+                    dataReader.Close();
+
+                    CloseConnection();
+                }
+
+                listTransactions.Items.Clear();
+
+                query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtName.Text + "' ORDER BY DateTime DESC; ";
+
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        string date = dataReader["DateTime"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+                        string[] row = { id, date, status };
+                        ListViewItem chz = new ListViewItem(row);
+                        listTransactions.Items.Add(chz);
+                    }
+
+                    dataReader.Close();
+
+                    CloseConnection();
+                }
+            }
+        }
+
         private bool OpenConnection()
         {
             try

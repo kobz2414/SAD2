@@ -18,14 +18,13 @@ namespace SAD2
         private string server, database, uid, password;
         private string itemTotalWeight;
         private double totalWeight = 0;
+        private bool checkNum = false, checkName = false;
 
-        public frmStockinDetailsAdd(string id, string staff)
+        public frmStockinDetailsAdd()
         {
             InitializeComponent();
             Initialize();
             show();
-            txtStockID.Text = id;
-            txtEmployee.Text = staff;
         }
 
         private void Initialize()
@@ -229,7 +228,55 @@ namespace SAD2
 
         private void txtStockID_TextChanged(object sender, EventArgs e)
         {
- 
+            if (!txtStockID.Text.All(char.IsDigit))
+            {
+
+                btnStockin.Enabled = false;
+                checkNum = false;
+                lblStockInNumberPrompt.Text = "Must enter all in digits";
+            }
+            else
+            {
+
+                try
+                {
+                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT stockin_id FROM `db_cefinal`.`stockin` WHERE stockin_id = '" + txtStockID.Text + "') THEN 'TRUE' ELSE 'FALSE' END as stockin_id;";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string temp = dataReader["stockin_id"].ToString();
+                            if (temp == "TRUE")
+                            {
+                                btnStockin.Enabled = false;
+                                checkNum = false;
+                                lblStockInNumberPrompt.Text = "Duplicate Transaction Number";
+                            }
+                            else
+                            {
+                                checkNum = true;
+                                if (checkNum == true)
+                                {
+                                    lblStockInNumberPrompt.Text = "   ";
+                                    if (checkName == true)
+                                    {
+                                        btnStockin.Enabled = true;
+                                    }
+                                }
+                            }
+                        }
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+                    CloseConnection();
+                }
+            }
         }
 
         private void txtSubtotal_TextChanged(object sender, EventArgs e)
@@ -615,6 +662,22 @@ namespace SAD2
             catch (Exception err)
             {
 
+            }
+        }
+
+        private void txtEmployee_TextChanged(object sender, EventArgs e)
+        {
+            if (txtEmployee.Text == "")
+            {
+                checkName = false;
+            }
+            else
+            {
+                checkName = true;
+                if (checkNum == true)
+                {
+                    btnStockin.Enabled = true;
+                }
             }
         }
 

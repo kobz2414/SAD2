@@ -233,71 +233,63 @@ namespace SAD2
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            try
+            if (listCart.SelectedItems.Count == 0)
             {
-                if (listCart.SelectedItems.Count == 0)
-                {
-                    MessageBox.Show("Please select an item");
-                }
-                else
-                {
-                    ListViewItem item = listCart.SelectedItems[0];
-
-                    int qty = int.Parse(item.SubItems[4].Text);
-                    string itemID = item.Text;
-
-                    txtPrice.Enabled = true;
-                    txtPrice.Text = "";
-                    txtQuantity.Text = "";
-
-                    bool check = false;
-
-                    foreach (ListViewItem eachItem in listProduct.Items)
-                        if (eachItem.SubItems[0].Text == itemID)
-                        {
-                            int temp = int.Parse(eachItem.SubItems[4].Text);
-                            int weight = int.Parse(eachItem.SubItems[3].Text);
-                            eachItem.SubItems[4].Text = (temp + qty).ToString();
-                            eachItem.SubItems[5].Text = ((temp + qty) * weight).ToString();
-                            check = true;
-                        }
-                    if(check == false)
-                    {
-                        string[] row = { item.Text, item.SubItems[1].Text, item.SubItems[2].Text, item.SubItems[3].Text, item.SubItems[4].Text, item.SubItems[5].Text };
-                        var listViewItem = new ListViewItem(row);
-                        listProduct.Items.Add(listViewItem);
-                    }
-
-                    item.Remove();
-
-                    subTotal = 0;
-                    totalWeight = 0;
-
-                    for (int i = 0; i < listCart.Items.Count; i++)
-                    {
-                        totalWeight += double.Parse(listCart.Items[i].SubItems[5].Text);
-                    }
-
-                    for (int i = 0; i < listCart.Items.Count; i++)
-                    {
-                        subTotal += double.Parse(listCart.Items[i].SubItems[7].Text);
-                    }
-
-                    txtTotalWeight.Text = totalWeight.ToString();
-                    txtSubtotal.Text = subTotal.ToString();
-
-                    btnRemove.Enabled = false;
-                    btnAdd.Enabled = false;
-                    txtPrice.Enabled = false;
-                    txtQuantity.Enabled = false;
-
-                }
+                MessageBox.Show("Please select an item");
             }
-            catch (Exception err)
+            else
             {
+                ListViewItem item = listCart.SelectedItems[0];
+
+                int qty = int.Parse(item.SubItems[4].Text);
+                string itemID = item.Text;
+
+                txtPrice.Enabled = true;
+                txtPrice.Text = "";
+                txtQuantity.Text = "";
+
+                bool check = false;
+
+                foreach (ListViewItem eachItem in listProduct.Items)
+                    if (eachItem.SubItems[0].Text == itemID)
+                    {
+                        int temp = int.Parse(eachItem.SubItems[4].Text);
+                        int weight = int.Parse(eachItem.SubItems[3].Text);
+                        eachItem.SubItems[4].Text = (temp + qty).ToString();
+                        eachItem.SubItems[5].Text = ((temp + qty) * weight).ToString();
+                        check = true;
+                    }
+                if(check == false)
+                {
+                    string[] row = { item.Text, item.SubItems[1].Text, item.SubItems[2].Text, item.SubItems[3].Text, item.SubItems[4].Text, item.SubItems[5].Text };
+                    var listViewItem = new ListViewItem(row);
+                    listProduct.Items.Add(listViewItem);
+                }
+
+                item.Remove();
+
+                subTotal = 0;
+                totalWeight = 0;
+
+                for (int i = 0; i < listCart.Items.Count; i++)
+                {
+                    totalWeight += double.Parse(listCart.Items[i].SubItems[5].Text);
+                }
+
+                for (int i = 0; i < listCart.Items.Count; i++)
+                {
+                    subTotal += double.Parse(listCart.Items[i].SubItems[7].Text);
+                }
+
+                txtTotalWeight.Text = totalWeight.ToString();
+                txtSubtotal.Text = subTotal.ToString();
+
+                btnRemove.Enabled = false;
+                btnAdd.Enabled = false;
+                txtPrice.Enabled = false;
+                txtQuantity.Enabled = false;
 
             }
-            
         }
 
         private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
@@ -336,6 +328,9 @@ namespace SAD2
             frmAddCustomer temp = new frmAddCustomer(1);
             temp.ShowDialog();
             showCustomerProfiles();
+            txtAddress.Text = "";
+            txtContactNum.Text = "";
+            txtName.Text = "";
         }
 
         private void txtName_TextChanged(object sender, EventArgs e)
@@ -579,7 +574,7 @@ namespace SAD2
 
                     //Sales
                     string query = "insert into sales(transactionID, DateTime, Name, Address, ContactNumber, Status) values('" + txtTransactionNum.Text + "', now() ,'" + txtName.Text + "','" + txtAddress.Text + "','" + txtContactNum.Text + "', 'Unpaid');" +
-                         "insert into stockrecordhistory(recordID, date, person, action) values('" + txtTransactionNum.Text + "', now(),'" + txtName.Text + "','Stock Out');";
+                         "insert into stockrecordhistory(recordID, date, person, action) values('" + txtTransactionNum.Text + "', now(),'" + txtName.Text + "','Sale');";
 
                     //New table in transactions database
                     string queryTransaction = "";

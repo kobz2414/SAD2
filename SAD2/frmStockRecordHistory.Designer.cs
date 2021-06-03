@@ -37,6 +37,7 @@ namespace SAD2
             this.colAction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDetails = new System.Windows.Forms.Button();
             this.btnStockIn = new System.Windows.Forms.Button();
+            this.btnStockOut = new System.Windows.Forms.Button();
             this.grpStockRecord.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +101,7 @@ namespace SAD2
             // 
             // btnStockIn
             // 
-            this.btnStockIn.Location = new System.Drawing.Point(374, 430);
+            this.btnStockIn.Location = new System.Drawing.Point(300, 429);
             this.btnStockIn.Name = "btnStockIn";
             this.btnStockIn.Size = new System.Drawing.Size(141, 30);
             this.btnStockIn.TabIndex = 1;
@@ -108,11 +109,22 @@ namespace SAD2
             this.btnStockIn.UseVisualStyleBackColor = true;
             this.btnStockIn.Click += new System.EventHandler(this.btnStockIn_Click);
             // 
+            // btnStockOut
+            // 
+            this.btnStockOut.Location = new System.Drawing.Point(447, 429);
+            this.btnStockOut.Name = "btnStockOut";
+            this.btnStockOut.Size = new System.Drawing.Size(141, 30);
+            this.btnStockOut.TabIndex = 2;
+            this.btnStockOut.Text = "Stock Out";
+            this.btnStockOut.UseVisualStyleBackColor = true;
+            this.btnStockOut.Click += new System.EventHandler(this.btnStockOut_Click);
+            // 
             // frmStockRecordHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(888, 480);
+            this.Controls.Add(this.btnStockOut);
             this.Controls.Add(this.btnStockIn);
             this.Controls.Add(this.grpStockRecord);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -137,5 +149,6 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader colDateAndTime;
         private System.Windows.Forms.ColumnHeader colEmployee;
         private System.Windows.Forms.ColumnHeader colAction;
+        private System.Windows.Forms.Button btnStockOut;
     }
 }

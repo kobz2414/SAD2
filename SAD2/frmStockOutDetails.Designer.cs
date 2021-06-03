@@ -31,7 +31,7 @@ namespace SAD2
         {
             this.grpStockIn = new System.Windows.Forms.GroupBox();
             this.txtEmployee = new System.Windows.Forms.TextBox();
-            this.txtStockID = new System.Windows.Forms.TextBox();
+            this.txtStockOutID = new System.Windows.Forms.TextBox();
             this.lblStaff = new System.Windows.Forms.Label();
             this.lblStockInID = new System.Windows.Forms.Label();
             this.grpInventoryItems = new System.Windows.Forms.GroupBox();
@@ -45,7 +45,7 @@ namespace SAD2
             this.colItemColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colItemWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colItemQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colItemSubtotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colItemTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpStockOutItems = new System.Windows.Forms.GroupBox();
             this.btnRemove = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.TextBox();
@@ -66,7 +66,7 @@ namespace SAD2
             // grpStockIn
             // 
             this.grpStockIn.Controls.Add(this.txtEmployee);
-            this.grpStockIn.Controls.Add(this.txtStockID);
+            this.grpStockIn.Controls.Add(this.txtStockOutID);
             this.grpStockIn.Controls.Add(this.lblStaff);
             this.grpStockIn.Controls.Add(this.lblStockInID);
             this.grpStockIn.Location = new System.Drawing.Point(12, 12);
@@ -78,21 +78,19 @@ namespace SAD2
             // 
             // txtEmployee
             // 
-            this.txtEmployee.Enabled = false;
             this.txtEmployee.Location = new System.Drawing.Point(109, 67);
             this.txtEmployee.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmployee.Name = "txtEmployee";
             this.txtEmployee.Size = new System.Drawing.Size(171, 20);
             this.txtEmployee.TabIndex = 2;
             // 
-            // txtStockID
+            // txtStockOutID
             // 
-            this.txtStockID.Enabled = false;
-            this.txtStockID.Location = new System.Drawing.Point(109, 34);
-            this.txtStockID.Margin = new System.Windows.Forms.Padding(2);
-            this.txtStockID.Name = "txtStockID";
-            this.txtStockID.Size = new System.Drawing.Size(171, 20);
-            this.txtStockID.TabIndex = 1;
+            this.txtStockOutID.Location = new System.Drawing.Point(109, 34);
+            this.txtStockOutID.Margin = new System.Windows.Forms.Padding(2);
+            this.txtStockOutID.Name = "txtStockOutID";
+            this.txtStockOutID.Size = new System.Drawing.Size(171, 20);
+            this.txtStockOutID.TabIndex = 1;
             // 
             // lblStaff
             // 
@@ -130,12 +128,14 @@ namespace SAD2
             // 
             // btnAdd
             // 
+            this.btnAdd.Enabled = false;
             this.btnAdd.Location = new System.Drawing.Point(491, 317);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(102, 27);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtQuantity
             // 
@@ -143,6 +143,7 @@ namespace SAD2
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(153, 20);
             this.txtQuantity.TabIndex = 3;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
             // 
             // lblQuantity
             // 
@@ -169,7 +170,8 @@ namespace SAD2
             this.colItemColor,
             this.colItemWeight,
             this.colItemQuantity,
-            this.colItemSubtotal});
+            this.colItemTotalWeight});
+            this.listInventory.FullRowSelect = true;
             this.listInventory.HideSelection = false;
             this.listInventory.Location = new System.Drawing.Point(25, 33);
             this.listInventory.Name = "listInventory";
@@ -177,6 +179,7 @@ namespace SAD2
             this.listInventory.TabIndex = 0;
             this.listInventory.UseCompatibleStateImageBehavior = false;
             this.listInventory.View = System.Windows.Forms.View.Details;
+            this.listInventory.SelectedIndexChanged += new System.EventHandler(this.listInventory_SelectedIndexChanged);
             // 
             // colItemID
             // 
@@ -203,10 +206,10 @@ namespace SAD2
             this.colItemQuantity.Text = "Quantity";
             this.colItemQuantity.Width = 85;
             // 
-            // colItemSubtotal
+            // colItemTotalWeight
             // 
-            this.colItemSubtotal.Text = "Subtotal";
-            this.colItemSubtotal.Width = 97;
+            this.colItemTotalWeight.Text = "Total Weight";
+            this.colItemTotalWeight.Width = 97;
             // 
             // grpStockOutItems
             // 
@@ -230,6 +233,7 @@ namespace SAD2
             this.btnRemove.TabIndex = 5;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // txtTotal
             // 
@@ -269,6 +273,7 @@ namespace SAD2
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
+            this.listStockOutItems.FullRowSelect = true;
             this.listStockOutItems.HideSelection = false;
             this.listStockOutItems.Location = new System.Drawing.Point(25, 34);
             this.listStockOutItems.Name = "listStockOutItems";
@@ -276,6 +281,7 @@ namespace SAD2
             this.listStockOutItems.TabIndex = 1;
             this.listStockOutItems.UseCompatibleStateImageBehavior = false;
             this.listStockOutItems.View = System.Windows.Forms.View.Details;
+            this.listStockOutItems.SelectedIndexChanged += new System.EventHandler(this.listStockOutItems_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -304,7 +310,7 @@ namespace SAD2
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Subtotal";
+            this.columnHeader6.Text = "Total Weight";
             this.columnHeader6.Width = 100;
             // 
             // frmStockOutDetails
@@ -319,7 +325,8 @@ namespace SAD2
             this.MaximizeBox = false;
             this.Name = "frmStockOutDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmStockOutDetails";
+            this.Text = "Stock Out Details";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStockOutDetails_FormClosing);
             this.Load += new System.EventHandler(this.frmStockOutDetails_Load);
             this.grpStockIn.ResumeLayout(false);
             this.grpStockIn.PerformLayout();
@@ -335,7 +342,7 @@ namespace SAD2
 
         private System.Windows.Forms.GroupBox grpStockIn;
         private System.Windows.Forms.TextBox txtEmployee;
-        private System.Windows.Forms.TextBox txtStockID;
+        private System.Windows.Forms.TextBox txtStockOutID;
         private System.Windows.Forms.Label lblStaff;
         private System.Windows.Forms.Label lblStockInID;
         private System.Windows.Forms.GroupBox grpInventoryItems;
@@ -347,7 +354,7 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader colItemColor;
         private System.Windows.Forms.ColumnHeader colItemWeight;
         private System.Windows.Forms.ColumnHeader colItemQuantity;
-        private System.Windows.Forms.ColumnHeader colItemSubtotal;
+        private System.Windows.Forms.ColumnHeader colItemTotalWeight;
         private System.Windows.Forms.ListView listStockOutItems;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;

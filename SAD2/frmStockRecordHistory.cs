@@ -40,7 +40,7 @@ namespace SAD2
 
         private void btnStockIn_Click(object sender, EventArgs e)
         {
-            frmStockinAdd temp = new frmStockinAdd();
+            frmStockinDetailsAdd temp = new frmStockinDetailsAdd();
             temp.Show();
             this.Hide();
         }
@@ -180,6 +180,13 @@ namespace SAD2
             frmInventory temp = new frmInventory();
             this.Hide();
             temp.Show();
+        }
+
+        private void btnStockOut_Click(object sender, EventArgs e)
+        {
+            frmStockOutDetails temp = new frmStockOutDetails();
+            temp.Show();
+            this.Hide();
         }
 
         private void listStockRecord_SelectedIndexChanged(object sender, EventArgs e)

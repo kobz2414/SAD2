@@ -62,6 +62,8 @@
             this.colQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblStockInNumberPrompt = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpStockIn.SuspendLayout();
             this.grpCart.SuspendLayout();
             this.grpInventory.SuspendLayout();
@@ -80,6 +82,7 @@
             // 
             // btnStockin
             // 
+            this.btnStockin.Enabled = false;
             this.btnStockin.Location = new System.Drawing.Point(515, 351);
             this.btnStockin.Margin = new System.Windows.Forms.Padding(2);
             this.btnStockin.Name = "btnStockin";
@@ -91,8 +94,7 @@
             // 
             // txtStockID
             // 
-            this.txtStockID.Enabled = false;
-            this.txtStockID.Location = new System.Drawing.Point(109, 35);
+            this.txtStockID.Location = new System.Drawing.Point(109, 25);
             this.txtStockID.Margin = new System.Windows.Forms.Padding(2);
             this.txtStockID.Name = "txtStockID";
             this.txtStockID.Size = new System.Drawing.Size(171, 20);
@@ -102,34 +104,36 @@
             // lblStockInID
             // 
             this.lblStockInID.AutoSize = true;
-            this.lblStockInID.Location = new System.Drawing.Point(73, 39);
+            this.lblStockInID.Location = new System.Drawing.Point(73, 29);
             this.lblStockInID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStockInID.Name = "lblStockInID";
-            this.lblStockInID.Size = new System.Drawing.Size(18, 13);
+            this.lblStockInID.Size = new System.Drawing.Size(22, 13);
             this.lblStockInID.TabIndex = 8;
-            this.lblStockInID.Text = "ID";
+            this.lblStockInID.Text = "ID*";
             // 
             // txtEmployee
             // 
-            this.txtEmployee.Enabled = false;
-            this.txtEmployee.Location = new System.Drawing.Point(109, 60);
+            this.txtEmployee.Location = new System.Drawing.Point(109, 50);
             this.txtEmployee.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmployee.Name = "txtEmployee";
             this.txtEmployee.Size = new System.Drawing.Size(171, 20);
             this.txtEmployee.TabIndex = 2;
+            this.txtEmployee.TextChanged += new System.EventHandler(this.txtEmployee_TextChanged);
             // 
             // lblStaff
             // 
             this.lblStaff.AutoSize = true;
-            this.lblStaff.Location = new System.Drawing.Point(62, 64);
+            this.lblStaff.Location = new System.Drawing.Point(62, 54);
             this.lblStaff.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStaff.Name = "lblStaff";
-            this.lblStaff.Size = new System.Drawing.Size(29, 13);
+            this.lblStaff.Size = new System.Drawing.Size(33, 13);
             this.lblStaff.TabIndex = 20;
-            this.lblStaff.Text = "Staff";
+            this.lblStaff.Text = "Staff*";
             // 
             // grpStockIn
             // 
+            this.grpStockIn.Controls.Add(this.label1);
+            this.grpStockIn.Controls.Add(this.lblStockInNumberPrompt);
             this.grpStockIn.Controls.Add(this.txtDateandTime);
             this.grpStockIn.Controls.Add(this.lblTime);
             this.grpStockIn.Controls.Add(this.txtEmployee);
@@ -365,6 +369,26 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // lblStockInNumberPrompt
+            // 
+            this.lblStockInNumberPrompt.AutoSize = true;
+            this.lblStockInNumberPrompt.Location = new System.Drawing.Point(285, 29);
+            this.lblStockInNumberPrompt.Name = "lblStockInNumberPrompt";
+            this.lblStockInNumberPrompt.Size = new System.Drawing.Size(16, 13);
+            this.lblStockInNumberPrompt.TabIndex = 23;
+            this.lblStockInNumberPrompt.Text = "   ";
+            this.lblStockInNumberPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(106, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "* - Required";
+            // 
             // frmStockinDetailsAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,5 +449,7 @@
         private System.Windows.Forms.TextBox txtDateandTime;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblStockInNumberPrompt;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -36,8 +36,8 @@ namespace SAD2
             this.lblContactNumber = new System.Windows.Forms.Label();
             this.txtContactNumber = new System.Windows.Forms.TextBox();
             this.grpCustomerDetails = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnAddCustomer = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpCustomerDetails.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,16 +109,6 @@ namespace SAD2
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Input Customer Details";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(112, 109);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "* - Required";
-            // 
             // btnAddCustomer
             // 
             this.btnAddCustomer.Enabled = false;
@@ -130,6 +120,16 @@ namespace SAD2
             this.btnAddCustomer.UseVisualStyleBackColor = true;
             this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(112, 109);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "* - Required";
+            // 
             // frmAddCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,7 +138,7 @@ namespace SAD2
             this.Controls.Add(this.grpCustomerDetails);
             this.Name = "frmAddCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAddCustomer";
+            this.Text = "Add Customer";
             this.Load += new System.EventHandler(this.frmAddCustomer_Load);
             this.grpCustomerDetails.ResumeLayout(false);
             this.grpCustomerDetails.PerformLayout();

@@ -155,7 +155,7 @@ namespace SAD2
         private void btnCreate_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form frmStockinDetailsAdd = new frmStockinDetailsAdd(txtStockID.Text, txtEmployee.Text);
+            Form frmStockinDetailsAdd = new frmStockinDetailsAdd();
             frmStockinDetailsAdd.Show();
             
         }

@@ -52,3 +52,6 @@ C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddPayment.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmPaymentDetails.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmCustomers.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddCustomer.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmCustomerUpdate.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddEmployee.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmEmployee.resources

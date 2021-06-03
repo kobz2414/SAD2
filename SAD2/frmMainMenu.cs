@@ -54,5 +54,12 @@ namespace SAD2
             temp.Show();
             this.Hide();
         }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            frmEmployee temp = new frmEmployee();
+            temp.Show();
+            this.Hide();
+        }
     }
 }
