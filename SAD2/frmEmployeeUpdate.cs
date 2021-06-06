@@ -11,28 +11,24 @@ using System.Windows.Forms;
 
 namespace SAD2
 {
-    public partial class frmCustomerUpdate : Form
+    public partial class frmEmployeeUpdate : Form
     {
-
         private MySqlConnection connection;
         private string server, database, database1, uid, password;
         private string userID;
-        public frmCustomerUpdate(string id)
+
+        public frmEmployeeUpdate(string id)
         {
-            userID = id;
             InitializeComponent();
+            userID = id;
             Initialize();
             show();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
         private void show()
         {
-            string query = "select name, address, contactnumber from db_cefinal.customers where customerID = '" + userID + "';";
+            Console.WriteLine(userID);
+            string query = "select name, address, contactnumber from db_cefinal.employees where employeeID = '" + userID + "';";
 
             if (OpenConnection() == true)
             {
@@ -58,16 +54,20 @@ namespace SAD2
 
         }
 
+        private void frmEmployeeUpdate_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if(txtAddress.Text == "" || txtContactNumber.Text == "" || txtName.Text == "")
+            if (txtAddress.Text == "" || txtContactNumber.Text == "" || txtName.Text == "")
             {
                 MessageBox.Show("Fill up all required details information");
             }
             else
             {
-                string query = "UPDATE `db_cefinal`.`customers` SET `Name` = '" + txtName.Text + "', `Address` = '" + txtAddress.Text + "', `ContactNumber` = '" + txtContactNumber.Text + "' WHERE (`customerID` = '" + userID + "');";
+                string query = "UPDATE `db_cefinal`.`employees` SET `Name` = '" + txtName.Text + "', `Address` = '" + txtAddress.Text + "', `ContactNumber` = '" + txtContactNumber.Text + "' WHERE (`employeeID` = '" + userID + "');";
 
                 if (OpenConnection() == true)
                 {
@@ -79,11 +79,6 @@ namespace SAD2
                 MessageBox.Show("Profile Updated");
                 this.Hide();
             }
-        }
-
-        private void grpCustomerInformation_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void Initialize()
@@ -139,9 +134,10 @@ namespace SAD2
         }
 
 
-        private void frmCustomerUpdate_Load(object sender, EventArgs e)
-        {
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

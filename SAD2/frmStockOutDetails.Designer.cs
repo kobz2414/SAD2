@@ -30,10 +30,11 @@ namespace SAD2
         private void InitializeComponent()
         {
             this.grpStockIn = new System.Windows.Forms.GroupBox();
-            this.txtEmployee = new System.Windows.Forms.TextBox();
+            this.lblStockOutPrompt = new System.Windows.Forms.Label();
+            this.cmbEmployees = new System.Windows.Forms.ComboBox();
             this.txtStockOutID = new System.Windows.Forms.TextBox();
             this.lblStaff = new System.Windows.Forms.Label();
-            this.lblStockInID = new System.Windows.Forms.Label();
+            this.lblStockOutID = new System.Windows.Forms.Label();
             this.grpInventoryItems = new System.Windows.Forms.GroupBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtQuantity = new System.Windows.Forms.TextBox();
@@ -65,10 +66,11 @@ namespace SAD2
             // 
             // grpStockIn
             // 
-            this.grpStockIn.Controls.Add(this.txtEmployee);
+            this.grpStockIn.Controls.Add(this.lblStockOutPrompt);
+            this.grpStockIn.Controls.Add(this.cmbEmployees);
             this.grpStockIn.Controls.Add(this.txtStockOutID);
             this.grpStockIn.Controls.Add(this.lblStaff);
-            this.grpStockIn.Controls.Add(this.lblStockInID);
+            this.grpStockIn.Controls.Add(this.lblStockOutID);
             this.grpStockIn.Location = new System.Drawing.Point(12, 12);
             this.grpStockIn.Name = "grpStockIn";
             this.grpStockIn.Size = new System.Drawing.Size(618, 118);
@@ -76,41 +78,54 @@ namespace SAD2
             this.grpStockIn.TabStop = false;
             this.grpStockIn.Text = "Stock In";
             // 
-            // txtEmployee
+            // lblStockOutPrompt
             // 
-            this.txtEmployee.Location = new System.Drawing.Point(109, 67);
-            this.txtEmployee.Margin = new System.Windows.Forms.Padding(2);
-            this.txtEmployee.Name = "txtEmployee";
-            this.txtEmployee.Size = new System.Drawing.Size(171, 20);
-            this.txtEmployee.TabIndex = 2;
+            this.lblStockOutPrompt.AutoSize = true;
+            this.lblStockOutPrompt.Location = new System.Drawing.Point(290, 68);
+            this.lblStockOutPrompt.Name = "lblStockOutPrompt";
+            this.lblStockOutPrompt.Size = new System.Drawing.Size(16, 13);
+            this.lblStockOutPrompt.TabIndex = 22;
+            this.lblStockOutPrompt.Text = "   ";
+            this.lblStockOutPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbEmployees
+            // 
+            this.cmbEmployees.FormattingEnabled = true;
+            this.cmbEmployees.Location = new System.Drawing.Point(112, 34);
+            this.cmbEmployees.Name = "cmbEmployees";
+            this.cmbEmployees.Size = new System.Drawing.Size(171, 21);
+            this.cmbEmployees.TabIndex = 21;
+            this.cmbEmployees.SelectedIndexChanged += new System.EventHandler(this.cmbEmployees_SelectedIndexChanged);
             // 
             // txtStockOutID
             // 
-            this.txtStockOutID.Location = new System.Drawing.Point(109, 34);
+            this.txtStockOutID.Location = new System.Drawing.Point(112, 64);
             this.txtStockOutID.Margin = new System.Windows.Forms.Padding(2);
             this.txtStockOutID.Name = "txtStockOutID";
             this.txtStockOutID.Size = new System.Drawing.Size(171, 20);
             this.txtStockOutID.TabIndex = 1;
+            this.txtStockOutID.TextChanged += new System.EventHandler(this.txtStockOutID_TextChanged);
             // 
             // lblStaff
             // 
             this.lblStaff.AutoSize = true;
-            this.lblStaff.Location = new System.Drawing.Point(62, 70);
+            this.lblStaff.Location = new System.Drawing.Point(65, 38);
             this.lblStaff.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStaff.Name = "lblStaff";
             this.lblStaff.Size = new System.Drawing.Size(29, 13);
             this.lblStaff.TabIndex = 20;
             this.lblStaff.Text = "Staff";
+            this.lblStaff.Click += new System.EventHandler(this.lblStaff_Click);
             // 
-            // lblStockInID
+            // lblStockOutID
             // 
-            this.lblStockInID.AutoSize = true;
-            this.lblStockInID.Location = new System.Drawing.Point(73, 38);
-            this.lblStockInID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblStockInID.Name = "lblStockInID";
-            this.lblStockInID.Size = new System.Drawing.Size(18, 13);
-            this.lblStockInID.TabIndex = 8;
-            this.lblStockInID.Text = "ID";
+            this.lblStockOutID.AutoSize = true;
+            this.lblStockOutID.Location = new System.Drawing.Point(25, 68);
+            this.lblStockOutID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStockOutID.Name = "lblStockOutID";
+            this.lblStockOutID.Size = new System.Drawing.Size(69, 13);
+            this.lblStockOutID.TabIndex = 8;
+            this.lblStockOutID.Text = "Stock Out ID";
             // 
             // grpInventoryItems
             // 
@@ -256,6 +271,7 @@ namespace SAD2
             // 
             // btnStockOut
             // 
+            this.btnStockOut.Enabled = false;
             this.btnStockOut.Location = new System.Drawing.Point(491, 441);
             this.btnStockOut.Name = "btnStockOut";
             this.btnStockOut.Size = new System.Drawing.Size(102, 27);
@@ -341,10 +357,9 @@ namespace SAD2
         #endregion
 
         private System.Windows.Forms.GroupBox grpStockIn;
-        private System.Windows.Forms.TextBox txtEmployee;
         private System.Windows.Forms.TextBox txtStockOutID;
         private System.Windows.Forms.Label lblStaff;
-        private System.Windows.Forms.Label lblStockInID;
+        private System.Windows.Forms.Label lblStockOutID;
         private System.Windows.Forms.GroupBox grpInventoryItems;
         private System.Windows.Forms.ListView listInventory;
         private System.Windows.Forms.GroupBox grpStockOutItems;
@@ -369,5 +384,7 @@ namespace SAD2
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.ComboBox cmbEmployees;
+        private System.Windows.Forms.Label lblStockOutPrompt;
     }
 }

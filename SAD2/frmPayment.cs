@@ -121,7 +121,7 @@ namespace SAD2
 
         private void frmPayment_Load(object sender, EventArgs e)
         {
-            string query = "SELECT transactionID, name FROM `db_cefinal`.`sales` where transactionID = " + transactionID + ";";
+            string query = "SELECT transactionID, customerID FROM `db_cefinal`.`sales` where transactionID = " + transactionID + ";";
 
             try
             {
@@ -132,11 +132,23 @@ namespace SAD2
 
                     while (dataReader.Read())
                     {
-                        string name = dataReader["name"] + "",
+                        string customerID = dataReader["customerID"] + "",
                                id = dataReader["transactionID"] + "";
 
+                        dataReader.Close();
+
+                        query = "SELECT Name FROM `db_cefinal`.`customers` where customerID = '" + customerID + "';";
+                        string customerName = "";
+                        cmd = new MySqlCommand(query, connection);
+                        dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            customerName = dataReader["Name"] + "";
+                        }
+
                         txtTransactionNum.Text = id;
-                        txtName.Text = name;
+                        txtName.Text = customerName;
                     }
 
                     dataReader.Close();

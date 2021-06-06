@@ -17,6 +17,7 @@ namespace SAD2
         private MySqlConnection connection;
         private string server, database, database1, uid, password;
         private int transactionID;
+
         public frmCustomers()
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace SAD2
 
             listTransactions.Items.Clear();
 
-            query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtName.Text + "' ORDER BY DateTime DESC; ";
+            query = "SELECT * FROM `db_cefinal`.`sales` WHERE customerID = '" + temp.Text + "' ORDER BY DateTime DESC; ";
 
             if (OpenConnection() == true)
             {
@@ -164,8 +165,6 @@ namespace SAD2
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            
-
             if (listCustomers.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please select a customer");
@@ -203,7 +202,7 @@ namespace SAD2
 
                 listTransactions.Items.Clear();
 
-                query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtName.Text + "' ORDER BY DateTime DESC; ";
+                query = "SELECT * FROM `db_cefinal`.`sales` WHERE customerID = '" + item.Text + "' ORDER BY DateTime DESC; ";
 
                 if (OpenConnection() == true)
                 {

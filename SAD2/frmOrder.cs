@@ -18,6 +18,7 @@ namespace SAD2
         private string itemSubtotal, itemTotalWeight, itemPrice;
         private double subTotal = 0, totalWeight = 0;
         private bool checkNum = false, checkContact = false, checkName = false, checkAdd = false;
+        private List<string> customer = new List<string>();
 
 
         public frmOrder()
@@ -294,7 +295,6 @@ namespace SAD2
 
         private void cmbProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             int space1 = cmbProfile.SelectedItem.ToString().IndexOf(' ');
             string firstPart = cmbProfile.SelectedItem.ToString().Substring(0, space1);
 
@@ -521,7 +521,7 @@ namespace SAD2
                 while (dataReader.Read())
                 {
                     string id = dataReader["customerID"] + "", name = dataReader["name"] + "", address = dataReader["address"] + "";
-
+                    customer.Add(id);
                     cmbProfile.Items.Add(id + " - " + name + " - " + address);
 
                 }
@@ -548,32 +548,16 @@ namespace SAD2
             if (listCart.Items.Count == 0)
             {
                 MessageBox.Show("Please input items to cart");
+                Console.WriteLine(customer[int.Parse(cmbProfile.SelectedIndex.ToString())]);
             }
             else
             {
                 try
                     {
-                    //string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT transactionID FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtTransactionNum.Text + "') THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
-
-                    //if (OpenConnection() == true)
-                    //{
-                    //    MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
-                    //    MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                    //    while (dataReader.Read())
-                    //    {
-                    //        string temp = dataReader["transactionID"].ToString();
-                    //        if (temp == "TRUE")
-                    //        {
-                    //            MessageBox.Show("Duplicate Transaction Number");
-                    //        }
-                    //    }
-                    //    CloseConnection();
-                    //}
-
+                    
 
                     //Sales
-                    string query = "insert into sales(transactionID, DateTime, Name, Address, ContactNumber, Status) values('" + txtTransactionNum.Text + "', now() ,'" + txtName.Text + "','" + txtAddress.Text + "','" + txtContactNum.Text + "', 'Unpaid');" +
+                    string query = "insert into sales(transactionID, DateTime, customerID, Address, ContactNumber, Status) values('" + txtTransactionNum.Text + "', now() ,'" + customer[int.Parse(cmbProfile.SelectedIndex.ToString())] + "','" + txtAddress.Text + "','" + txtContactNum.Text + "', 'Unpaid');" +
                          "insert into stockrecordhistory(recordID, date, person, action) values('" + txtTransactionNum.Text + "', now(),'" + txtName.Text + "','Sale');";
 
                     //New table in transactions database
@@ -582,7 +566,7 @@ namespace SAD2
                         " key (itemID));";
 
                     //New table in transactions database
-                    queryTransaction += "CREATE TABLE `db_payments`.`" + txtTransactionNum.Text + "` (paymentID int not null AUTO_INCREMENT, Date varchar(255), ModeOfPayment varchar(255), AccountNumber int, AccountName varchar(255), Amount int, primary" +
+                    queryTransaction += "CREATE TABLE `db_payments`.`" + txtTransactionNum.Text + "` (paymentID int not null AUTO_INCREMENT, Date varchar(255), ModeOfPayment varchar(255), AccountNumber varchar(255), AccountName varchar(255), Amount int, primary" +
                         " key (paymentID)) ENGINE = InnoDB AUTO_INCREMENT = 0;";
 
                     //Add items from cart to database

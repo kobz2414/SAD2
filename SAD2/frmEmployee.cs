@@ -103,6 +103,89 @@ namespace SAD2
             }
         }
 
+        private void btnUpdateEmployee_Click(object sender, EventArgs e)
+        {
+            if (listEmployee.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select an employee");
+            }
+            else
+            {
+                ListViewItem item = listEmployee.SelectedItems[0];
+                frmEmployeeUpdate temp = new frmEmployeeUpdate(item.Text);
+                temp.ShowDialog();
+                show();
+
+                string query = "select name, address, contactnumber from db_cefinal.employees where employeeID = '" + item.Text + "';";
+
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        string name = dataReader["name"] + "",
+                               address = dataReader["address"] + "",
+                               num = dataReader["contactnumber"] + "";
+
+                        txtName.Text = name;
+                        txtAddress.Text = address;
+                        txtContactNumber.Text = num;
+
+                    }
+
+                    dataReader.Close();
+
+                    CloseConnection();
+                }
+            }
+
+        }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+
+            if (listEmployee.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select an employee");
+            }
+            else
+            {
+                string message = "Are you sure?";
+                string title = "Delete Customer";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+
+                    ListViewItem item = listEmployee.SelectedItems[0];
+                    string query = "DELETE FROM `db_cefinal`.`employees` WHERE (`employeeID` = '" + item.Text + "');";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                    }
+                    CloseConnection();
+
+                    MessageBox.Show("Profile Deleted");
+                    show();
+
+                    txtAddress.Text = "";
+                    txtContactNumber.Text = "";
+                    txtName.Text = "";
+                }
+            }
+        }
+
+        private void frmEmployee_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frmMainMenu temp = new frmMainMenu();
+            temp.Show();
+            this.Hide();
+        }
+
         public frmEmployee()
         {
             InitializeComponent();

@@ -34,8 +34,6 @@
             this.listEmployee = new System.Windows.Forms.ListView();
             this.colCustomerID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colContactNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.grpCustomerInformation = new System.Windows.Forms.GroupBox();
             this.txtContactNumber = new System.Windows.Forms.TextBox();
@@ -54,43 +52,44 @@
             this.grpCustomerList.Controls.Add(this.btnDeleteEmployee);
             this.grpCustomerList.Controls.Add(this.listEmployee);
             this.grpCustomerList.Controls.Add(this.btnAddEmployee);
-            this.grpCustomerList.Location = new System.Drawing.Point(18, 13);
+            this.grpCustomerList.Location = new System.Drawing.Point(17, 13);
             this.grpCustomerList.Name = "grpCustomerList";
-            this.grpCustomerList.Size = new System.Drawing.Size(690, 213);
+            this.grpCustomerList.Size = new System.Drawing.Size(583, 213);
             this.grpCustomerList.TabIndex = 3;
             this.grpCustomerList.TabStop = false;
-            this.grpCustomerList.Text = "Customer List";
+            this.grpCustomerList.Text = "Employee List";
             // 
             // btnUpdateEmployee
             // 
-            this.btnUpdateEmployee.Location = new System.Drawing.Point(574, 126);
+            this.btnUpdateEmployee.Location = new System.Drawing.Point(466, 126);
             this.btnUpdateEmployee.Name = "btnUpdateEmployee";
             this.btnUpdateEmployee.Size = new System.Drawing.Size(96, 27);
             this.btnUpdateEmployee.TabIndex = 4;
             this.btnUpdateEmployee.Text = "Update Info";
             this.btnUpdateEmployee.UseVisualStyleBackColor = true;
+            this.btnUpdateEmployee.Click += new System.EventHandler(this.btnUpdateEmployee_Click);
             // 
             // btnDeleteEmployee
             // 
-            this.btnDeleteEmployee.Location = new System.Drawing.Point(574, 93);
+            this.btnDeleteEmployee.Location = new System.Drawing.Point(466, 93);
             this.btnDeleteEmployee.Name = "btnDeleteEmployee";
             this.btnDeleteEmployee.Size = new System.Drawing.Size(96, 27);
             this.btnDeleteEmployee.TabIndex = 3;
             this.btnDeleteEmployee.Text = "Delete Employee";
             this.btnDeleteEmployee.UseVisualStyleBackColor = true;
+            this.btnDeleteEmployee.Click += new System.EventHandler(this.btnDeleteEmployee_Click);
             // 
             // listEmployee
             // 
             this.listEmployee.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colCustomerID,
-            this.colName,
-            this.colAddress,
-            this.colContactNumber});
+            this.colName});
             this.listEmployee.FullRowSelect = true;
             this.listEmployee.HideSelection = false;
             this.listEmployee.Location = new System.Drawing.Point(21, 21);
+            this.listEmployee.MultiSelect = false;
             this.listEmployee.Name = "listEmployee";
-            this.listEmployee.Size = new System.Drawing.Size(536, 171);
+            this.listEmployee.Size = new System.Drawing.Size(431, 171);
             this.listEmployee.TabIndex = 0;
             this.listEmployee.UseCompatibleStateImageBehavior = false;
             this.listEmployee.View = System.Windows.Forms.View.Details;
@@ -106,19 +105,9 @@
             this.colName.Text = "Name";
             this.colName.Width = 174;
             // 
-            // colAddress
-            // 
-            this.colAddress.Text = "Address";
-            this.colAddress.Width = 183;
-            // 
-            // colContactNumber
-            // 
-            this.colContactNumber.Text = "Contact Number";
-            this.colContactNumber.Width = 123;
-            // 
             // btnAddEmployee
             // 
-            this.btnAddEmployee.Location = new System.Drawing.Point(574, 60);
+            this.btnAddEmployee.Location = new System.Drawing.Point(466, 60);
             this.btnAddEmployee.Name = "btnAddEmployee";
             this.btnAddEmployee.Size = new System.Drawing.Size(96, 27);
             this.btnAddEmployee.TabIndex = 2;
@@ -134,12 +123,12 @@
             this.grpCustomerInformation.Controls.Add(this.label3);
             this.grpCustomerInformation.Controls.Add(this.label2);
             this.grpCustomerInformation.Controls.Add(this.label1);
-            this.grpCustomerInformation.Location = new System.Drawing.Point(18, 232);
+            this.grpCustomerInformation.Location = new System.Drawing.Point(17, 232);
             this.grpCustomerInformation.Name = "grpCustomerInformation";
-            this.grpCustomerInformation.Size = new System.Drawing.Size(690, 123);
+            this.grpCustomerInformation.Size = new System.Drawing.Size(583, 123);
             this.grpCustomerInformation.TabIndex = 2;
             this.grpCustomerInformation.TabStop = false;
-            this.grpCustomerInformation.Text = "Customer Information";
+            this.grpCustomerInformation.Text = "Employee Information";
             // 
             // txtContactNumber
             // 
@@ -196,11 +185,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 369);
+            this.ClientSize = new System.Drawing.Size(616, 369);
             this.Controls.Add(this.grpCustomerList);
             this.Controls.Add(this.grpCustomerInformation);
+            this.MaximizeBox = false;
             this.Name = "frmEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEmployee_FormClosing);
             this.grpCustomerList.ResumeLayout(false);
             this.grpCustomerInformation.ResumeLayout(false);
             this.grpCustomerInformation.PerformLayout();
@@ -224,7 +216,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ColumnHeader colAddress;
-        private System.Windows.Forms.ColumnHeader colContactNumber;
     }
 }

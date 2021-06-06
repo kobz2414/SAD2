@@ -1,6 +1,6 @@
 ﻿namespace SAD2
 {
-    partial class frmCustomerUpdate
+    partial class frmEmployeeUpdate
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grpCustomerInformation = new System.Windows.Forms.GroupBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.grpEmployeeInformation = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtContactNumber = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -36,27 +38,44 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.grpCustomerInformation.SuspendLayout();
+            this.grpEmployeeInformation.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grpCustomerInformation
+            // btnCancel
             // 
-            this.grpCustomerInformation.Controls.Add(this.label4);
-            this.grpCustomerInformation.Controls.Add(this.txtContactNumber);
-            this.grpCustomerInformation.Controls.Add(this.txtAddress);
-            this.grpCustomerInformation.Controls.Add(this.txtName);
-            this.grpCustomerInformation.Controls.Add(this.label3);
-            this.grpCustomerInformation.Controls.Add(this.label2);
-            this.grpCustomerInformation.Controls.Add(this.label1);
-            this.grpCustomerInformation.Location = new System.Drawing.Point(14, 12);
-            this.grpCustomerInformation.Name = "grpCustomerInformation";
-            this.grpCustomerInformation.Size = new System.Drawing.Size(448, 140);
-            this.grpCustomerInformation.TabIndex = 1;
-            this.grpCustomerInformation.TabStop = false;
-            this.grpCustomerInformation.Text = "Customer Information";
-            this.grpCustomerInformation.Enter += new System.EventHandler(this.grpCustomerInformation_Enter);
+            this.btnCancel.Location = new System.Drawing.Point(150, 166);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(84, 28);
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.Location = new System.Drawing.Point(242, 166);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(84, 28);
+            this.btnAccept.TabIndex = 5;
+            this.btnAccept.Text = "Accept";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            // 
+            // grpEmployeeInformation
+            // 
+            this.grpEmployeeInformation.Controls.Add(this.label4);
+            this.grpEmployeeInformation.Controls.Add(this.txtContactNumber);
+            this.grpEmployeeInformation.Controls.Add(this.txtAddress);
+            this.grpEmployeeInformation.Controls.Add(this.txtName);
+            this.grpEmployeeInformation.Controls.Add(this.label3);
+            this.grpEmployeeInformation.Controls.Add(this.label2);
+            this.grpEmployeeInformation.Controls.Add(this.label1);
+            this.grpEmployeeInformation.Location = new System.Drawing.Point(14, 14);
+            this.grpEmployeeInformation.Name = "grpEmployeeInformation";
+            this.grpEmployeeInformation.Size = new System.Drawing.Size(448, 140);
+            this.grpEmployeeInformation.TabIndex = 4;
+            this.grpEmployeeInformation.TabStop = false;
+            this.grpEmployeeInformation.Text = "Employee Information";
             // 
             // label4
             // 
@@ -116,57 +135,36 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name*";
             // 
-            // btnAccept
-            // 
-            this.btnAccept.Location = new System.Drawing.Point(242, 164);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(84, 28);
-            this.btnAccept.TabIndex = 2;
-            this.btnAccept.Text = "Accept";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(150, 164);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(84, 28);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // frmCustomerUpdate
+            // frmEmployeeUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 208);
+            this.ClientSize = new System.Drawing.Size(476, 208);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.grpCustomerInformation);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.grpEmployeeInformation);
             this.MaximizeBox = false;
-            this.Name = "frmCustomerUpdate";
+            this.Name = "frmEmployeeUpdate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Customer Data";
-            this.Load += new System.EventHandler(this.frmCustomerUpdate_Load);
-            this.grpCustomerInformation.ResumeLayout(false);
-            this.grpCustomerInformation.PerformLayout();
+            this.Text = "Update Employee Information";
+            this.Load += new System.EventHandler(this.frmEmployeeUpdate_Load);
+            this.grpEmployeeInformation.ResumeLayout(false);
+            this.grpEmployeeInformation.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpCustomerInformation;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.GroupBox grpEmployeeInformation;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtContactNumber;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAccept;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label4;
     }
 }

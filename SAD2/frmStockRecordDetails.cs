@@ -67,8 +67,44 @@ namespace SAD2
             }
             else if(action == "Stock Out")
             {
-                query = "SELECT * FROM `db_cefinal`.`sales` where transactionID = " + id + ";";
+                query = "SELECT * FROM `db_cefinal`.`stockout` where stockOutID = " + id + ";";
                 txtAction.Text = "Stock Out";
+
+                try
+                {
+                    if (OpenConnection() == true)   
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string id = dataReader["stockOutID"] + "",
+                                   date = dataReader["DateTime"] + "",
+                                   staff = dataReader["Name"] + "";
+
+                            txtID.Text = id;
+                            txtDateAndTime.Text = date;
+                            txtEmployee.Text = staff;
+                            lblEmployee.Text = "        Staff";
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err);
+                    CloseConnection();
+                }
+
+            }
+            else if (action == "Sale")
+            {
+                query = "SELECT * FROM `db_cefinal`.`sales` where transactionID = " + id + ";";
+                txtAction.Text = "Sale";
 
                 try
                 {
@@ -81,11 +117,23 @@ namespace SAD2
                         {
                             string id = dataReader["transactionID"] + "",
                                    date = dataReader["DateTime"] + "",
-                                   staff = dataReader["Name"] + "";
+                                   customerID = dataReader["customerID"] + "";
+
+                            dataReader.Close();
+
+                            query = "SELECT Name FROM `db_cefinal`.`customers` where customerID = '" + customerID + "';";
+                            string customerName = "";
+                            cmd = new MySqlCommand(query, connection);
+                            dataReader = cmd.ExecuteReader();
+
+                            while (dataReader.Read())
+                            {
+                                customerName = dataReader["Name"] + "";
+                            }
 
                             txtID.Text = id;
                             txtDateAndTime.Text = date;
-                            txtEmployee.Text = staff;
+                            txtEmployee.Text = customerName;
                             lblEmployee.Text = "   Sold To";
                         }
 
@@ -102,7 +150,7 @@ namespace SAD2
 
             }
 
-            
+
 
             if (action == "Stock In")
             {
@@ -114,7 +162,7 @@ namespace SAD2
                         MySqlCommand cmd = new MySqlCommand(query, connection);
                         MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                        listItems.Columns[5].Text = "Subtotal";
+                        listItems.Columns[5].Text = "totalWeight";
 
                         while (dataReader.Read())
                         {
@@ -140,7 +188,7 @@ namespace SAD2
                     CloseConnection();
                 }
             }
-            else if (action == "Stock Out")
+            else if (action == "Sale")
             {
                 query = "SELECT * FROM db_transactions.`" + id + "`";
                 try
@@ -175,6 +223,45 @@ namespace SAD2
                     Console.WriteLine(err);
                     CloseConnection();
                 }
+            }
+            else if (action == "Stock Out")
+            {
+                query = "SELECT * FROM db_stockoutdetails.`" + id + "`;";
+                txtAction.Text = "Sale";
+
+                try
+                {
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        listItems.Columns[5].Text = "totalWeight";
+
+                        while (dataReader.Read())
+                        {
+                            string id = dataReader["itemID"] + "",
+                                   type = dataReader["itemType"] + "",
+                                   color = dataReader["itemColor"] + "",
+                                   weight = dataReader["itemWeight"] + "",
+                                   quantity = dataReader["itemQuantity"] + "",
+                                   subtotal = dataReader["totalWeight"] + "";
+                            string[] row = { id, type, color, weight, quantity, subtotal };
+                            ListViewItem item = new ListViewItem(row);
+                            listItems.Items.Add(item);
+                        }
+
+                        dataReader.Close();
+
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err);
+                    CloseConnection();
+                }
+
             }
 
         }

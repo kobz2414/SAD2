@@ -76,6 +76,7 @@
             this.listProduct.HideSelection = false;
             this.listProduct.Location = new System.Drawing.Point(22, 64);
             this.listProduct.Margin = new System.Windows.Forms.Padding(2);
+            this.listProduct.MultiSelect = false;
             this.listProduct.Name = "listProduct";
             this.listProduct.Size = new System.Drawing.Size(900, 186);
             this.listProduct.TabIndex = 12;

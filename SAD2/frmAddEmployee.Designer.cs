@@ -135,7 +135,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 205);
             this.Controls.Add(this.grpEmployeeDetails);
+            this.MaximizeBox = false;
             this.Name = "frmAddEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Employee";
             this.Load += new System.EventHandler(this.frmAddEmployee_Load);
             this.grpEmployeeDetails.ResumeLayout(false);

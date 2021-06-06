@@ -270,6 +270,7 @@ namespace SAD2
             this.listProduct.HideSelection = false;
             this.listProduct.Location = new System.Drawing.Point(20, 26);
             this.listProduct.Margin = new System.Windows.Forms.Padding(2);
+            this.listProduct.MultiSelect = false;
             this.listProduct.Name = "listProduct";
             this.listProduct.Size = new System.Drawing.Size(452, 234);
             this.listProduct.TabIndex = 13;

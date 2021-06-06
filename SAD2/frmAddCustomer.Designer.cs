@@ -136,6 +136,7 @@ namespace SAD2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 204);
             this.Controls.Add(this.grpCustomerDetails);
+            this.MaximizeBox = false;
             this.Name = "frmAddCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Customer";

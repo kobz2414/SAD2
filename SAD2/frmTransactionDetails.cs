@@ -40,13 +40,25 @@ namespace SAD2
                     while (dataReader.Read())
                     {
                         string date = dataReader["DateTime"] + "",
-                               name = dataReader["name"] + "",
+                               customerID = dataReader["customerID"] + "",
                                id = dataReader["transactionID"] + "",
                                address = dataReader["Address"] + "",
                                contact = dataReader["ContactNumber"] + "";
 
+                        dataReader.Close();
+
+                        query = "SELECT Name FROM `db_cefinal`.`customers` where customerID = '" + customerID + "';";
+                        string customerName = "";
+                        cmd = new MySqlCommand(query, connection);
+                        dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            customerName = dataReader["Name"] + "";
+                        }
+
                         txtTransactionNum.Text = id;
-                        txtName.Text = name;
+                        txtName.Text = customerName;
                         txtDateandTime.Text = date;
                         txtContactNum.Text = contact;
                         txtAddress.Text = address;

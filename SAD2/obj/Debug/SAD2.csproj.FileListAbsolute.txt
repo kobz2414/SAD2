@@ -55,3 +55,4 @@ C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddCustomer.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmCustomerUpdate.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddEmployee.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmEmployee.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmEmployeeUpdate.resources

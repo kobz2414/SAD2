@@ -18,11 +18,14 @@ namespace SAD2
         private string server, database, database1, uid, password;
         private double totalWeight = 0;
         private string itemSubtotal, itemTotalWeight, itemPrice;
+        private bool checkNum = false, checkName = false;
+        private List<string> employees = new List<string>();
 
         public frmStockOutDetails()
         {
             InitializeComponent();
             Initialize();
+            showEmployeeProfiles();
             show();
         }
 
@@ -161,6 +164,16 @@ namespace SAD2
             }
         }
 
+        private void txtEmployee_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStaff_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void Initialize()
         {
             server = "localhost";
@@ -174,6 +187,74 @@ namespace SAD2
 
             connection = new MySqlConnection(connectionString);
             connection2 = new MySqlConnection(connectionString2);
+        }
+
+        private void cmbEmployees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbEmployees.Text == "")
+            {
+
+                btnStockOut.Enabled = false;
+                checkName = false;
+            }
+            else
+            {
+                checkName = true;
+                if (checkNum == true && checkName == true)
+                {
+                    btnStockOut.Enabled = true;
+                }
+            }
+        }
+
+        private void txtStockOutID_TextChanged(object sender, EventArgs e)
+        {
+            if (!txtStockOutID.Text.All(char.IsDigit))
+            {
+
+                btnStockOut.Enabled = false;
+                checkNum = false;
+                lblStockOutPrompt.Text = "Must enter all in digits";
+            }
+            else
+            {
+                lblStockOutPrompt.Text = "   ";
+                try
+                {
+                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT recordID FROM `db_cefinal`.`stockrecordhistory` WHERE recordID = '" + txtStockOutID.Text + "' and (action = 'Stock Out' or action = 'Sale')) THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                        while (dataReader.Read())
+                        {
+                            string temp = dataReader["transactionID"].ToString();
+                            if (temp == "TRUE")
+                            {
+                                btnStockOut.Enabled = false;
+                                checkNum = false;
+                                lblStockOutPrompt.Text = "Duplicate Transaction Number";
+                            }
+                            else
+                            {
+                                checkNum = true;
+                                lblStockOutPrompt.Text = "   ";
+                                if (checkName == true && checkNum == true)
+                                {
+                                    btnStockOut.Enabled = true;
+                                }
+                            }
+                        }
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+                    CloseConnection();
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -302,32 +383,15 @@ namespace SAD2
             {
                 try
                 {
-                    //string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT transactionID FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtTransactionNum.Text + "') THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
-
-                    //if (OpenConnection() == true)
-                    //{
-                    //    MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
-                    //    MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                    //    while (dataReader.Read())
-                    //    {
-                    //        string temp = dataReader["transactionID"].ToString();
-                    //        if (temp == "TRUE")
-                    //        {
-                    //            MessageBox.Show("Duplicate Transaction Number");
-                    //        }
-                    //    }
-                    //    CloseConnection();
-                    //}
 
                     string queryTransaction = "";
                     //Sales
-                    queryTransaction = "insert into stockout(stockOutID, DateTime, Name) values('" + txtStockOutID.Text + "', now() ,'" + txtEmployee.Text + "');" +
-                         "insert into stockrecordhistory(recordID, date, person, action) values('" + txtStockOutID.Text + "', now(),'" + txtEmployee.Text + "','Stock Out');";
+                    queryTransaction = "insert into stockout(stockOutID, DateTime, Name) values('" + txtStockOutID.Text + "', now() ,'" + employees[int.Parse(cmbEmployees.SelectedIndex.ToString())] + "');" +
+                         "insert into stockrecordhistory(recordID, date, person, action) values('" + txtStockOutID.Text + "', now(),'" + employees[int.Parse(cmbEmployees.SelectedIndex.ToString())] + "','Stock Out');";
 
                     //New table in transactions database
                     
-                    queryTransaction = queryTransaction + "create table `db_stockoutdetails`.`" + txtStockOutID.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, totalWeight int, primary" +
+                    queryTransaction = queryTransaction + "create table `db_stockoutdetails`.`" + txtStockOutID.Text + "`(itemID varchar(255) not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, totalWeight int, primary" +
                         " key (itemID));";
 
                     //Add items from cart to database
@@ -361,6 +425,30 @@ namespace SAD2
             }
         }
 
+        public void showEmployeeProfiles()
+        {
+            cmbEmployees.Items.Clear();
+
+            string query = "SELECT employeeID, name, address from db_cefinal.employees";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["employeeID"] + "", name = dataReader["name"] + "", address = dataReader["address"] + "";
+                    employees.Add(name);
+                    cmbEmployees.Items.Add(id + " - " + name + " - " + address);
+
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
+        }
         private void frmStockOutDetails_Load(object sender, EventArgs e)
         {
 

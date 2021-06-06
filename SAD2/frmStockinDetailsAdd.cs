@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -19,12 +20,39 @@ namespace SAD2
         private string itemTotalWeight;
         private double totalWeight = 0;
         private bool checkNum = false, checkName = false;
+        private List<string> employees = new List<string>();
 
         public frmStockinDetailsAdd()
         {
             InitializeComponent();
             Initialize();
+            showEmployeeProfiles();
             show();
+        }
+
+        public void showEmployeeProfiles()
+        {
+            cmbEmployees.Items.Clear();
+
+            string query = "SELECT employeeID, name, address from db_cefinal.employees";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["employeeID"] + "", name = dataReader["name"] + "", address = dataReader["address"] + "";
+                    employees.Add(name);
+                    cmbEmployees.Items.Add(id + " - " + name + " - " + address);
+
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
         }
 
         private void Initialize()
@@ -228,19 +256,19 @@ namespace SAD2
 
         private void txtStockID_TextChanged(object sender, EventArgs e)
         {
-            if (!txtStockID.Text.All(char.IsDigit))
+            if (!txtStockInID.Text.All(char.IsDigit))
             {
 
                 btnStockin.Enabled = false;
                 checkNum = false;
-                lblStockInNumberPrompt.Text = "Must enter all in digits";
+                lblStockInPrompt.Text = "Must enter all in digits";
             }
             else
             {
 
                 try
                 {
-                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT stockin_id FROM `db_cefinal`.`stockin` WHERE stockin_id = '" + txtStockID.Text + "') THEN 'TRUE' ELSE 'FALSE' END as stockin_id;";
+                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT stockin_id FROM `db_cefinal`.`stockin` WHERE stockin_id = '" + txtStockInID.Text + "') THEN 'TRUE' ELSE 'FALSE' END as stockin_id;";
 
                     if (OpenConnection() == true)
                     {
@@ -254,14 +282,14 @@ namespace SAD2
                             {
                                 btnStockin.Enabled = false;
                                 checkNum = false;
-                                lblStockInNumberPrompt.Text = "Duplicate Transaction Number";
+                                lblStockInPrompt.Text = "Duplicate Transaction Number";
                             }
                             else
                             {
                                 checkNum = true;
                                 if (checkNum == true)
                                 {
-                                    lblStockInNumberPrompt.Text = "   ";
+                                    lblStockInPrompt.Text = "   ";
                                     if (checkName == true)
                                     {
                                         btnStockin.Enabled = true;
@@ -665,16 +693,69 @@ namespace SAD2
             }
         }
 
-        private void txtEmployee_TextChanged(object sender, EventArgs e)
+        private void txtStockOutID_TextChanged(object sender, EventArgs e)
         {
-            if (txtEmployee.Text == "")
+            if (!txtStockInID.Text.All(char.IsDigit))
             {
+
+                btnStockin.Enabled = false;
+                checkNum = false;
+                lblStockInPrompt.Text = "Must enter all in digits";
+            }
+            else
+            {
+                lblStockInPrompt.Text = "   ";
+                try
+                {
+                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT stockin_id FROM `db_cefinal`.`stockin` WHERE stockin_id = '" + txtStockInID.Text + "') THEN 'TRUE' ELSE 'FALSE' END as stockin_id;";
+
+                    if (OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                        MySqlDataReader dataReader = cmd.ExecuteReader();
+                        
+                        while (dataReader.Read())
+                        {
+                            string temp = dataReader["stockin_id"].ToString();
+                            if (temp == "TRUE")
+                            {
+                                btnStockin.Enabled = false;
+                                checkNum = false;
+                                lblStockInPrompt.Text = "Duplicate Stock In Number";
+                            }
+                            else
+                            {
+                                checkNum = true;
+                                lblStockInPrompt.Text = "   ";
+                                
+                                if (checkName == true && checkNum == true)
+                                {
+                                    btnStockin.Enabled = true;
+                                }
+                            }
+                        }
+                        CloseConnection();
+                    }
+                }
+                catch (Exception err)
+                {
+                    CloseConnection();
+                }
+            }
+        }
+
+        private void cmbEmployees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbEmployees.Text == "")
+            {
+
+                btnStockin.Enabled = false;
                 checkName = false;
             }
             else
             {
                 checkName = true;
-                if (checkNum == true)
+                if (checkNum == true && checkName == true)
                 {
                     btnStockin.Enabled = true;
                 }
@@ -701,28 +782,39 @@ namespace SAD2
 
         private void btnStockin_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_cefinal`.`stockin` (`stockin_id`, `date`, `staff`) VALUES(" + txtStockID.Text + ", now(), '" + txtEmployee.Text + "');" +
-                           "create table `db_stockindetails`.`" + txtStockID.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, subtotal int, primary key (itemID));" +
-                           "INSERT INTO `db_cefinal`.`stockrecordhistory` (`recordID`, `date`, `person`, `action`) VALUES(" + txtStockID.Text + ", now(), '" + txtEmployee.Text + "', 'Stock In');";
-            
-            foreach (ListViewItem eachItem in listCart.Items)
+            if (listCart.Items.Count == 0)
             {
-                query = query + "insert into `db_stockindetails`.`" + txtStockID.Text + "`(itemID, itemType, itemColor, itemWeight, itemQuantity, subtotal) values('" + int.Parse(eachItem.SubItems[0].Text) + "','" +
-                eachItem.SubItems[1].Text + "','" + eachItem.SubItems[2].Text + "','" + int.Parse(eachItem.SubItems[3].Text) + "','" + int.Parse(eachItem.SubItems[4].Text) + "','" + int.Parse(eachItem.SubItems[5].Text) + "');" +
-                "INSERT INTO `db_cefinal`.`inventory`(inventory_id, type, color, weight, quantity) VALUES('" + int.Parse(eachItem.SubItems[0].Text) + "','" +
-                eachItem.SubItems[1].Text + "','" + eachItem.SubItems[2].Text + "','" + int.Parse(eachItem.SubItems[3].Text) + "','" + int.Parse(eachItem.SubItems[4].Text) + "')" +
-                " ON DUPLICATE KEY UPDATE quantity = quantity + " + int.Parse(eachItem.SubItems[4].Text) + ";";
+                MessageBox.Show("Please input items to cart");
             }
-
-            if (this.OpenConnection() == true)
+            else
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
-            }
 
-            MessageBox.Show("Success");
-            this.Close();
+
+                string query = "INSERT INTO `db_cefinal`.`stockin` (`stockin_id`, `date`, `staff`) VALUES(" + txtStockInID.Text + ", now(), '" + employees[int.Parse(cmbEmployees.SelectedIndex.ToString())] + "');" +
+                           "create table `db_stockindetails`.`" + txtStockInID.Text + "`(itemID varchar(255) not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, subtotal int, primary key (itemID));" +
+                           "INSERT INTO `db_cefinal`.`stockrecordhistory` (`recordID`, `date`, `person`, `action`) VALUES(" + txtStockInID.Text + ", now(), '" + employees[int.Parse(cmbEmployees.SelectedIndex.ToString())] + "', 'Stock In');";
+
+                foreach (ListViewItem eachItem in listCart.Items)
+                {
+                    query = query + "insert into `db_stockindetails`.`" + txtStockInID.Text + "`(itemID, itemType, itemColor, itemWeight, itemQuantity, subtotal) values('" + int.Parse(eachItem.SubItems[0].Text) + "','" +
+                    eachItem.SubItems[1].Text + "','" + eachItem.SubItems[2].Text + "','" + int.Parse(eachItem.SubItems[3].Text) + "','" + int.Parse(eachItem.SubItems[4].Text) + "','" + int.Parse(eachItem.SubItems[5].Text) + "');" +
+                    "INSERT INTO `db_cefinal`.`inventory`(inventory_id, type, color, weight, quantity) VALUES('" + int.Parse(eachItem.SubItems[0].Text) + "','" +
+                    eachItem.SubItems[1].Text + "','" + eachItem.SubItems[2].Text + "','" + int.Parse(eachItem.SubItems[3].Text) + "','" + int.Parse(eachItem.SubItems[4].Text) + "')" +
+                    " ON DUPLICATE KEY UPDATE quantity = quantity + " + int.Parse(eachItem.SubItems[4].Text) + ";";
+                }
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    this.CloseConnection();
+                }
+
+                MessageBox.Show("Success");
+                frmStockRecordHistory temp = new frmStockRecordHistory();
+                temp.Show();
+                this.Hide();
+            }
         }
 
     }

@@ -13,7 +13,7 @@ namespace SAD2
 {
     public partial class frmTransactions : Form
     {
-        private MySqlConnection connection;
+        private MySqlConnection connection, connection2;
         private string server, database, uid, password;
         private int transactionID;
 
@@ -54,6 +54,7 @@ namespace SAD2
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
             connection = new MySqlConnection(connectionString);
+            connection2 = new MySqlConnection(connectionString);
         }
 
         private void listTransactionHistory_SelectedIndexChanged(object sender, EventArgs e)
@@ -87,7 +88,7 @@ namespace SAD2
                 {
                     listTransactionHistory.Items.Clear();
 
-                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+                    string query = "SELECT `db_cefinal`.`sales`.DateTime, `db_cefinal`.`customers`.Name, `db_cefinal`.`sales`.transactionID, `db_cefinal`.`sales`.Status FROM `db_cefinal`.`sales` INNER JOIN `db_cefinal`.`customers` ON `db_cefinal`.`sales`.CustomerID =`db_cefinal`.`customers`.CustomerID where transactionID = '" + txtSearch.Text + "' order by DateTime Desc;";
 
                     if (OpenConnection() == true)
                     {
@@ -111,7 +112,7 @@ namespace SAD2
                 {
                     listTransactionHistory.Items.Clear();
 
-                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+                    string query = "SELECT `db_cefinal`.`sales`.DateTime, `db_cefinal`.`customers`.Name, `db_cefinal`.`sales`.transactionID, `db_cefinal`.`sales`.Status FROM `db_cefinal`.`sales` INNER JOIN `db_cefinal`.`customers` ON `db_cefinal`.`sales`.CustomerID =`db_cefinal`.`customers`.CustomerID where Name = '" + txtSearch.Text + "' order by DateTime Desc;";
 
                     if (OpenConnection() == true)
                     {
@@ -151,7 +152,7 @@ namespace SAD2
                 {
                     listTransactionHistory.Items.Clear();
 
-                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+                    string query = "SELECT `db_cefinal`.`sales`.DateTime, `db_cefinal`.`customers`.Name, `db_cefinal`.`sales`.transactionID, `db_cefinal`.`sales`.Status FROM `db_cefinal`.`sales` INNER JOIN `db_cefinal`.`customers` ON `db_cefinal`.`sales`.CustomerID =`db_cefinal`.`customers`.CustomerID where transactionID = '" + txtSearch.Text + "' order by DateTime Desc;";
 
                     if (OpenConnection() == true)
                     {
@@ -175,7 +176,7 @@ namespace SAD2
                 {
                     listTransactionHistory.Items.Clear();
 
-                    string query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtSearch.Text + "' ORDER BY DateTime DESC; ";
+                    string query = "SELECT `db_cefinal`.`sales`.DateTime, `db_cefinal`.`customers`.Name, `db_cefinal`.`sales`.transactionID, `db_cefinal`.`sales`.Status FROM `db_cefinal`.`sales` INNER JOIN `db_cefinal`.`customers` ON `db_cefinal`.`sales`.CustomerID =`db_cefinal`.`customers`.CustomerID where Name = '" + txtSearch.Text + "' order by DateTime Desc;";
 
                     if (OpenConnection() == true)
                     {
@@ -198,43 +199,13 @@ namespace SAD2
             }
         }
 
-        //private void txtName_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtName.Text == "")
-        //    {
-        //        show();
-        //    }
-        //    else
-        //    {
-        //        listTransactionHistory.Items.Clear();
-
-        //        string query = "SELECT * FROM `db_cefinal`.`sales` WHERE name = '" + txtName.Text + "' ORDER BY DateTime DESC; ";
-
-        //        if (OpenConnection() == true)
-        //        {
-        //            MySqlCommand cmd = new MySqlCommand(query, connection);
-        //            MySqlDataReader dataReader = cmd.ExecuteReader();
-
-        //            while (dataReader.Read())
-        //            {
-        //                string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
-        //                string[] row = { id, date, name, status };
-        //                ListViewItem item = new ListViewItem(row);
-        //                listTransactionHistory.Items.Add(item);
-        //            }
-
-        //            dataReader.Close();
-
-        //            CloseConnection();
-        //        }
-        //    }
-        //}
 
         private bool OpenConnection()
         {
             try
             {
                 connection.Open();
+                connection2.Open();
                 return true;
             }
             catch (MySqlException ex)
@@ -258,6 +229,7 @@ namespace SAD2
             try
             {
                 connection.Close();
+                connection2.Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -271,7 +243,7 @@ namespace SAD2
         {
             listTransactionHistory.Items.Clear();
 
-            string query = "SELECT * FROM `db_cefinal`.`sales` order by DateTime Desc;";
+            string query = "SELECT `db_cefinal`.`sales`.DateTime, `db_cefinal`.`customers`.Name, `db_cefinal`.`sales`.transactionID, `db_cefinal`.`sales`.Status FROM `db_cefinal`.`sales` INNER JOIN `db_cefinal`.`customers` ON `db_cefinal`.`sales`.CustomerID =`db_cefinal`.`customers`.CustomerID order by DateTime Desc;";
 
             if (OpenConnection() == true)
             {
@@ -280,7 +252,14 @@ namespace SAD2
 
                 while (dataReader.Read())
                 {
-                    string date = dataReader["DateTime"] + "", name = dataReader["name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+                    string date = dataReader["DateTime"] + "", name = dataReader["Name"] + "", id = dataReader["transactionID"] + "", status = dataReader["Status"] + "";
+
+                    //query = "SELECT Name FROM `db_cefinal`.`customers` where customerID = '" + customerID + "';";
+                    //string customerName = "";
+                    //cmd = new MySqlCommand(query, connection2);
+                    //dataReader = cmd.ExecuteReader();
+                    //customerName = dataReader["Name"] + "";
+
                     string[] row = {id, date, name, status};
                     ListViewItem item = new ListViewItem(row);
                     listTransactionHistory.Items.Add(item);
