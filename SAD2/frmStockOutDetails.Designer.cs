@@ -30,7 +30,6 @@ namespace SAD2
         private void InitializeComponent()
         {
             this.grpStockIn = new System.Windows.Forms.GroupBox();
-            this.lblStockOutPrompt = new System.Windows.Forms.Label();
             this.cmbEmployees = new System.Windows.Forms.ComboBox();
             this.txtStockOutID = new System.Windows.Forms.TextBox();
             this.lblStaff = new System.Windows.Forms.Label();
@@ -66,7 +65,6 @@ namespace SAD2
             // 
             // grpStockIn
             // 
-            this.grpStockIn.Controls.Add(this.lblStockOutPrompt);
             this.grpStockIn.Controls.Add(this.cmbEmployees);
             this.grpStockIn.Controls.Add(this.txtStockOutID);
             this.grpStockIn.Controls.Add(this.lblStaff);
@@ -77,16 +75,6 @@ namespace SAD2
             this.grpStockIn.TabIndex = 23;
             this.grpStockIn.TabStop = false;
             this.grpStockIn.Text = "Stock In";
-            // 
-            // lblStockOutPrompt
-            // 
-            this.lblStockOutPrompt.AutoSize = true;
-            this.lblStockOutPrompt.Location = new System.Drawing.Point(290, 68);
-            this.lblStockOutPrompt.Name = "lblStockOutPrompt";
-            this.lblStockOutPrompt.Size = new System.Drawing.Size(16, 13);
-            this.lblStockOutPrompt.TabIndex = 22;
-            this.lblStockOutPrompt.Text = "   ";
-            this.lblStockOutPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbEmployees
             // 
@@ -99,6 +87,7 @@ namespace SAD2
             // 
             // txtStockOutID
             // 
+            this.txtStockOutID.Enabled = false;
             this.txtStockOutID.Location = new System.Drawing.Point(112, 64);
             this.txtStockOutID.Margin = new System.Windows.Forms.Padding(2);
             this.txtStockOutID.Name = "txtStockOutID";
@@ -385,6 +374,5 @@ namespace SAD2
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ComboBox cmbEmployees;
-        private System.Windows.Forms.Label lblStockOutPrompt;
     }
 }

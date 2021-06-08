@@ -56,3 +56,5 @@ C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmCustomerUpdate.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddEmployee.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmEmployee.resources
 C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmEmployeeUpdate.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddColor.resources
+C:\Users\Kobz\Desktop\SAD2\SAD2\obj\Debug\SAD2.frmAddType.resources

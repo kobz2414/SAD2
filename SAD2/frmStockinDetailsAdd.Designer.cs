@@ -58,7 +58,6 @@
             this.colTotalWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.grpStockIn = new System.Windows.Forms.GroupBox();
-            this.lblStockInPrompt = new System.Windows.Forms.Label();
             this.cmbEmployees = new System.Windows.Forms.ComboBox();
             this.txtStockInID = new System.Windows.Forms.TextBox();
             this.lblStaff = new System.Windows.Forms.Label();
@@ -146,6 +145,7 @@
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(169, 20);
             this.txtQuantity.TabIndex = 14;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
             // 
             // lblQuantity
             // 
@@ -315,7 +315,6 @@
             // 
             // grpStockIn
             // 
-            this.grpStockIn.Controls.Add(this.lblStockInPrompt);
             this.grpStockIn.Controls.Add(this.cmbEmployees);
             this.grpStockIn.Controls.Add(this.txtStockInID);
             this.grpStockIn.Controls.Add(this.txtDateandTime);
@@ -329,16 +328,6 @@
             this.grpStockIn.TabStop = false;
             this.grpStockIn.Text = "Stock In";
             // 
-            // lblStockInPrompt
-            // 
-            this.lblStockInPrompt.AutoSize = true;
-            this.lblStockInPrompt.Location = new System.Drawing.Point(289, 58);
-            this.lblStockInPrompt.Name = "lblStockInPrompt";
-            this.lblStockInPrompt.Size = new System.Drawing.Size(16, 13);
-            this.lblStockInPrompt.TabIndex = 22;
-            this.lblStockInPrompt.Text = "   ";
-            this.lblStockInPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // cmbEmployees
             // 
             this.cmbEmployees.FormattingEnabled = true;
@@ -350,6 +339,7 @@
             // 
             // txtStockInID
             // 
+            this.txtStockInID.Enabled = false;
             this.txtStockInID.Location = new System.Drawing.Point(113, 55);
             this.txtStockInID.Margin = new System.Windows.Forms.Padding(2);
             this.txtStockInID.Name = "txtStockInID";
@@ -433,7 +423,6 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox grpStockIn;
-        private System.Windows.Forms.Label lblStockInPrompt;
         private System.Windows.Forms.ComboBox cmbEmployees;
         private System.Windows.Forms.TextBox txtStockInID;
         private System.Windows.Forms.Label lblStaff;

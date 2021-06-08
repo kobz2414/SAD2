@@ -18,15 +18,51 @@ namespace SAD2
         private string server, database, database1, uid, password;
         private double totalWeight = 0;
         private string itemSubtotal, itemTotalWeight, itemPrice;
-        private bool checkNum = false, checkName = false;
         private List<string> employees = new List<string>();
+        private static readonly Random getrandom = new Random();
 
         public frmStockOutDetails()
         {
             InitializeComponent();
             Initialize();
             showEmployeeProfiles();
+            checkStockID();
             show();
+        }
+
+        public void checkStockID()
+        {
+            string stockInID = GetRandomNumber(700000000, 999999999).ToString();
+            string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT recordID FROM db_cefinal.stockrecordhistory WHERE recordID = '" + stockInID + "') THEN 'TRUE' ELSE 'FALSE' END as recordID;";
+            string temp2 = "";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                dataReader.Read();
+                string temp = dataReader["recordID"].ToString();
+                if (temp == "FALSE")
+                {
+                    txtStockOutID.Text = stockInID;
+                }
+                else if (temp == "TRUE")
+                {
+                    CloseConnection();
+                    dataReader.Close();
+                    checkStockID();
+                }
+                dataReader.Close();
+                CloseConnection();
+            }
+        }
+
+        public int GetRandomNumber(int min, int max)
+        {
+            lock (getrandom)
+            {
+                return getrandom.Next(min, max);
+            }
         }
 
         public void show()
@@ -193,68 +229,17 @@ namespace SAD2
         {
             if (cmbEmployees.Text == "")
             {
-
                 btnStockOut.Enabled = false;
-                checkName = false;
             }
             else
             {
-                checkName = true;
-                if (checkNum == true && checkName == true)
-                {
-                    btnStockOut.Enabled = true;
-                }
+                btnStockOut.Enabled = true;
             }
         }
 
         private void txtStockOutID_TextChanged(object sender, EventArgs e)
         {
-            if (!txtStockOutID.Text.All(char.IsDigit))
-            {
-
-                btnStockOut.Enabled = false;
-                checkNum = false;
-                lblStockOutPrompt.Text = "Must enter all in digits";
-            }
-            else
-            {
-                lblStockOutPrompt.Text = "   ";
-                try
-                {
-                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT recordID FROM `db_cefinal`.`stockrecordhistory` WHERE recordID = '" + txtStockOutID.Text + "' and (action = 'Stock Out' or action = 'Sale')) THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
-
-                    if (OpenConnection() == true)
-                    {
-                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
-                        MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                        while (dataReader.Read())
-                        {
-                            string temp = dataReader["transactionID"].ToString();
-                            if (temp == "TRUE")
-                            {
-                                btnStockOut.Enabled = false;
-                                checkNum = false;
-                                lblStockOutPrompt.Text = "Duplicate Transaction Number";
-                            }
-                            else
-                            {
-                                checkNum = true;
-                                lblStockOutPrompt.Text = "   ";
-                                if (checkName == true && checkNum == true)
-                                {
-                                    btnStockOut.Enabled = true;
-                                }
-                            }
-                        }
-                        CloseConnection();
-                    }
-                }
-                catch (Exception err)
-                {
-                    CloseConnection();
-                }
-            }
+            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -263,6 +248,10 @@ namespace SAD2
             {
                 MessageBox.Show("Please select an item");
                 btnAdd.Enabled = false;
+            }else if(!txtQuantity.Text.All(char.IsDigit))
+            {
+
+                MessageBox.Show("Please input a numeric value (Quantity)");
             }
             else
             {

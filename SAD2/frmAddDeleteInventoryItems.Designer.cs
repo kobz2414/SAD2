@@ -36,8 +36,6 @@ namespace SAD2
             this.lblType = new System.Windows.Forms.Label();
             this.lblColor = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.txtType = new System.Windows.Forms.TextBox();
-            this.txtColor = new System.Windows.Forms.TextBox();
             this.txtWeight = new System.Windows.Forms.TextBox();
             this.grpDeleteItems = new System.Windows.Forms.GroupBox();
             this.listInventory = new System.Windows.Forms.ListView();
@@ -47,24 +45,30 @@ namespace SAD2
             this.colWeight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnAddType = new System.Windows.Forms.Button();
+            this.btnAddColor = new System.Windows.Forms.Button();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpAddItems.SuspendLayout();
             this.grpDeleteItems.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpAddItems
             // 
+            this.grpAddItems.Controls.Add(this.label1);
+            this.grpAddItems.Controls.Add(this.cmbColor);
+            this.grpAddItems.Controls.Add(this.cmbType);
             this.grpAddItems.Controls.Add(this.lblItemID);
             this.grpAddItems.Controls.Add(this.txtIDAdd);
             this.grpAddItems.Controls.Add(this.lblWeight);
             this.grpAddItems.Controls.Add(this.lblType);
             this.grpAddItems.Controls.Add(this.lblColor);
             this.grpAddItems.Controls.Add(this.btnAdd);
-            this.grpAddItems.Controls.Add(this.txtType);
-            this.grpAddItems.Controls.Add(this.txtColor);
             this.grpAddItems.Controls.Add(this.txtWeight);
             this.grpAddItems.Location = new System.Drawing.Point(12, 12);
             this.grpAddItems.Name = "grpAddItems";
-            this.grpAddItems.Size = new System.Drawing.Size(500, 194);
+            this.grpAddItems.Size = new System.Drawing.Size(308, 194);
             this.grpAddItems.TabIndex = 25;
             this.grpAddItems.TabStop = false;
             this.grpAddItems.Text = "Add Items";
@@ -72,7 +76,7 @@ namespace SAD2
             // lblItemID
             // 
             this.lblItemID.AutoSize = true;
-            this.lblItemID.Location = new System.Drawing.Point(32, 29);
+            this.lblItemID.Location = new System.Drawing.Point(32, 26);
             this.lblItemID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblItemID.Name = "lblItemID";
             this.lblItemID.Size = new System.Drawing.Size(41, 13);
@@ -81,7 +85,8 @@ namespace SAD2
             // 
             // txtIDAdd
             // 
-            this.txtIDAdd.Location = new System.Drawing.Point(82, 25);
+            this.txtIDAdd.Enabled = false;
+            this.txtIDAdd.Location = new System.Drawing.Point(82, 22);
             this.txtIDAdd.Margin = new System.Windows.Forms.Padding(2);
             this.txtIDAdd.Name = "txtIDAdd";
             this.txtIDAdd.Size = new System.Drawing.Size(171, 20);
@@ -90,67 +95,52 @@ namespace SAD2
             // lblWeight
             // 
             this.lblWeight.AutoSize = true;
-            this.lblWeight.Location = new System.Drawing.Point(32, 107);
+            this.lblWeight.Location = new System.Drawing.Point(28, 104);
             this.lblWeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWeight.Name = "lblWeight";
-            this.lblWeight.Size = new System.Drawing.Size(41, 13);
+            this.lblWeight.Size = new System.Drawing.Size(45, 13);
             this.lblWeight.TabIndex = 9;
-            this.lblWeight.Text = "Weight";
+            this.lblWeight.Text = "Weight*";
             // 
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(42, 55);
+            this.lblType.Location = new System.Drawing.Point(38, 52);
             this.lblType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(31, 13);
+            this.lblType.Size = new System.Drawing.Size(35, 13);
             this.lblType.TabIndex = 9;
-            this.lblType.Text = "Type";
+            this.lblType.Text = "Type*";
             // 
             // lblColor
             // 
             this.lblColor.AutoSize = true;
-            this.lblColor.Location = new System.Drawing.Point(42, 81);
+            this.lblColor.Location = new System.Drawing.Point(38, 78);
             this.lblColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblColor.Name = "lblColor";
-            this.lblColor.Size = new System.Drawing.Size(31, 13);
+            this.lblColor.Size = new System.Drawing.Size(35, 13);
             this.lblColor.TabIndex = 10;
-            this.lblColor.Text = "Color";
+            this.lblColor.Text = "Color*";
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(82, 144);
+            this.btnAdd.Location = new System.Drawing.Point(98, 150);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(115, 30);
+            this.btnAdd.Size = new System.Drawing.Size(138, 30);
             this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // txtType
-            // 
-            this.txtType.Location = new System.Drawing.Point(82, 51);
-            this.txtType.Margin = new System.Windows.Forms.Padding(2);
-            this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(244, 20);
-            this.txtType.TabIndex = 2;
-            // 
-            // txtColor
-            // 
-            this.txtColor.Location = new System.Drawing.Point(82, 77);
-            this.txtColor.Margin = new System.Windows.Forms.Padding(2);
-            this.txtColor.Name = "txtColor";
-            this.txtColor.Size = new System.Drawing.Size(244, 20);
-            this.txtColor.TabIndex = 3;
-            // 
             // txtWeight
             // 
-            this.txtWeight.Location = new System.Drawing.Point(82, 103);
+            this.txtWeight.Location = new System.Drawing.Point(82, 100);
             this.txtWeight.Margin = new System.Windows.Forms.Padding(2);
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.Size = new System.Drawing.Size(171, 20);
             this.txtWeight.TabIndex = 4;
+            this.txtWeight.TextChanged += new System.EventHandler(this.txtWeight_TextChanged);
             // 
             // grpDeleteItems
             // 
@@ -216,11 +206,63 @@ namespace SAD2
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // btnAddType
+            // 
+            this.btnAddType.Location = new System.Drawing.Point(340, 67);
+            this.btnAddType.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddType.Name = "btnAddType";
+            this.btnAddType.Size = new System.Drawing.Size(162, 35);
+            this.btnAddType.TabIndex = 15;
+            this.btnAddType.Text = "Add Type";
+            this.btnAddType.UseVisualStyleBackColor = true;
+            this.btnAddType.Click += new System.EventHandler(this.btnAddType_Click);
+            // 
+            // btnAddColor
+            // 
+            this.btnAddColor.Location = new System.Drawing.Point(340, 110);
+            this.btnAddColor.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddColor.Name = "btnAddColor";
+            this.btnAddColor.Size = new System.Drawing.Size(162, 35);
+            this.btnAddColor.TabIndex = 27;
+            this.btnAddColor.Text = "Add Color";
+            this.btnAddColor.UseVisualStyleBackColor = true;
+            this.btnAddColor.Click += new System.EventHandler(this.btnAddColor_Click);
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(82, 48);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(171, 21);
+            this.cmbType.TabIndex = 15;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(82, 74);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(171, 21);
+            this.cmbColor.TabIndex = 16;
+            this.cmbColor.SelectedIndexChanged += new System.EventHandler(this.cmbColor_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(79, 126);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "* - Required";
+            // 
             // frmAddDeleteInventoryItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(525, 475);
+            this.Controls.Add(this.btnAddColor);
+            this.Controls.Add(this.btnAddType);
             this.Controls.Add(this.grpDeleteItems);
             this.Controls.Add(this.grpAddItems);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -245,8 +287,6 @@ namespace SAD2
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblColor;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox txtType;
-        private System.Windows.Forms.TextBox txtColor;
         private System.Windows.Forms.TextBox txtWeight;
         private System.Windows.Forms.GroupBox grpDeleteItems;
         private System.Windows.Forms.Button btnDelete;
@@ -256,5 +296,10 @@ namespace SAD2
         private System.Windows.Forms.ColumnHeader colColor;
         private System.Windows.Forms.ColumnHeader colWeight;
         private System.Windows.Forms.ColumnHeader colQuantity;
+        private System.Windows.Forms.Button btnAddType;
+        private System.Windows.Forms.Button btnAddColor;
+        private System.Windows.Forms.ComboBox cmbColor;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label label1;
     }
 }

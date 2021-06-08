@@ -185,36 +185,62 @@ namespace SAD2
 
         private void btnPayCheque_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_payments`.`" + transactionID + "` (`Date`, `ModeOfPayment`, `AccountNumber`, `Amount`) VALUES(now(), 'Cheque', '" + txtChequeNumber.Text + "', '" + txtAmountCheque.Text + "');";
-
-            if (this.OpenConnection() == true)
+            if (!txtChequeNumber.Text.All(char.IsDigit))
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
-            }
 
-            MessageBox.Show("Success");
-            frmPayment temp = new frmPayment(transactionID);
-            this.Hide();
-            temp.Show();
+                MessageBox.Show("Please input a numeric value (Cheque Number)");
+            }
+            else if (!txtAmountCheque.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Please input a numeric value (Amount)");
+            }
+            else
+            {
+                string query = "INSERT INTO `db_payments`.`" + transactionID + "` (`Date`, `ModeOfPayment`, `AccountNumber`, `Amount`) VALUES(now(), 'Cheque', '" + txtChequeNumber.Text + "', '" + txtAmountCheque.Text + "');";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    this.CloseConnection();
+                }
+
+                MessageBox.Show("Success");
+                frmPayment temp = new frmPayment(transactionID);
+                this.Hide();
+                temp.Show();
+            }
         }
 
         private void btnPayCash_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_payments`.`" + transactionID + "` (`Date`, `ModeOfPayment`, `AccountName`, `Amount`) VALUES(now(), 'Cash', '" + txtName.Text + "', '" + txtAmountCash.Text + "');";
-
-            if (this.OpenConnection() == true)
+            if (!txtAmountCash.Text.All(char.IsDigit))
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
-            }
 
-            MessageBox.Show("Success");
-            frmPayment temp = new frmPayment(transactionID);
-            this.Hide();
-            temp.Show();
+                MessageBox.Show("Please input a numeric value (Amount)");
+            }
+            else if (txtName.Text == "")
+            {
+
+                MessageBox.Show("Please input name");
+            }
+            else
+            {
+
+                string query = "INSERT INTO `db_payments`.`" + transactionID + "` (`Date`, `ModeOfPayment`, `AccountName`, `Amount`) VALUES(now(), 'Cash', '" + txtName.Text + "', '" + txtAmountCash.Text + "');";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    this.CloseConnection();
+                }
+
+                MessageBox.Show("Success");
+                frmPayment temp = new frmPayment(transactionID);
+                this.Hide();
+                temp.Show();
+            }
         }
 
 
@@ -247,19 +273,38 @@ namespace SAD2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_payments`.`" + transactionID + "` (`Date`, `ModeOfPayment`, `AccountNumber`, `AccountName`, `Amount`) VALUES(now(), 'Bank', '" + txtAccountNumber.Text + "', '" + txtAccountName.Text + "', '" + txtAmountBank.Text + "');";
 
-            if (this.OpenConnection() == true)
+            if (!txtAccountNumber.Text.All(char.IsDigit))
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
-            }
 
-            MessageBox.Show("Success");
-            frmPayment temp = new frmPayment(transactionID);
-            this.Hide();
-            temp.Show();
+                MessageBox.Show("Please input a numeric value (Account Number)");
+            }
+            else if (!txtAmountBank.Text.All(char.IsDigit))
+            {
+
+                MessageBox.Show("Please input a numeric value (Amount)");
+            }
+            else if (txtAccountName.Text == "")
+            {
+
+                MessageBox.Show("Please input a account name");
+            }
+            else
+            {
+                string query = "INSERT INTO `db_payments`.`" + transactionID + "` (`Date`, `ModeOfPayment`, `AccountNumber`, `AccountName`, `Amount`) VALUES(now(), 'Bank', '" + txtAccountNumber.Text + "', '" + txtAccountName.Text + "', '" + txtAmountBank.Text + "');";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    this.CloseConnection();
+                }
+
+                MessageBox.Show("Success");
+                frmPayment temp = new frmPayment(transactionID);
+                this.Hide();
+                temp.Show();
+            }
         }
 
         private void txtName_TextChanged(object sender, EventArgs e)

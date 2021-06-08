@@ -34,7 +34,6 @@ namespace SAD2
             this.btnCustomer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbProfile = new System.Windows.Forms.ComboBox();
-            this.lblTransactionNumberPrompt = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDateandTime = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
@@ -86,7 +85,6 @@ namespace SAD2
             this.grpCustomerDetails.Controls.Add(this.btnCustomer);
             this.grpCustomerDetails.Controls.Add(this.label2);
             this.grpCustomerDetails.Controls.Add(this.cmbProfile);
-            this.grpCustomerDetails.Controls.Add(this.lblTransactionNumberPrompt);
             this.grpCustomerDetails.Controls.Add(this.label1);
             this.grpCustomerDetails.Controls.Add(this.txtDateandTime);
             this.grpCustomerDetails.Controls.Add(this.lblTime);
@@ -118,11 +116,11 @@ namespace SAD2
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(98, 55);
+            this.label2.Location = new System.Drawing.Point(94, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Customer";
+            this.label2.Text = "Customer*";
             // 
             // cmbProfile
             // 
@@ -133,16 +131,6 @@ namespace SAD2
             this.cmbProfile.Size = new System.Drawing.Size(255, 21);
             this.cmbProfile.TabIndex = 17;
             this.cmbProfile.SelectedIndexChanged += new System.EventHandler(this.cmbProfile_SelectedIndexChanged);
-            // 
-            // lblTransactionNumberPrompt
-            // 
-            this.lblTransactionNumberPrompt.AutoSize = true;
-            this.lblTransactionNumberPrompt.Location = new System.Drawing.Point(423, 25);
-            this.lblTransactionNumberPrompt.Name = "lblTransactionNumberPrompt";
-            this.lblTransactionNumberPrompt.Size = new System.Drawing.Size(16, 13);
-            this.lblTransactionNumberPrompt.TabIndex = 15;
-            this.lblTransactionNumberPrompt.Text = "   ";
-            this.lblTransactionNumberPrompt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
@@ -176,6 +164,7 @@ namespace SAD2
             // 
             // txtTransactionNum
             // 
+            this.txtTransactionNum.Enabled = false;
             this.txtTransactionNum.Location = new System.Drawing.Point(158, 22);
             this.txtTransactionNum.Name = "txtTransactionNum";
             this.txtTransactionNum.Size = new System.Drawing.Size(255, 20);
@@ -185,11 +174,11 @@ namespace SAD2
             // lblTransactionNumber
             // 
             this.lblTransactionNumber.AutoSize = true;
-            this.lblTransactionNumber.Location = new System.Drawing.Point(39, 26);
+            this.lblTransactionNumber.Location = new System.Drawing.Point(43, 26);
             this.lblTransactionNumber.Name = "lblTransactionNumber";
-            this.lblTransactionNumber.Size = new System.Drawing.Size(110, 13);
+            this.lblTransactionNumber.Size = new System.Drawing.Size(106, 13);
             this.lblTransactionNumber.TabIndex = 10;
-            this.lblTransactionNumber.Text = "Transaction Number *";
+            this.lblTransactionNumber.Text = "Transaction Number ";
             // 
             // txtContactNum
             // 
@@ -315,6 +304,7 @@ namespace SAD2
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(141, 20);
             this.txtPrice.TabIndex = 16;
+            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // lblPrice
             // 
@@ -332,6 +322,7 @@ namespace SAD2
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(141, 20);
             this.txtQuantity.TabIndex = 14;
+            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity_TextChanged);
             // 
             // lblQuantity
             // 
@@ -565,7 +556,6 @@ namespace SAD2
         private System.Windows.Forms.TextBox txtSubtotal;
         private System.Windows.Forms.Label lblSubtotal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblTransactionNumberPrompt;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbProfile;
         private System.Windows.Forms.Button btnCustomer;

@@ -15,11 +15,14 @@ namespace SAD2
     {
         private MySqlConnection connection;
         private string server, database, uid, password;
+        private string type = "", color = "", weight = "";
 
         public frmAddDeleteInventoryItems()
         {
             InitializeComponent();
             Initialize();
+            showColor();
+            showType();
         }
 
         private void Initialize()
@@ -78,6 +81,52 @@ namespace SAD2
             showDelete();
         }
 
+        public void showType()
+        {
+            cmbType.Items.Clear();
+
+            string query = "SELECT typeName from db_inventory_item_types.type";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["typeName"] + "";
+                    cmbType.Items.Add(id);
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
+        }
+
+        public void showColor()
+        {
+            cmbColor.Items.Clear();
+
+            string query = "SELECT colorName from db_inventory_item_types.color";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["colorName"] + "";
+                    cmbColor.Items.Add(id);
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int quantity = 0;
@@ -105,36 +154,6 @@ namespace SAD2
             {
                 CloseConnection();
             }
-
-            //query = "SELECT EXISTS(SELECT quantity FROM `db_cefinal`.`inventory` WHERE inventory_id = '" + txtID.Text + "') as quantity;"; // Check if item exists
-
-            //try
-            //{
-            //    if (this.OpenConnection() == true)
-            //    {
-            //        MySqlCommand cmd = new MySqlCommand(query, connection);
-            //        MySqlDataReader dataReader = cmd.ExecuteReader();
-
-            //        while (dataReader.Read())
-            //        {
-            //            ifExists = dataReader["quantity"].ToString() == "1" ? true : false;
-            //        }
-
-            //        dataReader.Close();
-
-            //        this.CloseConnection();
-            //    }
-            //}
-            //catch (Exception err)
-            //{
-
-            //}
-
-            //if (ifExists)
-            //{
-            //    MessageBox.Show("Cannot delete item with a quantity of 1 or more");
-            //}
-            //else 
             
             if(quantity > 0)
             {
@@ -157,21 +176,120 @@ namespace SAD2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_cefinal`.`inventory` (`inventory_id`, `type`, `color`, `weight`, `quantity`)  VALUES('" + txtIDAdd.Text + "', '" + txtType.Text + "', '" + txtColor.Text + "', '" + txtWeight.Text + "', 0);";
+            if (type != "" && color != "" && weight != "")
+            {
 
-            if (this.OpenConnection() == true)
+                string query = "INSERT INTO `db_cefinal`.`inventory` (`inventory_id`, `type`, `color`, `weight`, `quantity`)  VALUES('" + txtIDAdd.Text + "', '" + cmbType.Text + "', '" + cmbColor.Text + "', '" + txtWeight.Text + "', 0);";
+
+                if (this.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    this.CloseConnection();
+                }
+
+                txtIDAdd.Text = "";
+                cmbColor.Text = "";
+                cmbType.Text = "";
+                txtWeight.Text = "";
+                MessageBox.Show("Success");
+                showDelete();
+            }
+            else
+            {
+                MessageBox.Show("Incomplete details");
+            }
+        }
+
+        private void txtType_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddColor_Click(object sender, EventArgs e)
+        {
+            frmAddColor temp = new frmAddColor();
+            temp.ShowDialog();
+            showColor();
+        }
+
+        private void cmbColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query = "SELECT colorID from db_inventory_item_types.color WHERE colorName = '" + cmbColor.Text + "';";
+
+            if (OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
-                this.CloseConnection();
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["colorID"] + "";
+                    color = id;
+                }
+
+                dataReader.Close();
+                CloseConnection();
             }
 
-            txtIDAdd.Text = "";
-            txtType.Text = "";
-            txtColor.Text = "";
-            txtWeight.Text = "";
-            MessageBox.Show("Success");
-            showDelete();
+            if (type != "" && color != "" && weight != "")
+            {
+                txtIDAdd.Text = type + color + weight;
+            }
+            else
+            {
+                txtIDAdd.Text = "";
+            }
+        }
+
+        private void txtWeight_TextChanged(object sender, EventArgs e)
+        {
+            weight = txtWeight.Text;
+
+            if (type != "" && color != "" && weight != "")
+            {
+                txtIDAdd.Text = type + color + weight;
+            }
+            else
+            {
+                txtIDAdd.Text = "";
+            }
+        }
+
+        private void btnAddType_Click(object sender, EventArgs e)
+        {
+            frmAddType temp = new frmAddType();
+            temp.ShowDialog();
+            showType();
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query = "SELECT typeID from db_inventory_item_types.type WHERE typeName = '" + cmbType.Text + "';";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["typeID"] + "";
+                    type = id;
+                }
+
+                dataReader.Close();
+                CloseConnection();
+            }
+
+            if (type != "" && color != "" && weight != "")
+            {
+                txtIDAdd.Text = type + color + weight;
+            }
+            else
+            {
+                txtIDAdd.Text = "";
+            }
         }
 
         private void pgDelete_Click(object sender, EventArgs e)

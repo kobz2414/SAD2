@@ -17,8 +17,9 @@ namespace SAD2
         private string server, database, database1, uid, password;
         private string itemSubtotal, itemTotalWeight, itemPrice;
         private double subTotal = 0, totalWeight = 0;
-        private bool checkNum = false, checkContact = false, checkName = false, checkAdd = false;
+        private bool checkContact = false, checkName = false, checkAdd = false;
         private List<string> customer = new List<string>();
+        private static readonly Random getrandom = new Random();
 
 
         public frmOrder()
@@ -27,6 +28,42 @@ namespace SAD2
             Initialize();
             show();
             showCustomerProfiles();
+            checkTransactionID();
+        }
+
+        public void checkTransactionID()
+        {
+            string transactionID = GetRandomNumber(100000000, 399999999).ToString();
+            string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT recordID FROM db_cefinal.stockrecordhistory WHERE recordID = '" + transactionID + "') THEN 'TRUE' ELSE 'FALSE' END as recordID;";
+            string temp2 = "";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                dataReader.Read();
+                string temp = dataReader["recordID"].ToString();
+                if (temp == "FALSE")
+                {
+                    txtTransactionNum.Text = transactionID;
+                }
+                else if (temp == "TRUE")
+                {
+                    CloseConnection();
+                    dataReader.Close();
+                    checkTransactionID();
+                }
+                dataReader.Close();
+                CloseConnection();
+            }
+        }
+
+        public int GetRandomNumber(int min, int max)
+        {
+            lock (getrandom)
+            {
+                return getrandom.Next(min, max);
+            }
         }
 
         private void Initialize()
@@ -74,6 +111,16 @@ namespace SAD2
             if (listProduct.SelectedItems.Count <= 0)
             {
                 MessageBox.Show("Please select an item");
+            }
+            else if (!txtQuantity.Text.All(char.IsDigit))
+            {
+
+                MessageBox.Show("Please input a numeric value (Quantity)");
+            }
+            else if (!txtPrice.Text.All(char.IsDigit))
+            {
+
+                MessageBox.Show("Please input a numeric value (Price)");
             }
             else
             {
@@ -215,7 +262,7 @@ namespace SAD2
             else
             {
                 checkAdd = true;
-                if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
+                if (checkContact == true && checkName == true && checkAdd == true)
                 {
                     btnAccept.Enabled = true;
                 }
@@ -343,11 +390,21 @@ namespace SAD2
             else
             {
                 checkName = true;
-                if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
+                if ( checkContact == true && checkName == true && checkAdd == true)
                 {
                     btnAccept.Enabled = true;
                 }
             }
+        }
+
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtQuantity_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void listCart_SelectedIndexChanged(object sender, EventArgs e)
@@ -372,55 +429,55 @@ namespace SAD2
 
         private void txtTransactionNum_TextChanged(object sender, EventArgs e)
         {
-            if (!txtTransactionNum.Text.All(char.IsDigit))
-            {
+            //if (!txtTransactionNum.Text.All(char.IsDigit))
+            //{
                 
-                btnAccept.Enabled = false;
-                checkNum = false;
-                lblTransactionNumberPrompt.Text = "Must enter all in digits";
-            }
-            else
-            {
+            //    btnAccept.Enabled = false;
+            //    checkNum = false;
+            //    lblTransactionNumberPrompt.Text = "Must enter all in digits";
+            //}
+            //else
+            //{
 
-                try
-                {
-                    string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT transactionID FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtTransactionNum.Text + "') THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
+            //    try
+            //    {
+            //        string checkDuplicate = "SELECT CASE WHEN EXISTS ( SELECT transactionID FROM `db_cefinal`.`sales` WHERE transactionID = '" + txtTransactionNum.Text + "') THEN 'TRUE' ELSE 'FALSE' END as transactionID;";
 
-                    if (OpenConnection() == true)
-                    {
-                        MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
-                        MySqlDataReader dataReader = cmd.ExecuteReader();
+            //        if (OpenConnection() == true)
+            //        {
+            //            MySqlCommand cmd = new MySqlCommand(checkDuplicate, connection);
+            //            MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                        while (dataReader.Read())
-                        {
-                            string temp = dataReader["transactionID"].ToString();
-                            if (temp == "TRUE")
-                            {
-                                btnAccept.Enabled = false;
-                                checkNum = false;
-                                lblTransactionNumberPrompt.Text = "Duplicate Transaction Number";
-                            }
-                            else
-                            {
-                                checkNum = true;
-                                if (checkNum == true)
-                                {
-                                    lblTransactionNumberPrompt.Text = "   ";
-                                    if(checkContact == true && checkName == true && checkAdd == true)
-                                    {
-                                        btnAccept.Enabled = true;
-                                    }
-                                }
-                            }
-                        }
-                        CloseConnection();
-                    }
-                }
-                catch (Exception err)
-                {
-                    CloseConnection();
-                }
-            }
+            //            while (dataReader.Read())
+            //            {
+            //                string temp = dataReader["transactionID"].ToString();
+            //                if (temp == "TRUE")
+            //                {
+            //                    btnAccept.Enabled = false;
+            //                    checkNum = false;
+            //                    lblTransactionNumberPrompt.Text = "Duplicate Transaction Number";
+            //                }
+            //                else
+            //                {
+            //                    checkNum = true;
+            //                    if (checkNum == true)
+            //                    {
+            //                        lblTransactionNumberPrompt.Text = "   ";
+            //                        if(checkContact == true && checkName == true && checkAdd == true)
+            //                        {
+            //                            btnAccept.Enabled = true;
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //            CloseConnection();
+            //        }
+            //    }
+            //    catch (Exception err)
+            //    {
+            //        CloseConnection();
+            //    }
+            //}
         }
 
         private void txtContactNum_TextChanged(object sender, EventArgs e)
@@ -438,7 +495,7 @@ namespace SAD2
             else
             {
                 checkContact = true;
-                if (checkNum == true && checkContact == true && checkName == true && checkAdd == true)
+                if (checkContact == true && checkName == true && checkAdd == true)
                 {
                     btnAccept.Enabled = true;
                 }
@@ -562,7 +619,7 @@ namespace SAD2
 
                     //New table in transactions database
                     string queryTransaction = "";
-                    queryTransaction = "create table `" + txtTransactionNum.Text + "`(itemID int not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, totalWeight int, price int, subtotal int, primary" +
+                    queryTransaction = "create table `" + txtTransactionNum.Text + "`(itemID varchar(255) not null, itemType varchar(255), itemColor varchar(255), itemWeight int, itemQuantity int, totalWeight int, price int, subtotal int, primary" +
                         " key (itemID));";
 
                     //New table in transactions database
