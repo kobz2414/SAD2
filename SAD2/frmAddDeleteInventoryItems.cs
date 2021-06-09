@@ -178,26 +178,35 @@ namespace SAD2
         {
             if (type != "" && color != "" && weight != "")
             {
-
-                string query = "INSERT INTO `db_cefinal`.`inventory` (`inventory_id`, `type`, `color`, `weight`, `quantity`)  VALUES('" + txtIDAdd.Text + "', '" + cmbType.Text + "', '" + cmbColor.Text + "', '" + txtWeight.Text + "', 0);";
-
-                if (this.OpenConnection() == true)
+                if (!txtWeight.Text.All(char.IsDigit))
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-                    cmd.ExecuteNonQuery();
-                    this.CloseConnection();
+                    MessageBox.Show("Must input a valid weight");
+                }else if (int.Parse(txtWeight.Text) <= 0)
+                {
+                    MessageBox.Show("Weight must not be equal to or less than 0");
                 }
+                else
+                {
+                    string query = "INSERT INTO `db_cefinal`.`inventory` (`inventory_id`, `type`, `color`, `weight`, `quantity`)  VALUES('" + txtIDAdd.Text + "', '" + cmbType.Text + "', '" + cmbColor.Text + "', '" + txtWeight.Text + "', 0);";
 
-                txtIDAdd.Text = "";
-                cmbColor.Text = "";
-                cmbType.Text = "";
-                txtWeight.Text = "";
-                MessageBox.Show("Success");
-                showDelete();
+                    if (this.OpenConnection() == true)
+                    {
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        this.CloseConnection();
+                    }
+
+                    txtIDAdd.Text = "";
+                    cmbColor.Text = "";
+                    cmbType.Text = "";
+                    txtWeight.Text = "";
+                    MessageBox.Show("Success");
+                    showDelete();
+                }
             }
             else
             {
-                MessageBox.Show("Incomplete details");
+                MessageBox.Show("Incomplete/Invalid details");
             }
         }
 
@@ -244,11 +253,18 @@ namespace SAD2
 
         private void txtWeight_TextChanged(object sender, EventArgs e)
         {
-            weight = txtWeight.Text;
-
-            if (type != "" && color != "" && weight != "")
+            if (txtWeight.Text.All(char.IsDigit))
             {
-                txtIDAdd.Text = type + color + weight;
+                weight = txtWeight.Text;
+
+                if (type != "" && color != "" && weight != "")
+                {
+                    txtIDAdd.Text = type + color + weight;
+                }
+                else
+                {
+                    txtIDAdd.Text = "";
+                }
             }
             else
             {

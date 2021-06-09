@@ -21,6 +21,54 @@ namespace SAD2
             InitializeComponent();
             Initialize();
             show();
+            showColor();
+            showType();
+        }
+
+        public void showColor()
+        {
+            cmbColor.Items.Clear();
+
+            string query = "SELECT colorName from db_inventory_item_types.color";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["colorName"] + "";
+                    cmbColor.Items.Add(id);
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
+        }
+
+        public void showType()
+        {
+            cmbType.Items.Clear();
+
+            string query = "SELECT typeName from db_inventory_item_types.type";
+
+            if (OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    string id = dataReader["typeName"] + "";
+                    cmbType.Items.Add(id);
+                }
+
+                dataReader.Close();
+
+                CloseConnection();
+            }
         }
 
         private void Initialize()

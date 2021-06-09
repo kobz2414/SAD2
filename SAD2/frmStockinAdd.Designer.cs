@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStockinAdd));
             this.lblStaff = new System.Windows.Forms.Label();
             this.txtEmployee = new System.Windows.Forms.TextBox();
             this.lblStockInID = new System.Windows.Forms.Label();
@@ -108,6 +109,7 @@
             this.Controls.Add(this.lblStockInID);
             this.Controls.Add(this.txtStockID);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "frmStockinAdd";

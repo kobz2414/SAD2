@@ -112,6 +112,14 @@ namespace SAD2
             {
                 MessageBox.Show("Please select an item");
             }
+            else if (txtQuantity.Text == "")
+            {
+                MessageBox.Show("Please input quantity");
+            }
+            else if (txtPrice.Text == "")
+            {
+                MessageBox.Show("Please input price");
+            }
             else if (!txtQuantity.Text.All(char.IsDigit))
             {
 
@@ -124,7 +132,7 @@ namespace SAD2
             }
             else
             {
-                if (txtQuantity.Text != "" && txtQuantity.Text != "0")
+                if (txtQuantity.Text != "" && txtPrice.Text != "")
                 {
                     ListViewItem item = listProduct.SelectedItems[0];
 
@@ -133,11 +141,11 @@ namespace SAD2
 
                     if (qty1 - qty2 < 0)
                     {
-                        MessageBox.Show("Must not be more or less than what is available");
+                        MessageBox.Show("Must not be more than what is available");
                     }
-                    else if (txtPrice.Text == "")
+                    else if (int.Parse(txtPrice.Text) <= 0)
                     {
-                        MessageBox.Show("Please input price");
+                        MessageBox.Show("Price must not be equal to or less than 0");
                     }
                     else
                     {
@@ -176,11 +184,6 @@ namespace SAD2
                             var listViewItem = new ListViewItem(row);
                             listCart.Items.Add(listViewItem);
                         }
-
-                        //if (int.Parse(item.SubItems[5].Text) == 0)
-                        //{
-                        //    item.Remove();
-                        //}
 
                         subTotal = 0;
                         totalWeight = 0;
@@ -645,7 +648,7 @@ namespace SAD2
 
                     CloseConnection();
 
-                    MessageBox.Show("Order added to cart");
+                    MessageBox.Show("Order successful");
                 }
                 catch (Exception err)
                 {

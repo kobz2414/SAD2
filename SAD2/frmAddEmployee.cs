@@ -91,18 +91,33 @@ namespace SAD2
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO `db_cefinal`.`employees` (`Name`, `Address`, `ContactNumber`) VALUES ('" + txtName.Text + "', '" + txtAddress.Text + "', '" + txtContactNumber.Text + "');";
-
-            if (OpenConnection() == true)
+            if (txtAddress.Text == "" || txtContactNumber.Text == "" || txtName.Text == "")
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
+                MessageBox.Show("Fill up all required details information");
             }
-            CloseConnection();
+            else if (!txtContactNumber.Text.All(char.IsDigit) || txtContactNumber.Text.Length <= 6)
+            {
+                MessageBox.Show("Must input a valid contact number");
+            }
+            else if (txtName.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Must input a valid name");
+            }
+            else
+            {
+                string query = "INSERT INTO `db_cefinal`.`employees` (`Name`, `Address`, `ContactNumber`) VALUES ('" + txtName.Text + "', '" + txtAddress.Text + "', '" + txtContactNumber.Text + "');";
 
-            MessageBox.Show("Profile Added");
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                }
+                CloseConnection();
 
-            this.Hide();
+                MessageBox.Show("Profile Added");
+
+                this.Hide();
+            }
 
         }
 

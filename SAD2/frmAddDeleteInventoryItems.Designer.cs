@@ -29,7 +29,11 @@ namespace SAD2
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddDeleteInventoryItems));
             this.grpAddItems = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.lblItemID = new System.Windows.Forms.Label();
             this.txtIDAdd = new System.Windows.Forms.TextBox();
             this.lblWeight = new System.Windows.Forms.Label();
@@ -47,9 +51,6 @@ namespace SAD2
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAddType = new System.Windows.Forms.Button();
             this.btnAddColor = new System.Windows.Forms.Button();
-            this.cmbType = new System.Windows.Forms.ComboBox();
-            this.cmbColor = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.grpAddItems.SuspendLayout();
             this.grpDeleteItems.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +73,34 @@ namespace SAD2
             this.grpAddItems.TabIndex = 25;
             this.grpAddItems.TabStop = false;
             this.grpAddItems.Text = "Add Items";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(79, 126);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "* - Required";
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(82, 74);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(171, 21);
+            this.cmbColor.TabIndex = 16;
+            this.cmbColor.SelectedIndexChanged += new System.EventHandler(this.cmbColor_SelectedIndexChanged);
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(82, 48);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(171, 21);
+            this.cmbType.TabIndex = 15;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             // 
             // lblItemID
             // 
@@ -228,34 +257,6 @@ namespace SAD2
             this.btnAddColor.UseVisualStyleBackColor = true;
             this.btnAddColor.Click += new System.EventHandler(this.btnAddColor_Click);
             // 
-            // cmbType
-            // 
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(82, 48);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(171, 21);
-            this.cmbType.TabIndex = 15;
-            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
-            // 
-            // cmbColor
-            // 
-            this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(82, 74);
-            this.cmbColor.Name = "cmbColor";
-            this.cmbColor.Size = new System.Drawing.Size(171, 21);
-            this.cmbColor.TabIndex = 16;
-            this.cmbColor.SelectedIndexChanged += new System.EventHandler(this.cmbColor_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(79, 126);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "* - Required";
-            // 
             // frmAddDeleteInventoryItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,6 +267,7 @@ namespace SAD2
             this.Controls.Add(this.grpDeleteItems);
             this.Controls.Add(this.grpAddItems);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmAddDeleteInventoryItems";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

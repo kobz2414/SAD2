@@ -30,6 +30,7 @@ namespace SAD2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddPayment));
             this.tabPayment = new System.Windows.Forms.TabControl();
             this.tabCash = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -337,6 +338,7 @@ namespace SAD2
             this.Controls.Add(this.txtDateandTime);
             this.Controls.Add(this.lblTime);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmAddPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -30,6 +30,7 @@ namespace SAD2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrder));
             this.grpCustomerDetails = new System.Windows.Forms.GroupBox();
             this.btnCustomer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -497,6 +498,7 @@ namespace SAD2
             this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpCustomerDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

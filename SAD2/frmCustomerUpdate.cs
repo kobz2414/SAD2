@@ -65,6 +65,14 @@ namespace SAD2
             {
                 MessageBox.Show("Fill up all required details information");
             }
+            else if (!txtContactNumber.Text.All(char.IsDigit) || txtContactNumber.Text.Length <= 6)
+            {
+                MessageBox.Show("Must input a valid contact number");
+            }
+            else if (txtName.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Must input a valid name");
+            }
             else
             {
                 string query = "UPDATE `db_cefinal`.`customers` SET `Name` = '" + txtName.Text + "', `Address` = '" + txtAddress.Text + "', `ContactNumber` = '" + txtContactNumber.Text + "' WHERE (`customerID` = '" + userID + "');";

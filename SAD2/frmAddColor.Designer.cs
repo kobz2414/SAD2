@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddColor));
             this.lblName = new System.Windows.Forms.Label();
             this.txtColor = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -79,6 +80,7 @@
             this.Controls.Add(this.txtColor);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmAddColor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

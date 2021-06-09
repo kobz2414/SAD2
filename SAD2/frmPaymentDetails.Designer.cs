@@ -29,6 +29,7 @@ namespace SAD2
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPaymentDetails));
             this.grpPaymentDetails = new System.Windows.Forms.GroupBox();
             this.txtDateandTime = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
@@ -153,6 +154,7 @@ namespace SAD2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 226);
             this.Controls.Add(this.grpPaymentDetails);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPaymentDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Payment Details";

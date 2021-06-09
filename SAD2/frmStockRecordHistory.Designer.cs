@@ -29,6 +29,7 @@ namespace SAD2
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStockRecordHistory));
             this.grpStockRecord = new System.Windows.Forms.GroupBox();
             this.listStockRecord = new System.Windows.Forms.ListView();
             this.colStockInOutID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -128,6 +129,7 @@ namespace SAD2
             this.Controls.Add(this.btnStockIn);
             this.Controls.Add(this.grpStockRecord);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmStockRecordHistory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

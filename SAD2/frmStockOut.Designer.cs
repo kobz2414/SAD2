@@ -29,6 +29,7 @@ namespace SAD2
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStockOut));
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblStaff = new System.Windows.Forms.Label();
@@ -106,6 +107,7 @@ namespace SAD2
             this.Controls.Add(this.lblStockInID);
             this.Controls.Add(this.txtStockID);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmStockOut";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

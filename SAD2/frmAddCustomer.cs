@@ -53,30 +53,45 @@ namespace SAD2
             }
         }
 
-        private void btnAddCustomer_Click(object sender, EventArgs e)
+        private void btnAddCustomer_Click(object sender, EventArgs e)   
         {
-            string query = "INSERT INTO `db_cefinal`.`customers` (`Name`, `Address`, `ContactNumber`) VALUES ('" + txtName.Text + "', '" + txtAddress.Text + "', '" + txtContactNumber.Text + "');";
-
-            if (OpenConnection() == true)
+            if (txtAddress.Text == "" || txtContactNumber.Text == "" || txtName.Text == "")
             {
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.ExecuteNonQuery();
+                MessageBox.Show("Fill up all required details information");
             }
-            CloseConnection();
-
-            MessageBox.Show("Profile Added");
-
-            if(formNumber == 0)
+            else if (!txtContactNumber.Text.All(char.IsDigit) || txtContactNumber.Text.Length <= 6)
             {
-                frmCustomers temp = new frmCustomers();
-                this.Hide();
-                temp.Show();
+                MessageBox.Show("Must input a valid contact number");
+            }
+            else if (txtName.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Must input a valid name");
             }
             else
             {
-                this.Hide();
+
+                string query = "INSERT INTO `db_cefinal`.`customers` (`Name`, `Address`, `ContactNumber`) VALUES ('" + txtName.Text + "', '" + txtAddress.Text + "', '" + txtContactNumber.Text + "');";
+
+                if (OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                }
+                CloseConnection();
+
+                MessageBox.Show("Profile Added");
+
+                if (formNumber == 0)
+                {
+                    frmCustomers temp = new frmCustomers();
+                    this.Hide();
+                    temp.Show();
+                }
+                else
+                {
+                    this.Hide();
+                }
             }
-            
         }
 
         private void txtName_TextChanged(object sender, EventArgs e)

@@ -29,6 +29,7 @@ namespace SAD2
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCustomers));
             this.grpCustomerInformation = new System.Windows.Forms.GroupBox();
             this.txtContactNumber = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -45,10 +46,10 @@ namespace SAD2
             this.colDateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpCustomerList = new System.Windows.Forms.GroupBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.listCustomers = new System.Windows.Forms.ListView();
             this.colCustomerID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.grpCustomerInformation.SuspendLayout();
             this.grpCustomerTransactions.SuspendLayout();
             this.grpCustomerList.SuspendLayout();
@@ -205,6 +206,16 @@ namespace SAD2
             this.grpCustomerList.TabStop = false;
             this.grpCustomerList.Text = "Customer List";
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(78, 392);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(96, 27);
+            this.btnUpdate.TabIndex = 4;
+            this.btnUpdate.Text = "Update Info";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // listCustomers
             // 
             this.listCustomers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -230,16 +241,6 @@ namespace SAD2
             this.colName.Text = "Name";
             this.colName.Width = 177;
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(78, 392);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(96, 27);
-            this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Text = "Update Info";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
             // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +250,7 @@ namespace SAD2
             this.Controls.Add(this.grpCustomerList);
             this.Controls.Add(this.grpCustomerInformation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmCustomers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
